@@ -55,6 +55,8 @@ The `explosive` field has three flags for non-fragment bullets:
  - `FINAL`: bullet explodes at either the end of its range or when the bullet's damage output is exhausted.
  - `PROXIMITY`: bullet snaps its explosion to the closest enemy block relative to its explode radius.
 
+([Explosive flags for fragments](./fragments.md#explosive-flags-for-fragments))
+
 ```lua
 {17000
     features=CANNON

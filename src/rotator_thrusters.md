@@ -11,8 +11,8 @@
     thrusterForce=50000
     thrusterBoost=2.0
     thrusterBoostTime=3.0
-    thrusterColor=0xAARRGGBB
-    thrusterColor1=0xAARRGGBB
+    thrusterColor=0xFFFFFFFF
+    thrusterColor1=0xFFFFFFFF
 }
 ```
 

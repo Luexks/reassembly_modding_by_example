@@ -12,10 +12,10 @@
 
     -- Thruster trail colors are decided by these two 0xAARRGGBB values.
     -- thrusterColor controls the color of the main thruster trail,
-    thrusterColor=0xAARRGGBB
+    thrusterColor=0xFFFFFFFF
     -- While thrusterColor1 controls the color of the trail
     -- immediately at the thruster.
-    thrusterColor1=0xAARRGGBB
+    thrusterColor1=0xFFFFFFFF
 }
 ```
 ## Thruster Colors

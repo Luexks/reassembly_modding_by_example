@@ -156,7 +156,8 @@ Below is an example of a cannon using the `RANDOM` pattern, which would be the s
     }
 ```
 Below are all the bullet patterns, they can all be used on both base cannon bullets and fragments except for `WAVE`, which can only be used on base cannon bullets.
- - `RANDOM`: default spread behaviour, choosing a random angle in the specified spread.
+### Random
+`pattern=RANDOM`: default spread behaviour, choosing a random angle in the specified spread.
 ```lua
 	cannon={spread=pi*2,pattern=RANDOM
 
@@ -167,7 +168,8 @@ Below are all the bullet patterns, they can all be used on both base cannon bull
   Your browser does not support the video tag.
 </video>
 
- - `CONSTANT`: bullet will angle exactly at the spread angle. Positive `spread` angles bullet counterclockwise while negative `spread` angles bullets clockwise.
+### Constant
+`pattern=CONSTANT`: bullet will angle exactly at the spread angle. Positive `spread` angles bullet counterclockwise while negative `spread` angles bullets clockwise.
  
  Firing counterclockwise:
  ```lua
@@ -191,7 +193,8 @@ Firing clockwise:
   Your browser does not support the video tag.
 </video>
 
- - `SPIRAL`: bullets are evenly distributed within the spread angle. Needs `roundsPerBurst` and `burstyness` defined on base cannon bullets but only needs `roundsPerBurst` defined on fragments.
+### Spiral
+`pattern=SPIRAL`: bullets are evenly distributed within the spread angle. Needs `roundsPerBurst` and `burstyness` defined on base cannon bullets but only needs `roundsPerBurst` defined on fragments.
  ```lua
 	cannon={spread=pi*0.5,pattern=SPIRAL,roundsPerBurst=5,burstyness=0.5
 
@@ -202,7 +205,8 @@ Firing clockwise:
   Your browser does not support the video tag.
 </video>
 
- - `WAVE`: bullets are distributed according to a sine wave within the spread angle. Do not use on fragments.
+### Wave
+`pattern=WAVE`: bullets are distributed according to a sine wave within the spread angle. Do not use on fragments.
  ```lua
 	cannon={spread=pi*0.5,pattern=WAVE,roundsPerBurst=20,burstyness=0.5
 
@@ -213,7 +217,8 @@ Firing clockwise:
   Your browser does not support the video tag.
 </video>
 
- - `ABSOLUTE`: bullets do not inherit velocity of ship or previous bullets. It can be mixed with any of the other pattern flags.
+### Absolute
+`pattern=ABSOLUTE`: bullets do not inherit velocity of ship or previous bullets. It can be mixed with any of the other pattern flags.
 
  This is without `ABSOLUTE`:
  ```lua
@@ -228,7 +233,7 @@ Firing clockwise:
 
  This is with `ABSOLUTE`:
  ```lua
-	cannon={spread=0|pattern=ABSOLUTE
+	cannon={spread=0,pattern=ABSOLUTE
 
         damage=100,roundsPerSec=5,muzzleVel=50,range=50,recoil=0}
  ```
@@ -243,4 +248,6 @@ There are fragment specific alternatives for `ENABLED`, `FINAL`, and `PROXIMITY`
  - `FRAG_FINAL`: bullet fragments at either the end of its range or when the bullet's damage output is exhausted.
  - `FRAG_PROXIMITY`: bullet fragments when within proximity of an attackable block.
 
-There is also `FRAG_NOFLASH`, which makes bullets with this flag spawn without producing a cosmetic poof.
+There is also `FRAG_NOFLASH`, which makes bullets with this flag spawn without producing a frag spawn particle.
+
+([Explosive flags for non-fragments](./cannons.md#explosive-cannons))

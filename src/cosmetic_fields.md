@@ -1,4 +1,4 @@
-# Cosmetic Fields
+# Cosmetic Features
 All of the following features are purely decorative and do nothing.
 ## Internal Lines
 Block always renders lines.

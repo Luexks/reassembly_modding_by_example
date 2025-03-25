@@ -16,6 +16,8 @@ Below is an example laser which has the most basic features.
 ```
 ## Firing in Bursts
 If you want a laser to fire in bursts, you need to define its `burstyness`, `pulsesPerBurst`, and `pulsesPerSec`.
+
+Burst firing lasers work similarly to burst firing cannons (see [Cannons: Firing in Bursts](./cannons.md#firing-in-bursts)), but `roundsPerSec` and `roundsPerBurst` are replaced by `pulsesPerSec` and `pulsesPerBurst` respectively.
 ```lua
 {17000
     features=LASER

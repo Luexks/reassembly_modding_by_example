@@ -20,12 +20,13 @@
 
     - [Thrusters](./thrusters.md)
         - [Rotator Thrusters](./rotator_thrusters.md)
-    - [Turning Force Blocks](./turning_force_blocks.md)
+    - [Torquers](./torquers.md)
 
     - [Factories](./factories.md)
 
     - [Shields](./shields.md)
         - [Void Shields](./void_shields.md)
+        - [Power Armor](./power_armor.md)
     - [Teleporters](./teleporters.md)
     - [Melee blocks](./melee_blocks.md)
         - [Other Collision: Bumper and Elasticity](./other_collision_bumper_and_elasticity.md)
@@ -43,6 +44,7 @@
             - [Launcher Chaining](./launcher_chaining.md)
         - [Turreted Weapons](./turreted_weapons.md)
             - [Hellbores](./hellbores.md)
+            - [Cosmetic Laser Printer](./cosmetic_laser_printer.md)
         - [Always and Never Firing Weapons](./always_and_never_firing_weapons.md)
             - [Always Fire Weapons as Decorations](./always_fire_weapons_as_decorations.md)
         - [One-Use Weapons](./one-use_weapons.md)
@@ -62,4 +64,5 @@
     - [Other Features and Fields](./other_features_and_fields.md)
     - [Features and Fields Not To Use](./features_and_fields_not_to_use.md)
     - [Standard Deviation Fields](./standard_deviation_fields.md)
-    - [Cosmetic Fields](./cosmetic_fields.md)
+    - [Cosmetic Features](./cosmetic_fields.md)
+- [UPS](./ups.md)

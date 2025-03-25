@@ -12,11 +12,11 @@ Here is a list of what they do:
 {17000
     features=SHIELD
     shield={
-        -- These fields are necessary.
+        -- These fields are necessary:
         strength=-1
         regen=-1
 
-        -- These can be anything.
+        -- These can be anything:
         radius=100
         delay=3
     }
