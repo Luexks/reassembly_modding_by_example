@@ -8,7 +8,7 @@ Cannons and lasers can be given the `ALWAYSFIRE` feature to continuously fire wi
     features=LASER|ALWAYSFIRE
 }
 {17002
-    features=LANCHER|AUTOLAUNCH
+    features=LAUNCHER|AUTOLAUNCH
 }
 ```
 The inverse for cannons and lasers is the `NEVERFIRE` feature, and for launchers it is `NEVERLAUNCH`.
@@ -20,7 +20,7 @@ The inverse for cannons and lasers is the `NEVERFIRE` feature, and for launchers
     features=LASER|NEVERFIRE
 }
 {17002
-    features=LANCHER|NEVERLAUCNH
+    features=LAUNCHER|NEVERLAUNCH
 }
 ```
 These features can be combined and omitted to create extremely unique weapons.
