@@ -1,1 +1,0 @@
-# Cosmetic Laser Printer

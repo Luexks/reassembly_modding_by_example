@@ -128,39 +128,49 @@ You can also make them flash:
 </video>
 
 ## Lens Flare
-Works by having a `roundsPerBurst=2` fragment spawn every frame using the `SPIRAL` pattern with `spread=pi*1/2` (equates to 180°) to create a lens flare shape. 
+A lens flare effect that does change direction when the ship it is on rotates.
+
+1st stage: invisible anti-FSP stage with spread just above 180° to be centered and `muzzleVel=0` to make the frag always face in the same direction.
+
+2nd stage: invisible 90° rotation stage by using `pattern=CONSTANT`.
+
+3rd stage: visible lens flare using 2 frags that always face in the same direction using `pattern=SPIRAL`.
 ```lua
 {17000
-    features=ALWAYSFIRE|CANNON|TURRET
+	features=CANNON|ALWAYSFIRE
 	sound=None
-	barrelSize={0.001,0.001} -- Centers the frag.
-	turretLimit=0
 	cannon={
-	-- Anti-frag spawn particle stage.
-		projectileSize=0
-		muzzleVel=1
+	-- 1st stage:
+		muzzleVel=0
 		range=0
         color=0x01000000
-		
+		spread=pi*0.5*1.0001
 		pattern=ABSOLUTE
         damage=0.0001
 		roundsPerSec=120
 		recoil=0
 		explosive=FINAL
 		fragment={
-	-- Fragment stage is the visible lens flare.
-			projectileSize=2
-			muzzleVel=3000
+	-- 2nd stage:
+			muzzleVel=1
 			range=0
-			color=0xFFFFFFFF
-			
-			pattern=SPIRAL
-			roundsPerBurst=2
-			spread=pi*1/2
-
+			color=0x01000000
+			pattern=CONSTANT
 			damage=0.0001
-			recoil=0
 			explosive=FINAL|FRAG_NOFLASH
+			spread=pi*1/2
+			fragment={
+	-- 3rd stage:
+				projectileSize=2
+				muzzleVel=3000
+				range=0
+				color=0xFFFFFFFF
+				pattern=SPIRAL
+				damage=0.0001
+				explosive=FINAL|FRAG_NOFLASH
+				spread=pi*1/2
+				roundsPerBurst=2
+			}
 		}
 	}
 }
@@ -170,22 +180,41 @@ Works by having a `roundsPerBurst=2` fragment spawn every frame using the `SPIRA
   Your browser does not support the video tag.
 </video>
 
-You can also make lens flares with an 'X' shape. The only differences are that the fragment's `roundsPerBurst` is changed from 2 to 4 and its `spread` is changed from `pi*1/2` (180°) to `pi*3/4` (270°).
+# X Shape Lens Flare
+You can also make lens flares with an 'X' shape.
+
+This X-shaped lens flare does not contain the 90° rotating 2nd stage of the standard lens flare frag as the X shape does not require it.
+
+The visible (2nd) stage's `roundsPerBurst` is changed from `2` to `4` and its `spread` is changed from `pi*1/2` (180°) to `pi*3/4` (270°).
 ```lua
+{17000
+	features=CANNON|ALWAYSFIRE
+	sound=None
+	cannon={
+	-- 1st stage:
+		muzzleVel=0
+		range=0
+        color=0x01000000
+		spread=pi*0.5*1.0001
+		pattern=ABSOLUTE
+        damage=0.0001
+		roundsPerSec=120
+		recoil=0
+		explosive=FINAL
 		fragment={
+	-- 2nd stage:
 			projectileSize=2
 			muzzleVel=3000
 			range=0
 			color=0xFFFFFFFF
-			
 			pattern=SPIRAL
-			roundsPerBurst=4    -- Changed from 2 to 4
-			spread=pi*3/4       -- Changed from pi*1/2 to pi*3/4
-
 			damage=0.0001
-			recoil=0
 			explosive=FINAL|FRAG_NOFLASH
+			spread=pi*3/4
+			roundsPerBurst=4
 		}
+	}
+}
 ```
 <video height=256 controls>
   <source src="diagrams/always_fire_lens_flare_x.mp4" type="video/mp4">
@@ -195,9 +224,9 @@ You can also make lens flares with an 'X' shape. The only differences are that t
 ## Frag Rings
 Here is an example of a basic frag ring you could make for a generator:
 
-1st stage: spread just above 180° is used to center the frag.
+1st stage: invisible anti-FSP stage with spread just above 180° is used to center the frag.
 
-2nd stage: each bullet is split into 20 more in a uniform spiral which are sent outwards. Bullets are multiplied in this stage instead of having `burstyness=1` and a high `roundsPerBurst` on the first stage to avoid having a more opaque initial frag spawn pile (which cannot be entirely removed).
+2nd stage: invisible stage of a 20-round burst in a uniform spiral which are sent outwards.
 
 3rd stage: this is the stage visible to the player. `pattern=ABSOLUTE` is used to reset the bullet velocities, and `projectileSize`, `muzzleVel`, and `color` affect how the frag looks. 
 ```lua
@@ -250,6 +279,36 @@ Here is an example of a basic frag ring you could make for a generator:
 </video>
 
 ## Poof Particle Emitter
+A simple fragless setup that emits 120 frag despawn poofs every second. A neat effect for a generator. 
+```lua
+{17000
+	features=CANNON|ALWAYSFIRE|GENERATOR
+	sound=None
+	shape=OCTAGON
+	scale=3
+	cannon={
+		projectileSize=1
+		muzzleVel=100
+		range=0
+        color=0xFFFFFFFF
+		spread=pi
+		pattern=ABSOLUTE
+        damage=0.0001
+		roundsPerSec=120
+		recoil=0
+	}
+	-- Generator fields here.
+}
+```
+<video height=256 controls>
+  <source src="diagrams/always_fire_poof_particle_emitter.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
-## Laser Printer
-[Laser Printer](./cosmetic_laser_printer.md)
+## Launchable Laser Printer
+See the main page for the [Launchable Laser Printer](./cosmetic_launchable_laser_printer.md).
+
+<video height=256 controls>
+  <source src="diagrams/cosmetic_laser_printer.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
