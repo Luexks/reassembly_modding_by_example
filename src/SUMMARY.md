@@ -1,7 +1,9 @@
 # Summary
 [Introduction](./introduction.md)
 ---
+- [Using the Sandbox](./using_the_sandbox.md)
 - [Mod structure](./mod_structure.md)
+- [Publishing to the Steam Workshop](./publishing_to_the_steam_workshop.md)
 # Blocks
 - [blocks.lua](./blocks.lua.md)
     - [Basic Fields and Hull](./basic_fields_and_hull.md)
@@ -64,7 +66,17 @@
         - [Always Fire Weapons as Decorations](./always_fire_weapons_as_decorations.md)
     - [One-Use Weapons](./one-use_weapons.md)
     - [Combining Weapon Types](./combining_weapon_types.md)
-
+# Shapes
+- [shapes.lua](./shapes.lua.md)
+    - [Niche Port Flag Combinations](./niche_port_flag_combinations.md)
+# Audio
+- [audio.lua](./audio.lua.md)
+# Factions
+- [factions.lua](./factions.lua.md)
+# Regions
+- [regions.lua](./regions.lua.md)
+# Cvars
+- [cvars.txt](./cvars.txt.md)
 # Other References
 - [Standard Deviation Fields](./standard_deviation_fields.md)
 - [UPS](./ups.md)
