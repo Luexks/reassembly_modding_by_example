@@ -42,10 +42,34 @@ Used during early development by Terran stations making them unable to be truly 
 }
 ```
 ## Launch
-Used internally for missiles and seeds that can be launched by the player. Do not use.
+Used internally for launchables like missiles and seeds grown from launchers. Do not use.
 ```lua
 {17000
     features=LAUNCH
+}
+{17001
+    features=LAUNCHER
+    replicateBlock={
+        features=LAUNCH
+    }
+}
+```
+## Auto-Launch
+Identical to [`ALWAYSFIRE`](./always_and_never_firing_weapons.md#always-fire-weapons), but only works for not-turreted launchers and is used put on the launchable in the same way as [`LAUNCH`](./features_and_fields_not_to_use.md#launch).
+
+It is unique in that it overrides [`NEVERFIRE`](./always_and_never_firing_weapons.md#never-fire-weapons) and is selectable in the bindings menu, but as neither of these traits are useful, [`ALWAYSFIRE`](./always_and_never_firing_weapons.md#always-fire-weapons) should be used instead.
+```lua
+{17000
+    features=LAUNCHER
+    replicateBlock={
+        features=AUTOLAUNCH
+    }
+}
+{17001
+    features=LAUNCHER|NEVERFIRE
+    replicateBlock={
+        features=AUTOLAUNCH
+    }
 }
 ```
 ## Growing and Ungrowing

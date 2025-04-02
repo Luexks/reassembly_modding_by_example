@@ -42,8 +42,6 @@
     - [Seeds](./seeds.md)
     - [Roots](./roots.md)
 
-    - [Other Features and Fields](./other_features_and_fields.md)
-    - [Features and Fields Not To Use](./features_and_fields_not_to_use.md)
     - [Cosmetic Features](./cosmetic_fields.md)
 
     - [Shrouding](./shrouding.md)
@@ -60,12 +58,14 @@
     - [Launchers](./launchers.md)
         - [Launcher Chaining](./launcher_chaining.md)
     - [Turreted Weapons](./turreted_weapons.md)
-        - [Hellbores](./hellbores.md)
+        - [X-Spaced Barrel Beams](./x-spaced_barrel_beams.md)
         - [Cosmetic Launchable Laser Printer](./cosmetic_launchable_laser_printer.md)
     - [Always and Never Firing Weapons](./always_and_never_firing_weapons.md)
         - [Always Fire Weapons as Decorations](./always_fire_weapons_as_decorations.md)
     - [One-Use Weapons](./one-use_weapons.md)
     - [Combining Weapon Types](./combining_weapon_types.md)
+    - [Other Features and Fields](./other_features_and_fields.md)
+    - [Features and Fields Not To Use](./features_and_fields_not_to_use.md)
 # Shapes
 - [shapes.lua](./shapes.lua.md)
     - [Niche Port Flag Combinations](./niche_port_flag_combinations.md)
