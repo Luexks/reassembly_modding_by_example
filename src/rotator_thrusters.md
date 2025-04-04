@@ -1,6 +1,6 @@
 # Rotator Thrusters
 ```lua
-{17000
+{ 17000
     features=THRUSTER|ROTATOR
 
     -- Similar fields to those of turreted weapons.
@@ -27,9 +27,9 @@ A basic rotator thruster to show that it rotates weirdly with different player c
 ## Rotator Limit Bug
 The field `rotatorLimit` is bugged such that the rotator thruster always faces towards the front of the ship instead of the front of the block as one would expect.
 
-Here is an example of 4 rotator thrusters with `turretLimit=pi` using the scale 2 `CANNON` shape to show that they face outwards from the command core:
+Here is an example of 4 rotator thrusters with `turretLimit=pi` using the scale 2 `CANNON` shape to show that they face outwards from the command:
 ```lua
-{17000
+{ 17000
     features=PALETTE|THRUSTER|ROTATOR
 	shape=CANNON
 	scale=2
@@ -43,7 +43,7 @@ Here is an example of 4 rotator thrusters with `turretLimit=pi` using the scale 
 
 And here is the same thing but with `turretLimit=0`:
 ```lua
-{17000
+{ 17000
     features=PALETTE|THRUSTER|ROTATOR
 	shape=CANNON
 	scale=2

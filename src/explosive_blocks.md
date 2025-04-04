@@ -1,13 +1,13 @@
 # Explosive Blocks
 
 ```lua
-{17000
+{ 17000
     features=EXPLODE
 
     explodeDamage=50
     explodeRadius=50
-    explodeStdDev=10 -- *
-    explodeFaction=98 -- Makes the specified faction not take damage from the explosion.
+    explodeStdDev=10  -- *
+    explodeFaction=98 -- The specified faction will not take damage from the explosion.
 }
 ```
 

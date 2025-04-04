@@ -1,6 +1,6 @@
 # Thrusters
 ```lua
-{17000
+{ 17000
     features=THRUSTER
 
     thrusterForce=50000 -- =50K
@@ -21,10 +21,10 @@
 ## Thruster Colors
 The following videos each show the area of one thruster color type on a stationary vessel with `thrusterForce=50000`:
  - Only `thrusterColor`
-```
-{17000
+```lua
+{ 17000
     thrusterForce=50000
-    thrusterColor=0xffffffff
+    thrusterColor=0xFFFFFFFF
     thrusterColor1=0x01000000
 }
 ```
@@ -34,11 +34,11 @@ The following videos each show the area of one thruster color type on a stationa
 </video>
 
  - Only `thrusterColor1`
-```
-{17000
+```lua
+{ 17000
     thrusterForce=50000
     thrusterColor=0x01000000
-    thrusterColor1=0xffffffff
+    thrusterColor1=0xFFFFFFFF
 }
 ```
 <video height=256 controls>

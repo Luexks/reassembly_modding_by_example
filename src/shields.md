@@ -1,6 +1,6 @@
 # Shields
 ```lua
-{17000
+{ 17000
     features=SHIELD
     shield={
         strength=100            -- Maximum shield health.

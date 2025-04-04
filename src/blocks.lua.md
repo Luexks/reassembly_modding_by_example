@@ -24,7 +24,7 @@ Brackets are how the game keeps understands when one thing starts and ends and w
 Below is how the above structure might be represented if it actually defined three blocks:
 ```lua
 {
-    {17000
+    { 17000
         group=98
         sort=1
         fillColor=0x5555AA
@@ -39,8 +39,8 @@ Below is how the above structure might be represented if it actually defined thr
         features=PALETTE
     }
     -- Extended blocks copy the fields of the blocks they extend.
-    {17001,extends=17000,scale=2}
-    {17002,extends=17000,scale=3}
+    { 17001 extends=17000 scale=2}
+    { 17002 extends=17000 scale=3}
 }
 ```
 

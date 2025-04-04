@@ -35,7 +35,7 @@ Original Hull Square
 │	    └── Scale 4
 │
 │
-├── Command Core
+├── Command
 │
 ├── Generator Scale 1
 │   ├── Generator Scale 2

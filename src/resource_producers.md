@@ -2,7 +2,7 @@
 'Photosynthesizer' and 'solar panel' are synonyms for 'resource producer'.
 
 ```lua
-{17000
+{ 17000
     features=PHOTOSYNTH
     photosynthPerSec=0.2
 

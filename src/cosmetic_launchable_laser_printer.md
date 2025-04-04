@@ -7,7 +7,7 @@ The direction of the laser is decided by the sign of `barrelSpacing`'s Y change,
 
 Both the laser printer's cycle time (1 second, because `barrelCount` / `roundsPerSec` = 1) and the launcher's `replicateTime` are the same, allowing for the two blocks to synchronize their functionality if activated at the right time.
 ```lua
-{17000 features=LASER|CANNON|ALWAYSFIRE|TURRET
+{ 17000 features=LASER|CANNON|ALWAYSFIRE|TURRET
     name="Laser Printer Left -> Right"
 	shape=271390000
 	scale=4
@@ -32,8 +32,8 @@ Both the laser printer's cycle time (1 second, because `barrelCount` / `roundsPe
 		explosive=FINAL
 	}
 }
-{17001 extends=17070 name="Laser Printer Right -> Left" shape=271390001 barrelSpacing={0,1}}
-{17002 features=LAUNCHER|TURRET|NOICON
+{ 17001 extends=17000 name="Laser Printer Right -> Left" shape=271390001 barrelSpacing={0,1}}
+{ 17002 features=LAUNCHER|TURRET|NOICON
     name="Launcher"
 	scale=4
 	turretLimit=0

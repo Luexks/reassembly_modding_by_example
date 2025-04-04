@@ -8,7 +8,7 @@ Key fields:
  - (Low `muzzleVel` and `range` if you want it to be a stationary beam.)
  - (Low `recoil` if you do not want to be flung around because of high `roundsPerBurst`.)
 ```lua
-{17000
+{ 17000
 	features=CANNON|TURRET
 	barrelSize={0.000001,0.000001}
 	barrelCount=32

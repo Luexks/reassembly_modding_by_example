@@ -1,7 +1,7 @@
 # Turreted Weapons
 Cannons, lasers, and launchers can all be turreted.
 ```lua
-{17000
+{ 17000
     features=CANNON|TURRET
     cannon={
         -- Cannon fields here.
@@ -9,15 +9,15 @@ Cannons, lasers, and launchers can all be turreted.
     turretSpeed=6
     turretLimit=pi
 }
-{17001
+{ 17001
     features=LASER|TURRET
-    LASER={
-        -- LASER fields here.
+    laser={
+        -- Laser fields here.
     }
     turretSpeed=6
     turretLimit=pi
 }
-{17002
+{ 17002
     features=LAUNCHER|TURRET
     replicateBlock={
         launcherSpeed=100
@@ -32,7 +32,7 @@ Note that turreted launchers use `launcherSpeed` defined on the replicated block
 ## Barrel Appearance
 Turreted cannons and lasers both display barrels which have fields that control how the look and where their bullets are fired from.
 ```lua
-{17000
+{ 17000
     features=CANNON|TURRET  -- Same fields for `LASER|TURRET`
     barrelSize={5,2.5}      -- Length and width dimensions of the barrel.
                             -- (Height value is doubled.)
@@ -46,7 +46,7 @@ Turreted cannons and lasers both display barrels which have fields that control 
 ## Invisible Barrels
 If you want a barrel to be near-invisible then use two near-zero values for its `barrelSize`;
 ```lua
-{17000
+{ 17000
     features=CANNON|TURRET
     barrelSize={0.001,0.001}
 }

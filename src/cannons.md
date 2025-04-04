@@ -1,17 +1,17 @@
 # Cannons
 Below is an example cannon which has the most basic features. 
 ```lua
-{17000
+{ 17000
     features=CANNON
     cannon={
-        damage=100      -- ...per shot fired.
+        damage=100        -- ...per shot fired.
         roundsPerSec=5
-        muzzleVel=1000  -- Velocity of bullet.
-        range=1000      -- Distance travelled by bullet before it is destroyed.
-        power=10        -- ...per shot fired.
-        spread=0.1      -- Maximum random spread of bullets in radians.
+        muzzleVel=1000    -- Velocity of bullet.
+        range=1000        -- Distance travelled by bullet before it is destroyed.
+        power=10          -- ...per shot fired.
+        spread=0.1        -- Maximum random spread of bullets in radians.
         color=0xFFFFFFFF  -- AARRGGBB color value.
-        recoil=1        -- ...per shot fired.
+        recoil=1          -- ...per shot fired.
     }
 }
 ```
@@ -31,7 +31,7 @@ A burstyness of 0 means that a cannon will not fire in bursts and a burstyness o
 
 Burstyness values in between 0 and 1 will fire however many `roundsPerBurst` they have, wait, and then fire another burst again.
 ```lua
-{17000
+{ 17000
     features=CANNON
     cannon={
         -- This cannon will fire 5 bullets at once every 1 second.
@@ -58,7 +58,7 @@ The `explosive` field has three flags for non-fragment bullets:
 ([Explosive flags for fragments](./fragments.md#explosive-flags-for-fragments))
 
 ```lua
-{17000
+{ 17000
     features=CANNON
     cannon={
         -- This bullet will explode on hitting a block.

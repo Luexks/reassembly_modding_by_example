@@ -7,7 +7,7 @@ When using always fire cannons cosmetically, it is important to check how [UPS](
 
 ## Frag Spike
 ```lua
-{17000
+{ 17000
 	features=CANNON|ALWAYSFIRE
 	sound=None                  -- Having a sound is annoying.
     cannon={
@@ -33,7 +33,7 @@ When using always fire cannons cosmetically, it is important to check how [UPS](
 
 ## Laser Spike
 ```lua
-{17000
+{ 17000
 	features=LASER|ALWAYSFIRE
 	sound=None                  -- Having a sound is annoying.
     laser={
@@ -62,7 +62,7 @@ You could also use a negative `width`, such as `width=-3` in the below example:
 
 ## Laser Light
 ```lua
-{17000
+{ 17000
 	features=LASER|ALWAYSFIRE|TURRET
 	sound=None
 	barrelSize={0.001,0.001}    -- Centers the laser.
@@ -99,7 +99,7 @@ You can also make them flash:
 
 ## Frag Tentacle
 ```lua
-{17000
+{ 17000
     features=ALWAYSFIRE|CANNON
 	sound=None
 	cannon={
@@ -137,7 +137,7 @@ A lens flare effect that does change direction when the ship it is on rotates.
 
 3rd stage: visible lens flare using 2 frags that always face in the same direction using `pattern=SPIRAL`.
 ```lua
-{17000
+{ 17000
 	features=CANNON|ALWAYSFIRE
 	sound=None
 	cannon={
@@ -188,7 +188,7 @@ This X-shaped lens flare does not contain the 90° rotating 2nd stage of the sta
 
 The visible (2nd) stage's `roundsPerBurst` is changed from `2` to `4` and its `spread` is changed from `pi*1/2` (180°) to `pi*3/4` (270°).
 ```lua
-{17000
+{ 17000
 	features=CANNON|ALWAYSFIRE
 	sound=None
 	cannon={
@@ -231,7 +231,7 @@ Here is an example of a basic frag ring you could make for a generator:
 
 3rd stage: this is the stage visible to the player. `pattern=ABSOLUTE` is used to reset the bullet velocities, and `projectileSize`, `muzzleVel`, and `color` affect how the frag looks. 
 ```lua
-{17000
+{ 17000
 	features=CANNON|ALWAYSFIRE|GENERATOR
 	sound=None
 	shape=OCTAGON
@@ -282,7 +282,7 @@ Here is an example of a basic frag ring you could make for a generator:
 ## Poof Particle Emitter
 A simple fragless setup that emits 120 frag despawn poofs every second. A neat effect for a generator. 
 ```lua
-{17000
+{ 17000
 	features=CANNON|ALWAYSFIRE|GENERATOR
 	sound=None
 	shape=OCTAGON

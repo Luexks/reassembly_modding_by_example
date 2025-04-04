@@ -9,7 +9,7 @@ Here is a list of what they do:
  - The `armor` field doesn't function.
  - May have other yet undiscovered effects.
 ```lua
-{17000
+{ 17000
     features=SHIELD
     shield={
         -- These fields are necessary:

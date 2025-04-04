@@ -2,7 +2,7 @@
 
 Below is an example laser which has the most basic features. 
 ```lua
-{17000
+{ 17000
     features=LASER
     laser={
         damage=100      -- ...per second of contact.
@@ -19,7 +19,7 @@ If you want a laser to fire in bursts, you need to define its `burstyness`, `pul
 
 Burst firing lasers work similarly to burst firing cannons (see [Cannons: Firing in Bursts](./cannons.md#firing-in-bursts)), but `roundsPerSec` and `roundsPerBurst` are replaced by `pulsesPerSec` and `pulsesPerBurst` respectively.
 ```lua
-{17000
+{ 17000
     features=LASER
     laser={
         burstyness=0.5
@@ -34,7 +34,7 @@ There are two types of force a laser can exert: an immobilization force and a li
 ### Imobilization Force
 When a target is continuously hit by an imobilization laser, the `immobilizeForce` is exerted on the target to keep them in the same location as when they were initially hit.
 ```lua
-{17000
+{ 17000
     features=LASER
     laser={
         immobilizeForce=100000
@@ -45,7 +45,7 @@ When a target is continuously hit by an imobilization laser, the `immobilizeForc
 ### Linear Force
 Force exerted in the direction of the laser. Positive `linearForce` drives targets away, negative `linearForce` draws them in.
 ```lua
-{17000
+{ 17000
     features=LASER
     laser={
         linearForce=100000
@@ -62,7 +62,7 @@ The `explosive` field has three flags for lasers:
  - `PROXIMITY`: todo.
 
 ```lua
-{17000
+{ 17000
     features=LASER
     cannon={
         -- This laser will explode on hitting a block.

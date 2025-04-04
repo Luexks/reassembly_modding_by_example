@@ -1,7 +1,7 @@
 # Generators
 
 ```lua
-{17000
+{ 17000
     features=GENERATOR
     generatorCapacityPerSec=150
     powerCapacity=150

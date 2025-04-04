@@ -4,7 +4,7 @@ The `extends` field takes the Block ID of another block and duplicates all of th
 
 ```lua
 {
-    {17000
+    { 17000
         name="My First Block"
         group=78
         sort=0
@@ -13,7 +13,7 @@ The `extends` field takes the Block ID of another block and duplicates all of th
         features=PALETTE
         -- Other block stuff here.
     }
-    {17001,extends=17000,scale=2
+    { 17001 extends=17000 scale=2
         name="My Second Block, which is exactly the same,"
         blurb="but is scale 2 and has a blurb and a different name."
     }

@@ -48,7 +48,7 @@ Torpedoes have the [`EXPLODE`](./explosive_blocks.md) and [`THRUSTER`](./thruste
 	}
 ```
 ## Missile Launcher
-Missiles have the [`COMMAND`](./command_cores.md), [`EXPLODE`](./explosive_blocks.md), [`THRUSTER`](./thrusters.md), and [`TORQUER`](./torquers.md) features.
+Missiles have the [`COMMAND`](./commands.md), [`EXPLODE`](./explosive_blocks.md), [`THRUSTER`](./thrusters.md), and [`TORQUER`](./torquers.md) features.
 ```lua
 	replicateBlock={
         features=COMMAND|EXPLODE|THRUSTER|TORQUER
@@ -66,7 +66,7 @@ Missiles have the [`COMMAND`](./command_cores.md), [`EXPLODE`](./explosive_block
 	}
 ```
 ## Drone Launcher
-Drones have the [`COMMAND`](./command_cores.md), [`NOCLIP_ALLY`](./noclipping_blocks.md), [`FREERES`](./other_features_and_fields.md#command-core-that-does-not-give-resources-on-death), [`THRUSTER`](./thrusters.md), [`TORQUER`](./torquers.md), [`GENERATOR`](./generators.md), either [`CANNON`](./cannons.md) or [`LASER`](./lasers.md), and usually [`TURRET`](./turreted_weapons.md) features.
+Drones have the [`COMMAND`](./commands.md), [`NOCLIP_ALLY`](./noclipping_blocks.md), [`FREERES`](./other_features_and_fields.md#commands-that-do-not-give-resources-on-death), [`THRUSTER`](./thrusters.md), [`TORQUER`](./torquers.md), [`GENERATOR`](./generators.md), either [`CANNON`](./cannons.md) or [`LASER`](./lasers.md), and usually [`TURRET`](./turreted_weapons.md) features.
 ### Cannon Drone
 ```lua
 	replicateBlock={
@@ -129,7 +129,7 @@ Drones have the [`COMMAND`](./command_cores.md), [`NOCLIP_ALLY`](./noclipping_bl
 ## Launcher Drone Launcher
 It is very possible to create drones that fire launchables. Below is an example for a drone that fires drones; a mothership drone?
 ```lua
-{ 17111
+{ 17000
 	group=98
 	features=PALETTE|LAUNCHER
 	shape=RECT_LAUNCHER1

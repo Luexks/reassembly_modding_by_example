@@ -13,7 +13,7 @@
     
     - [Getting Blocks to Show Up in the Campaign's Databank](./getting_blocks_to_show_up_in_the_campaigns_databank.md)
 
-    - [Command Cores](./command_cores.md)
+    - [Commands](./commands.md)
 
     - [Resource Containers](./resource_containers.md)
     - [Resource Collectors](./resource_collectors.md)

@@ -2,7 +2,7 @@
 'Tractor beam' is a synonym for 'resource collector'.
 
 ```lua
-{17000
+{ 17000
     features=TRACTOR
     tractorRange=500
 
