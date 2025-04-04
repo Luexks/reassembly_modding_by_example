@@ -54,6 +54,7 @@ When using always fire cannons cosmetically, it is important to check how [UPS](
 </video>
 
 You could also use a negative `width`, such as `width=-3` in the below example:
+
 <video height=256 controls>
   <source src="diagrams/always_fire_laser_spike_negative_width.mp4" type="video/mp4">
   Your browser does not support the video tag.
