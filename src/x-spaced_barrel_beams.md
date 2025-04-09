@@ -1,4 +1,6 @@
 # X-Spaced Barrel Beams
+Also called just 'barrel beams' or alternatively 'hellbores'.
+
 X-spaced barrel beams fire an evenly spaced "beam" of burst bullets across multiple X-spaced invisible barrels. They can penetrate enemy ships.
 
 Key fields:
