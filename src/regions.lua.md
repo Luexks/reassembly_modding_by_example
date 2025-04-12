@@ -1,5 +1,7 @@
 # regions.lua
 `regions.lua` controls how sectors procedurally generate in the galaxy by defining regions.
+
+Below is an example of a `regions.lua` that defines the region for one faction. Note that `regions.lua`s that define multiple regions have a [different syntax](./multiple_regions_in_one_mod.md).
 ```lua
 {
 	-- General region identity:
@@ -19,7 +21,7 @@
                                 -- 0.0 is the center of the galaxy,
                                 -- 1.0 is at the edge.
 
-	radius={0.05,0.10}          -- Range of this region's size 0.0-1.0.
+	radius=  {0.05,0.10}        -- Range of this region's size 0.0-1.0.
                                 -- 0.0 could just not spawn the region,
                                 -- 1.0 could make the region galaxy-sized.
 
@@ -28,7 +30,7 @@
                                 -- 1: Splats  - what the Reds use.
                                 -- 2: Circles - what most factions use.
 	
-	-- Standard fleets (See explanation below):
+	-- *:
 	fleets={
 		{ 98 {
 			{0,1000}
@@ -51,7 +53,7 @@
 	fortressCount={3, 6}         -- Range of fortresses per damaged station.
 	fortressRadius={500, 500}    -- Range of distances of fortresses from station.
 	
-	-- Unique spawns:
+	-- **:
 	unique={
 		{
 			"98_Special_Station"
@@ -77,60 +79,21 @@
 
 	asteroidDensity={0.1,0.2}   -- Range of density of asteroids in region 0.0-1.0.
 	asteroidSize={12,24}        -- Range of block count per asteroid.
-	asteroidFlags=PENROSE       -- See all flags below.
+	asteroidFlags=EXPLOSIVE     -- See all flags below.
 }
 ```
-## Fleets
-<!-- `fleetFraction` is the probability of a sector in the region containing a fleet.
+\* [Fleet Spawning](./fleet_spawning.md)
 
-`fleets` controls how much P is allocated to a fleet of a faction in a sector at different distances from the center of a region.
+\*\* [Unique Fleet Spawning](./unique_fleet_spawning.md)
 
-`fleetCount` controls the ranges of ship counts for each faction of a fleet. -->
-When a sector is generated in this region, each type of fleet in `fleets` has `fleetFraction` (0.0-1.0) probability to spawn.
+## Asteroid Flags
 
-Each type of fleet in `fleets` has a faction ID. Each type of fleet also has a list of number pairs, with the 2nd number being a P allocation for every spawned fleet, and the 1st number being which distance from the center of the region the P allocation is for.
+Many asteroid flags sadly do not work (they can be found in ), but the ones that do are listed below:
+ - `EXPLOSIVE`: asteroid blocks are replaced with their explosive variants.
+ - `UNIFORM_SIZE`: all asteroids in a sector have the same number of blocks.
 
-In other words, `fleets` controls how much P is allocated to a fleet of a faction in a sector at different distances from the center of a region.
+## Regions Visualizer
 
-`fleetCount` is a list of ranges of ship numbers for the fleet type at the same index.
+The [RWDK](https://ttftcuts.github.io/RWDK/)'s region editor is a useful tool for visualising how much of the galaxy a region will take up.
 
-So, every time a fleet is spawned in a sector, a random number in the range of the relevant `fleetCount` element is chosen to decide how many ships will be in the fleet. Then, the relevant P allocation for the fleet (dependent on the sector's distance from the center of the region) is spread out between the number of ships in the fleet.
-```lua
-    fleets={
-		{ 98    -- Faction ID of the faction that can spawn
-				-- in a sector in this region.
-			{
-				-- Each faction 98 fleet in the center of the region has 10000P total.
-				{0.0,10000}
-
-				-- Each faction 98 fleet halfway into the region has 3000P total.
-				{0.5, 3000}
-
-				-- Each faction 98 fleet at the edge of the region has 1000P total.
-				{1.0, 1000}
-			}
-		}
-		{ 8     -- The Terrans (faction 8) could also spawn in this region.
-			{ 
-				-- No Terrans can spawn in the center of the region.
-				{0.0,    0}
-
-				-- No Terrans can spawn close to the edge of the region.
-				{0.75,    0}
-
-				-- Terran fleets can spawn at the edge of the region
-				-- and the each have 1000P total.
-				{1.0, 1000}
-			}
-		}
-    }
-
-	fleetCount={
-		{4,8}	-- Each faction 98 fleet has 4 to 8 ships.
-		{10,16} -- Each Terran fleet has 10 to 16 ships.
-	}
-
-				-- Every sector in this region has a 75% chance of spawning a
-				-- faction 98 fleet and a 75% of spawning a Terran fleet.
-	fleetFraction=0.75
-```
+![RWDK Region Starchart](./diagrams/regions_rwdk.PNG)

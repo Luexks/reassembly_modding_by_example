@@ -75,6 +75,11 @@
 - [factions.lua](./factions.lua.md)
 # Regions
 - [regions.lua](./regions.lua.md)
+    - [Fleet Spawning](./fleet_spawning.md)
+    - [Unique Fleet Spawning](./unique_fleet_spawning.md)
+    - [Subregions](./subregions.md)
+    - [Multiple Regions in One Mod](./multiple_regions_in_one_mod.md)
+    - [Nonfunctional Asteroid Flags](./nonfunctional_asteroid_flags.md)
 # Cvars
 - [cvars.txt](./cvars.txt.md)
 # Other References
