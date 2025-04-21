@@ -1,9 +1,11 @@
 # Summary
 [Introduction](./introduction.md)
 ---
-- [Using the Sandbox](./using_the_sandbox.md)
 - [Mod structure](./mod_structure.md)
 - [Publishing to the Steam Workshop](./publishing_to_the_steam_workshop.md)
+# Sandbox
+- [Sandbox Basics](./sandbox_basics.md)
+- [Further Ship Testing](./further_ship_testing.md)
 # Blocks
 - [blocks.lua](./blocks.lua.md)
     - [Basic Fields and Hull](./basic_fields_and_hull.md)

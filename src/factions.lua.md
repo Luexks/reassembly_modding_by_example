@@ -28,6 +28,7 @@
 
 		aiflags=BAD_AIM|CAUTIOUS    -- How ships of this faction will act.
                                     -- Some ships deviate on an individual basis.
+									-- *
 	}
 	-- More factions:
 	256={
@@ -38,3 +39,4 @@
 	}
 }
 ```
+`aiflags` uses [command flags](./commands.md#command-flags).
