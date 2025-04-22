@@ -48,8 +48,8 @@
 
     - [Shrouding](./shrouding.md)
         - [Transparency in Shrouds](./transparency_in_shrouds.md)
-        - [Centering Shrouds on Non-Turreted Blocks](./centering_shrouds_on_non-turreted_blocks.md)
         - [Getting More Than Three Colors](./getting_more_than_three_colors.md)
+        - [Centering Shrouds on Non-Turreted Blocks](./centering_shrouds_on_non-turreted_blocks.md)
 
     - [Cannons](./cannons.md)
         - [Fragments](./fragments.md)
