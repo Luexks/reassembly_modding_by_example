@@ -85,3 +85,15 @@ Spawn in a faction's fleets by using the `fleetp` command followed by either its
 Use `Ctrl` + `S` to save the state of the sandbox.
 
 If you want a clean state for your sandbox a big block of text saying 'IN THE BEGINNING WAS THE COMMAND LINE', use the `cl` command to clear everything and the do `Ctrl` + `S`.
+## Opening and Closing the Console
+Use the `` ` `` or `~` buttons without the mouse cursor over the console to open and close the console view. Works everywhere and not just the sandbox (save for most menus).
+
+Pressing `Esc` also closes the console view.
+## Time Settings
+Use `P` without the mouse cursor over the console to freeze and unfreeze time.
+
+Use `O` in the same way to progress Reassembly's simulation by 1 update (can be held down).
+
+Use `{` to speed down update rate (not [updates per second](./ups.md)) by 50% and `}` to slow it down by 50%.
+
+Use the `deb fps` command to open the FPS debugger in the bottem left to check update rate and UPS.`
