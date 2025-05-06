@@ -1,9 +1,9 @@
 # Getting More Than Three Colors
 As shrouds are limited to using the three colors of their block (`fillColor`, `fillColor1`, and `lineColor`), they can usually only have three colors, but there are ways to get around the limitations.
 ## Overlaying Transparent Shrouds
-When transparent shrouds are overlayed, only the lines of the topmost shroud are rendered unless the shrouds have the same Z level, but the fill colors of all the shrouds are merged, which can be used to create more than three colors.
+When shrouds with >100% alpha are overlayed, only the lines of the topmost shroud are rendered (unless the shrouds have the same Z level). However, the fill colors of all the shrouds are merged, which can be used to create more than three colors.
 
-Below is an example of a shroud with 3 circles layered bottom up in the orders red, blue, and green, all with 50% transparency:
+Below is an example of a shroud with 3 circles layered bottom up in the orders red, blue, and green, all with 50% alpha:
 ```lua
 -- Shape 271390000 is a circle.
 { 17000
@@ -20,13 +20,22 @@ Below is an example of a shroud with 3 circles layered bottom up in the orders r
 
 ![Transparency With All 50%](./diagrams/shroud_transparency_50.png)
 
-Even though all the colors in the above example have the same 50% transparency, they do not blend equally.
+Even though all the circles in the above example have the same Z level of `0.01`, and the same alpha value of 50%, the intersection of all three colors is mostly blue because of the digital compositing process.
 
-This is because the shrouds are rendered in order from red, green, to blue (even if they all have the same Z level). So for the center, the red first mixes with the black background, then that is mixed with the green, then that is mixed with the blue.
+The digital compositing process decides the color of the pixels of the intersection with this process:
+1. The opaque black background defaults pixels to black: 0% red, blue, and green.
+2. The black color is mixed with the red circle of 50% alpha. This leads to a color that is 50% black, and 50% red. In terms of RGB, this is 50% red, 0% blue, and 0% green.
+3. Then, this dark red color is mixed with the green circle of 50% alpha. This creates a color that is 25% black, 25% red, and 50% green. In terms of RGB, this is 25% red, 50% green, and 0% blue (`0x3F7F00`).
+4. Finally, this slightly dark impure green color is mixed with a 50% blue. This leads to a color that is 12.5% black, 12.5% red, 25% green, and 50% blue. In terms of RGB, this is 14.29% red, 28.57% green, and 57.14% blue, (`0x244992`) which is a dark blue color.
 
-If you wanted a grey center, you need to make the final ratios of the colors red, green, and blue all equal.
+However, if you want a grey center from three circles colored red, green, and blue, you would need to make the final ratios after the digital compositing process of the three colors all equal.
 
-The alpha values in order of the colors in order of rendering are:
+To get a color of 1:1:1 R:G:B:
+1. Start with a full red at 100% alpha.
+2. Then split it equally with green using an alpha value of 50% for 50% red and 50% green.
+3. And then split those two colors with the third color, blue, at 33% alpha to get equal ratio for all colors.
+
+The alpha values in order are:
 1. Red:     100%
 2. Green:    50%
 3. Blue:     33%
@@ -44,7 +53,7 @@ The alpha values in order of the colors in order of rendering are:
 ```
 ![Transparency With Central Gr*y](./diagrams/shroud_transparency_gr,y.png)
 
-Merging their colors is of course limited, but it is useful for creating gradients with a transparent shroud on top to get rid of the lines:
+Merging their colors is of course limited, but it is useful for creating gradients with a non-opaque shroud on top to get rid of the lines:
 ```lua
 { 17000
 	scale=4
@@ -113,7 +122,7 @@ They can also fade into the background:
 ```
 ![Shroud Gradient Transparent](./diagrams/shroud_gradient_transparent.png)
 
-Sadly, there is no way to truly avoid rendering lines, as, when hiding lines, there must always be some higher-layered transparent shroud with its own rendered lines.
+Sadly, there is no way to truly avoid rendering lines, as, when hiding lines, there must always be some higher-layered near-transparent shroud with its own rendered lines.
 ## Never Firing Non-Turreted Launcher
 A non-turreted [never firing launcher](./always_and_never_firing_weapons.html?highlight=LAUNCHER|NEVERFIRE), can hold a launchable that can have its own three colors and its own shroud.
 
