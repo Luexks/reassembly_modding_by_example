@@ -53,8 +53,8 @@
 
     - [Cannons](./cannons.md)
         - [Fragments](./fragments.md)
-            - [Bullet Flashes](bullet_flashes.md)
-            - [Anti-PSF, Anti-BSF, and Anti-BDF Stages](./anti-psf,_anti-BSF,_and_anti-bdf_stages.md)
+            - [Bullet Poofs](bullet_poofs.md)
+            - [Anti-Bullet Poof Stages](./anti-bullet_poof_stages.md)
             - [Muzzle Flash](./muzzle_flash.md)
             - [Bullet Shaping](./bullet_shaping.md)
             - [Fragbeams](./fragbeams.md)
