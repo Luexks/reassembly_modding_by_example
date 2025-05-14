@@ -8,9 +8,9 @@ This chapter covers various types of common bullet shapes:
  - [Reverse Bullet](./bullet_shaping.md#reverse-bullet)
  - [2-Tail Bullet](./bullet_shaping.md#2-tail-bullet)
  - [3-Tail Bullet](./bullet_shaping.md#3-tail-bullet)
- - [8-Point Star](./bullet_shaping.md#8-point-star)
+ - [n-Point Star](./bullet_shaping.md#n-point-star)
  - [X Shape Lense Flare Bullet](./bullet_shaping.md#x-shape-lens-flare-bullet)
- - [9-Point Saw](./bullet_shaping.md#9-point-saw).
+ - [n-Point Saw](./bullet_shaping.md#n-point-saw).
 
 ## Fragball
 
@@ -181,13 +181,17 @@ Three angled bullets inherit velocity from the primary stage to create a bullet 
   your browser does not support the video tag.
 </video>
 
-## 8-Point Star
+## n-Point Star
 
-Eight bullets in a uniform `SPIRAL` pattern to create an 8-pointed star bullet.
+The `SPIRAL` pattern can be used to create an star bullet with any amount of points.
+
+For an n-pointed star, you can calculate the value for the secondary stage's `spread` by using the formula `pi*((n-1)/n))`.
+
+For example, an 8-pointed star's spread would be calculated with `pi*((8-1)/8)`, which would be put into the fragment as `spread=pi*7/8`.
 
 ```lua
 { 17000
-	features=CANNON|PALETTE
+	features=CANNON
     cannon={
         damage=1
         roundsPerSec=1
@@ -197,9 +201,9 @@ Eight bullets in a uniform `SPIRAL` pattern to create an 8-pointed star bullet.
 		color=0xAAFFFFFF
 		explosive=FINAL
 		fragment={
-			roundsPerBurst=8
+			roundsPerBurst=8  -- Number of points of the star.
 			damage=25
-			spread=157.5*pi/180
+			spread=pi*7/8     -- Spread value here calculated from pi*((n-1)/n)).
 			muzzleVel=1
 			range=    0.5
 			color=0xAAFFFFFF
@@ -254,14 +258,18 @@ The function of the stages are as follows:
   your browser does not support the video tag.
 </video>
 
-## 9-Point Saw
+## n-Point Saw
 
-A complex saw blade ring of bullets made out of nine bullets.
+A complex saw blade ring of bullets made out of n bullets defined by the `roundsPerBurst` value of the 3rd stage.
+
+The `spread` of the 3rd stage can be calculated in a similar way to that of the [n-Point Star](./bullet_shaping.md#n-point-star), where the `spread` can be calculated using the formula `pi*((n-1)/n))`.
+
+For example, a the spread of the 3rd stage of a 9-pointed star would be calculated with `pi*((9-1)/9)`, which would be put into the 3rd stage as `spread=pi*8/9`.
 
 The function of each stage is as follows:
 1. Creates a [PSP](./bullet_poofs.html?highlight=PSP#bullet-poofs) and moves the fragment backwards a small distance. This accounts for the distance which the fragment moves forwards while assembling the saw formation so that it looks like the saw blade spawns from the right place.
 2. Reverses the fragment again so that it faces forwards without changing its position.
-3. Splits the fragment into 9 bullets which then travel outwards almost instantly.
+3. Splits the fragment into n bullets (in this case, 9) which then travel outwards almost instantly.
 4. Cancels out the fragment's velocities so that it no longer changes position.
 5. This stage rotates by 60° anticlockwise using `pattern=CONSTANT`. This stage is also the actual bullet stage that can deal damage and is visible.
 
@@ -272,8 +280,8 @@ The function of each stage is as follows:
     cannon={   damage=1 muzzleVel=-1000 range= -10 color=0xAAFFFFFF explosive=FINAL              roundsPerSec=1 power=10
     -- 2nd stage:
     fragment={ damage=1 muzzleVel=-2000 range=   0 color=1          explosive=FINAL|FRAG_NOFLASH
-    -- 3rd stage:
-    fragment={ damage=1 muzzleVel=  400 range=  12 color=1          explosive=FINAL|FRAG_NOFLASH pattern=SPIRAL roundsPerBurst=9 spread=0.5*320*pi/180
+    -- 3rd stage (defines how many bullets there are in the saw):
+    fragment={ damage=1 muzzleVel=  400 range=  12 color=1          explosive=FINAL|FRAG_NOFLASH pattern=SPIRAL roundsPerBurst=9 spread=pi*8/9
     -- 4th stage:
     fragment={ damage=1 muzzleVel= -400 range=   0 color=1          explosive=FINAL|FRAG_NOFLASH
     -- 5th stage (actual bullet):
