@@ -3,26 +3,21 @@ name: Deploy mdBook to GitHub Pages
 on:
   push:
     branches:
-      - master
-  workflow_dispatch:
+      - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: Checkout repo
         uses: actions/checkout@v3
 
       - name: Install mdBook
-        uses: peaceiris/actions-mdbook@v1
-        with:
-          mdbook-version: latest
+        run: cargo install mdbook --version 0.4.37
 
       - name: Build the book
         run: mdbook build
-
-      - name: Disable Jekyll
-        run: touch ./book/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
