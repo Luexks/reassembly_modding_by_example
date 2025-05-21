@@ -58,6 +58,7 @@
             - [Muzzle Flash](./muzzle_flash.md)
             - [Bullet Shaping](./bullet_shaping.md)
             - [Fragbeams](./fragbeams.md)
+            - [Frag Cascade](./frag_cascade.md)
             - [Flamethrowers](./flamethrowers.md)
             - [Phase Frags](./phase_frags.md)
     - [Lasers](./lasers.md)
