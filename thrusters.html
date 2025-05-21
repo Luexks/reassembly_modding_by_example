@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="light sidebar-visible" dir="ltr">
+<html lang="en" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-
+        
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -24,29 +24,26 @@
         <link rel="stylesheet" href="fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="highlight-css" href="highlight.css">
-        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
-        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-
-        <!-- Provide site root and default themes to javascript -->
-        <script>
-            const path_to_root = "";
-            const default_light_theme = "light";
-            const default_dark_theme = "navy";
-        </script>
-        <!-- Start loading toc.js asap -->
-        <script src="toc.js"></script>
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
     <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                let theme = localStorage.getItem('mdbook-theme');
-                let sidebar = localStorage.getItem('mdbook-sidebar');
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -60,22 +57,24 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
-            let theme;
+            var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            const html = document.documentElement;
+            var html = document.querySelector('html');
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add("js");
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            let sidebar = null;
-            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -83,25 +82,45 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <!-- populated by js -->
-            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
-            <noscript>
-                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
-            </noscript>
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="mod_structure.html"><strong aria-hidden="true">1.</strong> Mod structure</a></li><li class="chapter-item expanded "><a href="publishing_to_the_steam_workshop.html"><strong aria-hidden="true">2.</strong> Publishing to the Steam Workshop</a></li><li class="chapter-item expanded affix "><li class="part-title">Sandbox</li><li class="chapter-item expanded "><a href="sandbox_basics.html"><strong aria-hidden="true">3.</strong> Sandbox Basics</a></li><li class="chapter-item expanded "><a href="further_ship_testing.html"><strong aria-hidden="true">4.</strong> Further Ship Testing</a></li><li class="chapter-item expanded affix "><li class="part-title">Blocks</li><li class="chapter-item expanded "><a href="blocks.lua.html"><strong aria-hidden="true">5.</strong> blocks.lua</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="basic_fields_and_hull.html"><strong aria-hidden="true">5.1.</strong> Basic Fields and Hull</a></li><li class="chapter-item expanded "><a href="block_features.html"><strong aria-hidden="true">5.2.</strong> Block Features</a></li><li class="chapter-item expanded "><a href="block_extensions.html"><strong aria-hidden="true">5.3.</strong> Block Extensions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="getting_the_most_out_of_block_extensions.html"><strong aria-hidden="true">5.3.1.</strong> Getting the most out of block extensions</a></li></ol></li><li class="chapter-item expanded "><a href="getting_blocks_to_show_up_in_the_campaigns_databank.html"><strong aria-hidden="true">5.4.</strong> Getting Blocks to Show Up in the Campaign's Databank</a></li><li class="chapter-item expanded "><a href="commands.html"><strong aria-hidden="true">5.5.</strong> Commands</a></li><li class="chapter-item expanded "><a href="resource_containers.html"><strong aria-hidden="true">5.6.</strong> Resource Containers</a></li><li class="chapter-item expanded "><a href="resource_collectors.html"><strong aria-hidden="true">5.7.</strong> Resource Collectors</a></li><li class="chapter-item expanded "><a href="resource_producers.html"><strong aria-hidden="true">5.8.</strong> Resource Producers</a></li><li class="chapter-item expanded "><a href="generators.html"><strong aria-hidden="true">5.9.</strong> Generators</a></li><li class="chapter-item expanded "><a href="thrusters.html" class="active"><strong aria-hidden="true">5.10.</strong> Thrusters</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rotator_thrusters.html"><strong aria-hidden="true">5.10.1.</strong> Rotator Thrusters</a></li></ol></li><li class="chapter-item expanded "><a href="torquers.html"><strong aria-hidden="true">5.11.</strong> Torquers</a></li><li class="chapter-item expanded "><a href="factories.html"><strong aria-hidden="true">5.12.</strong> Factories</a></li><li class="chapter-item expanded "><a href="shields.html"><strong aria-hidden="true">5.13.</strong> Shields</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="void_shields.html"><strong aria-hidden="true">5.13.1.</strong> Void Shields</a></li><li class="chapter-item expanded "><a href="power_armor.html"><strong aria-hidden="true">5.13.2.</strong> Power Armor</a></li></ol></li><li class="chapter-item expanded "><a href="teleporters.html"><strong aria-hidden="true">5.14.</strong> Teleporters</a></li><li class="chapter-item expanded "><a href="melee_blocks.html"><strong aria-hidden="true">5.15.</strong> Melee blocks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="other_collision_bumper_and_elasticity.html"><strong aria-hidden="true">5.15.1.</strong> Other Collision: Bumper and Elasticity</a></li></ol></li><li class="chapter-item expanded "><a href="explosive_blocks.html"><strong aria-hidden="true">5.16.</strong> Explosive Blocks</a></li><li class="chapter-item expanded "><a href="invulnerable_blocks.html"><strong aria-hidden="true">5.17.</strong> Invulnerable Blocks</a></li><li class="chapter-item expanded "><a href="blocks_with_lifetimes.html"><strong aria-hidden="true">5.18.</strong> Blocks with Lifetimes</a></li><li class="chapter-item expanded "><a href="noclipping_blocks.html"><strong aria-hidden="true">5.19.</strong> Noclipping Blocks</a></li><li class="chapter-item expanded "><a href="environmental_blocks.html"><strong aria-hidden="true">5.20.</strong> Environmental Blocks</a></li><li class="chapter-item expanded "><a href="seeds.html"><strong aria-hidden="true">5.21.</strong> Seeds</a></li><li class="chapter-item expanded "><a href="roots.html"><strong aria-hidden="true">5.22.</strong> Roots</a></li><li class="chapter-item expanded "><a href="cosmetic_fields.html"><strong aria-hidden="true">5.23.</strong> Cosmetic Features</a></li><li class="chapter-item expanded "><a href="shrouding.html"><strong aria-hidden="true">5.24.</strong> Shrouding</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="transparency_in_shrouds.html"><strong aria-hidden="true">5.24.1.</strong> Transparency in Shrouds</a></li><li class="chapter-item expanded "><a href="getting_more_than_three_colors.html"><strong aria-hidden="true">5.24.2.</strong> Getting More Than Three Colors</a></li><li class="chapter-item expanded "><a href="centering_shrouds_on_non-turreted_blocks.html"><strong aria-hidden="true">5.24.3.</strong> Centering Shrouds on Non-Turreted Blocks</a></li></ol></li><li class="chapter-item expanded "><a href="cannons.html"><strong aria-hidden="true">5.25.</strong> Cannons</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="fragments.html"><strong aria-hidden="true">5.25.1.</strong> Fragments</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="bullet_poofs.html"><strong aria-hidden="true">5.25.1.1.</strong> Bullet Poofs</a></li><li class="chapter-item expanded "><a href="anti-bullet_poof_stages.html"><strong aria-hidden="true">5.25.1.2.</strong> Anti-Bullet Poof Stages</a></li><li class="chapter-item expanded "><a href="muzzle_flash.html"><strong aria-hidden="true">5.25.1.3.</strong> Muzzle Flash</a></li><li class="chapter-item expanded "><a href="bullet_shaping.html"><strong aria-hidden="true">5.25.1.4.</strong> Bullet Shaping</a></li><li class="chapter-item expanded "><a href="fragbeams.html"><strong aria-hidden="true">5.25.1.5.</strong> Fragbeams</a></li><li class="chapter-item expanded "><a href="frag_cascade.html"><strong aria-hidden="true">5.25.1.6.</strong> Frag Cascade</a></li><li class="chapter-item expanded "><a href="flamethrowers.html"><strong aria-hidden="true">5.25.1.7.</strong> Flamethrowers</a></li><li class="chapter-item expanded "><a href="phase_frags.html"><strong aria-hidden="true">5.25.1.8.</strong> Phase Frags</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="lasers.html"><strong aria-hidden="true">5.26.</strong> Lasers</a></li><li class="chapter-item expanded "><a href="launchers.html"><strong aria-hidden="true">5.27.</strong> Launchers</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="launcher_chaining.html"><strong aria-hidden="true">5.27.1.</strong> Launcher Chaining</a></li></ol></li><li class="chapter-item expanded "><a href="turreted_weapons.html"><strong aria-hidden="true">5.28.</strong> Turreted Weapons</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="x-spaced_barrel_beams.html"><strong aria-hidden="true">5.28.1.</strong> X-Spaced Barrel Beams</a></li><li class="chapter-item expanded "><a href="cosmetic_launchable_laser_printer.html"><strong aria-hidden="true">5.28.2.</strong> Cosmetic Launchable Laser Printer</a></li></ol></li><li class="chapter-item expanded "><a href="always_and_never_firing_weapons.html"><strong aria-hidden="true">5.29.</strong> Always and Never Firing Weapons</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="always_fire_weapons_as_decorations.html"><strong aria-hidden="true">5.29.1.</strong> Always Fire Weapons as Decorations</a></li></ol></li><li class="chapter-item expanded "><a href="one-use_weapons.html"><strong aria-hidden="true">5.30.</strong> One-Use Weapons</a></li><li class="chapter-item expanded "><a href="combining_weapon_types.html"><strong aria-hidden="true">5.31.</strong> Combining Weapon Types</a></li><li class="chapter-item expanded "><a href="other_features_and_fields.html"><strong aria-hidden="true">5.32.</strong> Other Features and Fields</a></li><li class="chapter-item expanded "><a href="features_and_fields_not_to_use.html"><strong aria-hidden="true">5.33.</strong> Features and Fields Not To Use</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Shapes</li><li class="chapter-item expanded "><a href="shapes.lua.html"><strong aria-hidden="true">6.</strong> shapes.lua</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="niche_port_flag_combinations.html"><strong aria-hidden="true">6.1.</strong> Niche Port Flag Combinations</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Audio</li><li class="chapter-item expanded "><a href="audio.lua.html"><strong aria-hidden="true">7.</strong> audio.lua</a></li><li class="chapter-item expanded affix "><li class="part-title">Factions</li><li class="chapter-item expanded "><a href="factions.lua.html"><strong aria-hidden="true">8.</strong> factions.lua</a></li><li class="chapter-item expanded affix "><li class="part-title">Regions</li><li class="chapter-item expanded "><a href="regions.lua.html"><strong aria-hidden="true">9.</strong> regions.lua</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="fleet_spawning.html"><strong aria-hidden="true">9.1.</strong> Fleet Spawning</a></li><li class="chapter-item expanded "><a href="unique_fleet_spawning.html"><strong aria-hidden="true">9.2.</strong> Unique Fleet Spawning</a></li><li class="chapter-item expanded "><a href="subregions.html"><strong aria-hidden="true">9.3.</strong> Subregions</a></li><li class="chapter-item expanded "><a href="multiple_regions_in_one_mod.html"><strong aria-hidden="true">9.4.</strong> Multiple Regions in One Mod</a></li><li class="chapter-item expanded "><a href="nonfunctional_asteroid_flags.html"><strong aria-hidden="true">9.5.</strong> Nonfunctional Asteroid Flags</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Cvars</li><li class="chapter-item expanded "><a href="cvars.txt.html"><strong aria-hidden="true">10.</strong> cvars.txt</a></li><li class="chapter-item expanded affix "><li class="part-title">Other References</li><li class="chapter-item expanded "><a href="standard_deviation_fields.html"><strong aria-hidden="true">11.</strong> Standard Deviation Fields</a></li><li class="chapter-item expanded "><a href="ups.html"><strong aria-hidden="true">12.</strong> UPS</a></li></ol>
+            </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -111,7 +130,6 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
