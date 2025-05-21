@@ -1,0 +1,276 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Commands - Reassembly Modding by Example</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Reassembly Modding by Example</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="commands"><a class="header" href="#commands">Commands</a></h1>
+<pre><code class="language-lua">{ 17000
+    features=COMMAND
+    blurb="The ship of this command cannot regenerate at all."
+}
+{ 17001
+    features=COMMAND|REGROWER
+    blurb="The command's ship can regenerate missing parts but not using debris."
+}
+{ 17002
+    features=COMMAND|ASSEMBLER
+    blurb="The command's ship can regenerate normally and by using debris."
+}
+</code></pre>
+<p>Commands commonly have either the <code>REGROWER</code> or the <code>ASSEMBLER</code> features.</p>
+<p><code>REGROWER</code> allows the ship to be able to regenerate missing parts.</p>
+<p><code>ASSEMBLER</code> is the same as <code>REGROWER</code>, but also allows ships to reassemble themselves using parts from debris.</p>
+<h2 id="the-command-field"><a class="header" href="#the-command-field">The <code>command</code> Field</a></h2>
+<p>Commands can also contain the <code>command</code> field, but it is unnecessary for most ships as the values it contains are controlled by <a href="./factions.lua.html"><code>factions.lua</code></a> and how Reassembly handles blueprints.</p>
+<p>Most use cases do not need to define all three command flags.</p>
+<pre><code class="language-lua">{ 17000
+    features=COMMAND
+    command={
+        flags=RECKLESS|HATES_PLANTS -- These take priority over the faction's AI flags.
+        faction=98                  -- Faction ID this command will be assigned to.
+        blueprint="98_Test_Ship"    -- Blueprint that the command will become.
+    }
+}
+</code></pre>
+<h2 id="command-flags"><a class="header" href="#command-flags">Command Flags</a></h2>
+<p>These are the flags which are used for <a href="./commands.html#the-command-field"><code>command={flags}</code></a> and in <a href="./factions.lua.html"><code>aiflags</code></a>.</p>
+<ul>
+<li><code>NONE</code>: does nothing.</li>
+<li><code>METAMORPHOSIS</code>: AI will occasionally change blueprints.</li>
+<li><code>FOLLOWER</code>: follows player.</li>
+<li><code>ATTACK</code>: overrides all other command flags and makes AI attack ruthlessly. Used internally for tournament mode.</li>
+<li><code>FLOCKING</code>: move in a flock with nearby allied ships at the speed of the slowest one.</li>
+<li><code>RECKLESS</code>: disengage less.</li>
+<li><code>AGGRESSIVE</code>: initiate attack more easily.</li>
+<li><code>CAUTIOUS</code>: initiate attack less easily.</li>
+<li><code>SOCIAL</code>: call for help when attacked.</li>
+<li><code>PEACEFUL</code>: never initiate attack.</li>
+<li><code>WANDER</code>: wander randomly if nothing else to do. Recommended for most factions.</li>
+<li><code>HATES_PLANTS</code>: kill plants if in range.</li>
+<li><code>FORGIVING</code>: stop attacking more easily.</li>
+<li><code>TRACTOR_TRANSIENT</code>: grab blocks from the environment and use them.</li>
+<li><code>DODGES</code>: dodge projectiles.</li>
+<li><code>RIPPLE_FIRE</code>: use ripple fire on weapons.</li>
+<li><code>SPREAD_FIRE</code>: use spread fire on weapons.</li>
+<li><code>BAD_AIM</code>: aim poorly.</li>
+<li><code>POINT_DEFENSE</code>: act like a point defense drone.</li>
+<li><code>INACTIVE</code>: become a vegetable, yum.</li>
+<li><code>SMART_FIRE</code>: use spread fire when enemy is expected to dodge.</li>
+<li><code>NO_PARENT</code>: do not follow parent ship.</li>
+<li><code>CHILDREN_SET</code>: used internally for AI ships that should not change their children blueprints as set by the player.</li>
+<li><code>BLUEPRINT_SET</code>: used internally for AI ships that should not change their own blueprint as set by the player.</li>
+<li><code>HANGOUT</code>: used to make the Anisoptera ship spin in circles :P.</li>
+<li><code>PACIFIST</code>: never attack even when attacked.</li>
+<li><code>FIRE_AT_WILL</code>: ignore parent ship target.</li>
+</ul>
+<p>The following command flags can also be used for normal factions but at set in vanilla in the bindings menu:</p>
+<ul>
+<li><code>ALWAYS_KITE</code>: always attack from max range.</li>
+<li><code>ALWAYS_RUSH</code>: always attack at closest range regardless of incoming damage.</li>
+<li><code>ALWAYS_MANEUVER</code>: always dodging while attacking.</li>
+<li><code>AI_BINDING</code>: attack from range of highest binding weapon that has not been destroyed.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="getting_blocks_to_show_up_in_the_campaigns_databank.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="resource_containers.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="getting_blocks_to_show_up_in_the_campaigns_databank.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="resource_containers.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

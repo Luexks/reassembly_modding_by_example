@@ -1,0 +1,270 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Cannons - Reassembly Modding by Example</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Reassembly Modding by Example</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="cannons"><a class="header" href="#cannons">Cannons</a></h1>
+<p>Below is an example cannon which has the most basic features.</p>
+<pre><code class="language-lua">{ 17000
+    features=CANNON
+    cannon={
+        damage=100        -- ...per shot fired.
+        roundsPerSec=5
+        muzzleVel=1000    -- Velocity of bullet.
+        range=1000        -- Distance travelled by bullet before it is destroyed.
+        power=10          -- ...per shot fired.
+        spread=0.1        -- Maximum random spread of bullets in radians.
+        color=0xFFFFFFFF  -- AARRGGBB color value.
+        recoil=1          -- ...per shot fired.
+    }
+}
+</code></pre>
+<p>To be precise, that definition of bullet range is not correct, as bullets are destroyed based a duration calculated from just their <code>muzzleVel</code> and the <code>range</code>.</p>
+<p>If the bullet was fired from a stationary ship, then it would travel 1000 units at 1000 units per second over 1 second. However, if the bullet was fired from a moving ship, then the bullet would inherit its velocity.</p>
+<p>For the above example, if the ship firing the bullet was travelling in the same direction as the bullet being fired, the bullet would travel a greater distance with a greater speed over the same amount of time.</p>
+<h2 id="firing-in-bursts"><a class="header" href="#firing-in-bursts">Firing in Bursts</a></h2>
+<p>If you want a cannon to fire in bursts, you need to define its <code>burstyness</code> and <code>roundsPerBurst</code>.</p>
+<p>The way that a cannon using <code>burstyness</code> fires is defined by its <code>burstyness</code>, <code>roundsPerBurst</code>, and <code>roundsPerSec</code>. Keep in mind that <code>roundsPerSec</code> is always constant.</p>
+<p>The value of <code>burstyness</code> must be between 0.0 and 1.0.</p>
+<p>A burstyness of 0 means that a cannon will not fire in bursts and a burstyness of 1 means that a cannon will fire the value of <code>roundsPerBurst</code> all at once.</p>
+<p>Burstyness values in between 0 and 1 will fire however many <code>roundsPerBurst</code> they have, wait, and then fire another burst again.</p>
+<pre><code class="language-lua">{ 17000
+    features=CANNON
+    cannon={
+        -- This cannon will fire 5 bullets at once every 1 second.
+        burstyness=1
+        roundsPerSec=5
+        roundsPerBurst=5
+
+        -- Other cannon fields here.
+    }
+}
+</code></pre>
+<h2 id="bullet-damage-output"><a class="header" href="#bullet-damage-output">Bullet Damage Output</a></h2>
+<p>Think of a bullet's damage output as its health which it 'spends' on damaging blocks. When the bullet runs out of damage output, it is destroyed.</p>
+<p>More specifically, when a bullet (that's non-<code>explosive=ENABLED</code>) hits a block, it deal as much of its damage to the block as it can. If the bullet had more remaining damage output than the block's remaining health before the collision, then the bullet will continue existing with the block's prior remaining health subtracted from its damage output.</p>
+<h2 id="explosive-cannons"><a class="header" href="#explosive-cannons">Explosive Cannons</a></h2>
+<p>If you want a cannon to fire explosives, you need to define its <code>explosive</code> and <code>explodeRadius</code>.</p>
+<p>The <code>explosive</code> field has three flags for non-fragment bullets:</p>
+<ul>
+<li><code>ENABLED</code>: bullet explodes when hitting a target.</li>
+<li><code>FINAL</code>: bullet explodes at either the end of its range or when the bullet's damage output is exhausted.</li>
+<li><code>PROXIMITY</code>: bullet snaps its explosion to the closest enemy block relative to its explode radius.</li>
+</ul>
+<p>(<a href="./fragments.html#explosive-flags-for-fragments">Explosive flags for fragments</a>)</p>
+<pre><code class="language-lua">{ 17000
+    features=CANNON
+    cannon={
+        -- This bullet will explode on hitting a block.
+        -- It will deal its damage to all blocks in a radius of 50.
+        explosive=ENABLED
+        explosiveRadius=50
+        -- Other cannon fields here.
+    }
+}
+</code></pre>
+<p>The <code>explosive</code> field is a flag type, so the way it works is similar to the <code>features</code> field for blocks. This means you can combine <code>explosive</code> flags for a desired effect, but this is unnecessary to know about with the three explosive flags stated prior unless you want to use <a href="./fragments.html">Fragments</a>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="centering_shrouds_on_non-turreted_blocks.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="fragments.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="centering_shrouds_on_non-turreted_blocks.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="fragments.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

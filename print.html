@@ -1,0 +1,3268 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Reassembly Modding by Example</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Reassembly Modding by Example</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="reassembly-modding-by-example"><a class="header" href="#reassembly-modding-by-example">Reassembly Modding by Example</a></h1>
+<p>Reassembly modding is fun. This resource has three goals:</p>
+<ul>
+<li>To be what the average modder constantly checks to get field names correct,</li>
+<li>To document more obscure parts of Reassembly modding (frags, shrouds, jank, etc.),</li>
+<li>And to have some possibly useful advice on improvement and productivity when modding Reassembly.</li>
+</ul>
+<p>Reassembly Discord: <a href="https://discord.gg/8fCjt3J">https://discord.gg/8fCjt3J</a></p>
+<p>Written by Luexks.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mod-structure"><a class="header" href="#mod-structure">Mod Structure</a></h1>
+<p>Local (i.e., what you create) mod folders are stored in the <code>mods/</code> folder, which must be created next to the <code>data/</code> folder at the following location:
+<code>C:/Users/&lt;your username here&gt;/Saved Games/Reassembly/</code>
+You should now have what looks like this:</p>
+<pre><code>Reassembly/
+├── data/
+└── mods/           # This is the folder you just created
+</code></pre>
+<p>Now, make your new mod's folder into <code>mods/</code>.</p>
+<pre><code>Reassembly/
+├── data/
+└── mods/
+    └── Terran V2/   # Name it something suitable.
+                    # If it's a faction mod, call it the name of the faction.
+</code></pre>
+<p>There are multiple <code>data/</code> folders scattered around your computer. One in <code>Save Games/</code>, one in the games actual installation, and one in the Steam cloud folder if you're using that. Mod structure mirrors the structure of the Reassembly <code>data/</code> folders. If your mod has the same folder and file names as those in the Reassembly <code>data/</code> folders then it will work. The <code>data/</code> folders are grouped up when the game is run and all the common files and folders between both mods and the base game are merged.</p>
+<p>This resource is organised by Reassembly's moddable files and folders.
+Below is what mod folders tend to look like:</p>
+<pre><code>Reassembly/
+├── data/
+└── mods/
+    └── Blue Sun/
+        ├── audio/
+        │   ├── sub_folder_for_lasers/
+        │   │   ├── laser_0.ogg
+        │   │   ├── laser_1.ogg
+        │   │   └── laser_2.ogg
+        │   ├── machine_gun_0.ogg
+        │   ├── machine_gun_1.ogg
+        │   └── machine_gun_2.ogg
+        │
+        ├── ships/
+        │   ├── 256_ship_1.lua
+        │   ├── 256_ship_2.lua
+        │   └── 256_ship_3.lua
+        │
+        ├── folder_for_unused_ships_that_i'll_delete_before_i_post_the_mod/
+        │   └── 256_ship_wip.lua
+        │
+        ├── audio.lua
+        ├── blocks.lua
+        ├── cvars.txt
+        ├── factions.lua
+        ├── regions.lua
+        ├── shapes.lua
+        │
+        ├── preview.png         # Here's your reminder that all of these images individually must be &gt;1 MB to get uploaded to the Steam Workshop.
+        ├── capture1.jpg        # You can have as many `capture#.jpg`s as you want.
+        ├── capture2.jpg
+        ├── capture3.jpg
+        │
+        └── anything.txt        # Random stuff that won't be picked up by the game
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="publishing-to-the-steam-workshop"><a class="header" href="#publishing-to-the-steam-workshop">Publishing to the Steam Workshop</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="sandbox-basics"><a class="header" href="#sandbox-basics">Sandbox Basics</a></h1>
+<p><img src="./diagrams/sandbox_button.png" alt="Sandbox Button" /></p>
+<p>The sandbox is where a faction's blocks can be tested out and where ships can be built without anything annoying getting in the way.</p>
+<p><img src="./diagrams/sandbox_in_the_beginning_was_the_command_line.png" alt="In the beginning was the command line" /></p>
+<h2 id="sandbox-modes"><a class="header" href="#sandbox-modes">Sandbox Modes</a></h2>
+<p>There are 3 modes for interacting with the sandbox:</p>
+<ol>
+<li>
+<p>Fly: start controlling the selected ship.</p>
+ <img src="./diagrams/sandbox_fly.png" alt="Fly Mode" width="400" height="auto">
+</li>
+<li>
+<p>Command: select ships and see how your ships will look in game.</p>
+ <img src="./diagrams/sandbox_command.png" alt="Command Mode" width="400" height="auto">
+</li>
+<li>
+<p>Construct: interact with everything with the controls of the campaign's editor and look at the selected ship's construction info in the bottom right.</p>
+ <img src="./diagrams/sandbox_construct.png" alt="Construct Mode" width="400" height="auto">
+</li>
+</ol>
+<p>Switch between the modes by pressing the corresponding number keys without having your mouse cursor over the console. (<code>1</code> for fly, <code>2</code> for command, <code>3</code> for construct.)</p>
+<h2 id="interacting-with-the-console"><a class="header" href="#interacting-with-the-console">Interacting with the Console</a></h2>
+<p>Hovering your mouse over the console in the top left lets you type console commands.</p>
+<p>Pressing <code>Tab</code> will either autocomplete what you are typing or list out what options you could type.</p>
+<p>For example, pressing tab on an empty console will give you every command in a list:</p>
+<p><img src="./diagrams/sandbox_tab_on_empty_console.png" alt="Tab on an empty console." /></p>
+<p>Many commands do an action at the deploy location, the blue circle with an X. Change its location by double clicking.</p>
+<img src="./diagrams/sandbox_deploy_location.png" alt="Deploy Location" width="100" height="auto">
+<h2 id="spawning-in-palettes"><a class="header" href="#spawning-in-palettes">Spawning in Palettes</a></h2>
+<p>Each faction has a palette that can be spawned in using the <code>mi</code> command followed by either its <a href="./blocks.lua.html?highlight=group"><code>group</code></a> in the <code>blocks.lua</code> or its <a href="./factions.lua.html?highlight=name"><code>name</code></a> in the <code>factions.lua</code>.</p>
+<p>Work with the palette using normal editor controls by switching to command mode by pressing <code>3</code>.</p>
+<video height=256 controls>
+  <source src="diagrams/sandbox_mi.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="looking-at-ships"><a class="header" href="#looking-at-ships">Looking at Ships</a></h2>
+<p>The main use of the command mode other than selecting ships is to look at ships without the construct mode's visual clutter.</p>
+<p>This is useful if you care about how lines are drawn or if you just want to see how your ships will look in game.</p>
+<video height=256 controls>
+  <source src="diagrams/sandbox_looking_at_ships.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="flying-ships"><a class="header" href="#flying-ships">Flying Ships</a></h2>
+<p>Duplicate your ship in construct mode (<code>3</code>) and then fly it around away from your construction area with fly mode (<code>1</code>).</p>
+<video height=256 controls>
+  <source src="diagrams/sandbox_flying_ships.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>(Always duplicate your ships before flying them so that they can always be saved in their latest state and so that they do not reassemble to a previous state if activated.)</p>
+<h2 id="saving-modded-ships"><a class="header" href="#saving-modded-ships">Saving Modded Ships</a></h2>
+<p>Once you have spawned in a palette and made a ship with a command, save it to your mod's <code>ships/</code> folder with the <code>ss &lt;Ship Name Here&gt;</code> command. Note that you must use underscores instead of spaces.</p>
+<video height=256 controls>
+  <source src="diagrams/sandbox_ss.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>Note that if neither your ship has a corresponding faction defined in the <code>faction.lua</code> nor there is a preexisting <code>ships/</code> folder, your ship will instead be saved to <code>C:/Users/&lt;your username here&gt;/Saved Games/Reassembly/Data/ships/</code>.</p>
+<h2 id="spawning-fleet-palettes"><a class="header" href="#spawning-fleet-palettes">Spawning Fleet Palettes</a></h2>
+<p>Spawn in a faction's fleets by using the <code>fleetp</code> command followed by either its <a href="./factions.lua.html?highlight=98">faction ID</a> or its <a href="./factions.lua.html?highlight=name"><code>name</code></a> in the <code>factions.lua</code>.</p>
+<video height=256 controls>
+  <source src="diagrams/sandbox_fleetp.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>(<code>fleetp 0</code> spawns in plants, <code>fleetp -10</code> spawns in every faction except for the Contestants, and specifying any other negative faction ID spawns in every faction plus the Contestants.)</p>
+<h2 id="saving-the-sandbox"><a class="header" href="#saving-the-sandbox">Saving the Sandbox</a></h2>
+<p>Use <code>Ctrl</code> + <code>S</code> to save the state of the sandbox.</p>
+<p>If you want a clean state for your sandbox a big block of text saying 'IN THE BEGINNING WAS THE COMMAND LINE', use the <code>cl</code> command to clear everything and the do <code>Ctrl</code> + <code>S</code>.</p>
+<h2 id="opening-and-closing-the-console"><a class="header" href="#opening-and-closing-the-console">Opening and Closing the Console</a></h2>
+<p>Use the <code>`</code> or <code>~</code> buttons without the mouse cursor over the console to open and close the console view. Works everywhere and not just the sandbox (save for most menus).</p>
+<p>Pressing <code>Esc</code> also closes the console view.</p>
+<h2 id="time-settings"><a class="header" href="#time-settings">Time Settings</a></h2>
+<p>Use <code>P</code> without the mouse cursor over the console to freeze and unfreeze time.</p>
+<p>Use <code>O</code> in the same way to progress Reassembly's simulation by 1 update (can be held down).</p>
+<p>Use <code>{</code> to speed down update rate (not <a href="./ups.html">updates per second</a>) by 50% and <code>}</code> to slow it down by 50%.</p>
+<p>Use the <code>deb fps</code> command to open the FPS debugger in the bottem left to check update rate and UPS.`</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="further-ship-testing"><a class="header" href="#further-ship-testing">Further Ship Testing</a></h1>
+<p>This chapter covers how to understand a ship more than how well it flies and whether it shoots.</p>
+<h2 id="activating-and-deactivating-ships"><a class="header" href="#activating-and-deactivating-ships">Activating and Deactivating Ships</a></h2>
+<p>The <code>ac</code> command activates the selected ships and the <code>dea</code> command deactivates the selected ships.</p>
+<p>Activated ships have AI control and reassemble themselve's to their state when activated.</p>
+<video height=256 controls>
+  <source src="diagrams/sandbox_ac_and_dea.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="spawning-targets-and-asteroids"><a class="header" href="#spawning-targets-and-asteroids">Spawning Targets and Asteroids</a></h2>
+<p>The <code>target</code> and <code>asteroid</code> command are useful for testing how deadly your weapons are.</p>
+<p><code>target 1000</code> and <code>asteroid</code> are good defaults (no need to specify their other fields).</p>
+<video height=256 controls>
+  <source src="diagrams/sandbox_target_and_asteroid.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="fighting-fleets"><a class="header" href="#fighting-fleets">Fighting Fleets</a></h2>
+<p>The <code>fleet &lt;Fleet Index&gt; &lt;Total P&gt;</code> command spawns a fleet of the specified fleet index and total P which is useful for balancing.</p>
+<video height=256 controls>
+  <source src="diagrams/sandbox_fleet.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video><div style="break-before: page; page-break-before: always;"></div><h1 id="blockslua"><a class="header" href="#blockslua">blocks.lua</a></h1>
+<p><code>blocks.lua</code> is well-named. It controls the blocks of a mod and can become the most complicated of all the files you work with in a Reassembly mod.</p>
+<p>This section will be like a shopping list. Do you want to add a shield? Go to the shield chapter in the section on block features. Do you want to add block decals using shrouding? Go to the shrouding chapter.</p>
+<p>But before you do any of that cool stuff, here's how to set up your <code>blocks.lua</code> and not have to deal with Reassembly undecipherable punctuation errors at you:</p>
+<pre><code class="language-lua">{
+    {&lt;ID here&gt; -- First block
+        &lt;block stuff here&gt;
+    }
+    {&lt;Different ID here&gt; -- Second block
+        &lt;more block stuff here&gt;
+    }
+    {&lt;Another Different ID here&gt; -- Third block
+        &lt;even more block stuff here&gt;
+    }
+}
+</code></pre>
+<p>Brackets are how the game keeps understands when one thing starts and ends and what something contains.</p>
+<p>Below is how the above structure might be represented if it actually defined three blocks:</p>
+<pre><code class="language-lua">{
+    { 17000
+        group=98
+        sort=1
+        fillColor=0x5555AA
+        fillColor1=0x3333AA
+        lineColor=0xFFFFFF
+        shape=SQUARE
+        scale=1
+        name="Hull"
+        blurb="1x1\nBasic structure"
+        durability=1.001
+        density=0.1
+        features=PALETTE
+    }
+    -- Extended blocks copy the fields of the blocks they extend.
+    { 17001 extends=17000 scale=2}
+    { 17002 extends=17000 scale=3}
+}
+</code></pre>
+<p>If you are a beginner, read <a href="./basic_fields_and_hull.html">Basic Fields and Hull</a> and <a href="./block_features.html">Block Features</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="basic-fields-and-hull"><a class="header" href="#basic-fields-and-hull">Basic Fields and Hull</a></h1>
+<p>Below are some basic fields that should be defined for every block, using hull as a example:</p>
+<pre><code class="language-lua">{ 17000		 -- This is the block's ID that the game uses to keep track of things.
+        	 -- Keep them within the range 17000-26000.
+
+	group=98 -- The command `palette 98` will spawn this block.
+	sort=1 	 -- Orders blocks in the campaign's databank.
+
+
+	-- A block's color alternates between fillColor and fillColor1.
+
+	-- All 3 color fields can be either 0xRRGGBB, for red green blue,
+	-- or 0xAARRGGBB, for alpha (the less the alpha, the greater the transparency),
+	-- then red, green, blue.
+	fillColor=0x5555AA
+	fillColor1=0x3333AA
+	-- Note that lines do not render transparency even when defined with 0xAARRGGBB.
+	lineColor=0xFFFFFF
+
+
+	-- Base game shapes are text, custom shapes are whole numbers.
+	shape=SQUARE
+	-- Scales count up from 1.
+	scale=1
+
+
+	name="Hull"
+	blurb="1x1\nBasic structure"
+
+	-- Block health is calculated per block based on its durability and area,
+	durability=1.00001
+	-- Don't set durability to 1 if you want to use block extensions as
+	-- block health will not be recalculated for each block.
+
+
+	-- Block mass is calculated per block based on its density and area,
+	density=0.1
+
+	-- The greater the grow rate, the faster the block grows.
+	growRate=20
+
+
+	-- Give every block the PALETTE feature if you want it to show up in the campaign.
+	features=PALETTE
+}
+{ 17001 extends=17000 scale=2 blurb="2x2\nBasic structure" }
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="block-features"><a class="header" href="#block-features">Block Features</a></h1>
+<p>The use of block features are how different types of blocks are created.</p>
+<p>Say you want a generator, you would use <code>features=GENERATOR</code>.
+Say you want a generator that also produced R. To do this you would add a delimiting pipe <code>|</code> character between the word <code>GENERATOR</code> and <code>PHOTOSYNTH</code>, giving you <code>features=GENERATOR|PHOTOSYNTH</code>.</p>
+<p>Although there are exceptions, most block types are defined by either one or multiple feature flags. Features are what make Reassembly modding versatile.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="block-extensions"><a class="header" href="#block-extensions">Block Extensions</a></h1>
+<p>The <code>extends</code> field takes the Block ID of another block and duplicates all of that block's data into the new block. Fields after the <code>extends</code> field give the new block its differences.</p>
+<pre><code class="language-lua">{
+    { 17000
+        name="My First Block"
+        group=78
+        sort=0
+        shape=SQUARE
+        scale=1
+        features=PALETTE
+        -- Other block stuff here.
+    }
+    { 17001 extends=17000 scale=2
+        name="My Second Block, which is exactly the same,"
+        blurb="but is scale 2 and has a blurb and a different name."
+    }
+}
+</code></pre>
+<p>Looks at the above block of ID '17001'. It uses block extension, an great utility that makes block creation productive and concise.</p>
+<p>Block extensions allow you to not have to rewrite stuff over and over again. It's especially useful for creating hull palettes.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="getting-the-most-out-of-block-extensions"><a class="header" href="#getting-the-most-out-of-block-extensions">Getting the most out of block extensions</a></h1>
+<p>Have everything in a faction as interconnected by using block extensions. If you have a good plan of what you are making, it will save you time.</p>
+<p>Below is how you might want to map out an extension hierachy. The example has 3 types of hull, each containing squares and triangles, both of which have 4 scales, plus some non-hull components. Every branch represents an <code>extends</code> field. This is how I manage my mods.</p>
+<pre><code>Original Hull Square
+├── Scale 2
+├── Scale 3
+├── Scale 4
+│
+├── Hull Triangle
+│   ├── Scale 2
+│   ├──	Scale 3
+│   └──	Scale 4
+│
+│
+├── Differently Colored Hull Square
+│   ├──	Scale 2
+│   ├──	Scale 3
+│   ├──	Scale 4
+│   └──	Differently Colored Hull Triangle
+│	    ├── Scale 2
+│	    ├── Scale 3
+│	    └── Scale 4
+│
+│
+├── Armored Hull Square
+│   ├──	Scale 2
+│   ├──	Scale 3
+│   ├──	Scale 4
+│   └──	Armored Hull Triangle
+│	    ├── Scale 2
+│	    ├── Scale 3
+│	    └── Scale 4
+│
+│
+├── Command
+│
+├── Generator Scale 1
+│   ├── Generator Scale 2
+│   ├── Generator Scale 3
+│   └── Generator Scale 4
+│
+├── Gun Scale 1
+│   ├── Gun Scale 2
+│   └── Gun Scale 3
+│
+└── Different Type of Gun Scale 1
+    ├── Different Type of Gun Scale 2
+    └── Different Type of Gun Scale 3
+
+</code></pre>
+<p>I like making the most of block extension but I keep different components seperate to not sacrifice my ability to create and edit stuff.</p>
+<p>For example, I like seperating different guns in the extends tree. This makes them easier to work with as they do not depend on each other for features.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="getting-blocks-to-show-up-in-the-campaigns-databank"><a class="header" href="#getting-blocks-to-show-up-in-the-campaigns-databank">Getting Blocks to Show Up in the Campaign's Databank</a></h1>
+<p>Use <code>PALETTE</code> for everything you want a player to access, use <code>NOPALETTE</code> for everything you don't want a player to access.</p>
+<p>When a block has <code>PALETTE</code>, it will always shows up in campaign databank regardless of being present on one of the faction's ships.</p>
+<pre><code class="language-lua">{ 17000
+    features=PALETTE
+}
+</code></pre>
+<p>When a block has <code>NOPALETTE</code>, it will never shows up in campaign databank.
+<code>NOPALETTE</code> blocks cannot be accessed by scaling in the campaign.</p>
+<pre><code class="language-lua">{ 17000
+    features=NOPALETTE
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="commands"><a class="header" href="#commands">Commands</a></h1>
+<pre><code class="language-lua">{ 17000
+    features=COMMAND
+    blurb="The ship of this command cannot regenerate at all."
+}
+{ 17001
+    features=COMMAND|REGROWER
+    blurb="The command's ship can regenerate missing parts but not using debris."
+}
+{ 17002
+    features=COMMAND|ASSEMBLER
+    blurb="The command's ship can regenerate normally and by using debris."
+}
+</code></pre>
+<p>Commands commonly have either the <code>REGROWER</code> or the <code>ASSEMBLER</code> features.</p>
+<p><code>REGROWER</code> allows the ship to be able to regenerate missing parts.</p>
+<p><code>ASSEMBLER</code> is the same as <code>REGROWER</code>, but also allows ships to reassemble themselves using parts from debris.</p>
+<h2 id="the-command-field"><a class="header" href="#the-command-field">The <code>command</code> Field</a></h2>
+<p>Commands can also contain the <code>command</code> field, but it is unnecessary for most ships as the values it contains are controlled by <a href="./factions.lua.html"><code>factions.lua</code></a> and how Reassembly handles blueprints.</p>
+<p>Most use cases do not need to define all three command flags.</p>
+<pre><code class="language-lua">{ 17000
+    features=COMMAND
+    command={
+        flags=RECKLESS|HATES_PLANTS -- These take priority over the faction's AI flags.
+        faction=98                  -- Faction ID this command will be assigned to.
+        blueprint="98_Test_Ship"    -- Blueprint that the command will become.
+    }
+}
+</code></pre>
+<h2 id="command-flags"><a class="header" href="#command-flags">Command Flags</a></h2>
+<p>These are the flags which are used for <a href="./commands.html#the-command-field"><code>command={flags}</code></a> and in <a href="./factions.lua.html"><code>aiflags</code></a>.</p>
+<ul>
+<li><code>NONE</code>: does nothing.</li>
+<li><code>METAMORPHOSIS</code>: AI will occasionally change blueprints.</li>
+<li><code>FOLLOWER</code>: follows player.</li>
+<li><code>ATTACK</code>: overrides all other command flags and makes AI attack ruthlessly. Used internally for tournament mode.</li>
+<li><code>FLOCKING</code>: move in a flock with nearby allied ships at the speed of the slowest one.</li>
+<li><code>RECKLESS</code>: disengage less.</li>
+<li><code>AGGRESSIVE</code>: initiate attack more easily.</li>
+<li><code>CAUTIOUS</code>: initiate attack less easily.</li>
+<li><code>SOCIAL</code>: call for help when attacked.</li>
+<li><code>PEACEFUL</code>: never initiate attack.</li>
+<li><code>WANDER</code>: wander randomly if nothing else to do. Recommended for most factions.</li>
+<li><code>HATES_PLANTS</code>: kill plants if in range.</li>
+<li><code>FORGIVING</code>: stop attacking more easily.</li>
+<li><code>TRACTOR_TRANSIENT</code>: grab blocks from the environment and use them.</li>
+<li><code>DODGES</code>: dodge projectiles.</li>
+<li><code>RIPPLE_FIRE</code>: use ripple fire on weapons.</li>
+<li><code>SPREAD_FIRE</code>: use spread fire on weapons.</li>
+<li><code>BAD_AIM</code>: aim poorly.</li>
+<li><code>POINT_DEFENSE</code>: act like a point defense drone.</li>
+<li><code>INACTIVE</code>: become a vegetable, yum.</li>
+<li><code>SMART_FIRE</code>: use spread fire when enemy is expected to dodge.</li>
+<li><code>NO_PARENT</code>: do not follow parent ship.</li>
+<li><code>CHILDREN_SET</code>: used internally for AI ships that should not change their children blueprints as set by the player.</li>
+<li><code>BLUEPRINT_SET</code>: used internally for AI ships that should not change their own blueprint as set by the player.</li>
+<li><code>HANGOUT</code>: used to make the Anisoptera ship spin in circles :P.</li>
+<li><code>PACIFIST</code>: never attack even when attacked.</li>
+<li><code>FIRE_AT_WILL</code>: ignore parent ship target.</li>
+</ul>
+<p>The following command flags can also be used for normal factions but at set in vanilla in the bindings menu:</p>
+<ul>
+<li><code>ALWAYS_KITE</code>: always attack from max range.</li>
+<li><code>ALWAYS_RUSH</code>: always attack at closest range regardless of incoming damage.</li>
+<li><code>ALWAYS_MANEUVER</code>: always dodging while attacking.</li>
+<li><code>AI_BINDING</code>: attack from range of highest binding weapon that has not been destroyed.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="resource-containers"><a class="header" href="#resource-containers">Resource Containers</a></h1>
+<pre><code class="language-lua">{ 17000
+    capacity=50
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="resource-collectors"><a class="header" href="#resource-collectors">Resource Collectors</a></h1>
+<p>'Tractor beam' is a synonym for 'resource collector'.</p>
+<pre><code class="language-lua">{ 17000
+    features=TRACTOR
+    tractorRange=500
+
+    -- Resource Collectors tend to also store R.
+    capacity=50
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="resource-producers"><a class="header" href="#resource-producers">Resource Producers</a></h1>
+<p>'Photosynthesizer' and 'solar panel' are synonyms for 'resource producer'.</p>
+<pre><code class="language-lua">{ 17000
+    features=PHOTOSYNTH
+    photosynthPerSec=0.2
+
+    -- Resource Producers tend to also store R.
+    capacity=50
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="generators"><a class="header" href="#generators">Generators</a></h1>
+<pre><code class="language-lua">{ 17000
+    features=GENERATOR
+    generatorCapacityPerSec=150
+    powerCapacity=150
+
+    -- Generators tend to also store R.
+    capacity=50
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="thrusters"><a class="header" href="#thrusters">Thrusters</a></h1>
+<pre><code class="language-lua">{ 17000
+    features=THRUSTER
+
+    thrusterForce=50000 -- =50K
+
+    -- When a thruster is turned on, its thruster force is multipled by
+    -- its thruster boost for `thrusterBoostTime` seconds.
+    thrusterBoost=2.0
+    thrusterBoostTime=3.0
+
+    -- Thruster trail colors are decided by these two 0xAARRGGBB values.
+    -- thrusterColor controls the color of the main thruster trail,
+    thrusterColor=0xFFFFFFFF
+    -- While thrusterColor1 controls the color of the trail
+    -- immediately at the thruster.
+    thrusterColor1=0xFFFFFFFF
+}
+</code></pre>
+<h2 id="thruster-colors"><a class="header" href="#thruster-colors">Thruster Colors</a></h2>
+<p>The following videos each show the area of one thruster color type on a stationary vessel with <code>thrusterForce=50000</code>:</p>
+<ul>
+<li>Only <code>thrusterColor</code></li>
+</ul>
+<pre><code class="language-lua">{ 17000
+    thrusterForce=50000
+    thrusterColor=0xFFFFFFFF
+    thrusterColor1=0x01000000
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/thruster_color_only_-.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<ul>
+<li>Only <code>thrusterColor1</code></li>
+</ul>
+<pre><code class="language-lua">{ 17000
+    thrusterForce=50000
+    thrusterColor=0x01000000
+    thrusterColor1=0xFFFFFFFF
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/thruster_color_only_1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video><div style="break-before: page; page-break-before: always;"></div><h1 id="rotator-thrusters"><a class="header" href="#rotator-thrusters">Rotator Thrusters</a></h1>
+<pre><code class="language-lua">{ 17000
+    features=THRUSTER|ROTATOR
+
+    -- Similar fields to those of turreted weapons.
+    rotatorSpeed=6
+    rotatorLimit=pi -- *
+
+    -- Other thruster fields are identical:
+    thrusterForce=50000
+    thrusterBoost=2.0
+    thrusterBoostTime=3.0
+    thrusterColor=0xFFFFFFFF
+    thrusterColor1=0xFFFFFFFF
+}
+</code></pre>
+<p>* <a href="./rotator_thrusters.html#rotator-limit-bug">Rotator Limit Bug</a></p>
+<p>A basic rotator thruster to show that it rotates weirdly with different player control schemes:
+<video height=256 controls>
+<source src="diagrams/thruster_rotator.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video></p>
+<h2 id="rotator-limit-bug"><a class="header" href="#rotator-limit-bug">Rotator Limit Bug</a></h2>
+<p>The field <code>rotatorLimit</code> is bugged such that the rotator thruster always faces towards the front of the ship instead of the front of the block as one would expect.</p>
+<p>Here is an example of 4 rotator thrusters with <code>turretLimit=pi</code> using the scale 2 <code>CANNON</code> shape to show that they face outwards from the command:</p>
+<pre><code class="language-lua">{ 17000
+    features=PALETTE|THRUSTER|ROTATOR
+	shape=CANNON
+	scale=2
+	rotatorLimit=pi
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/thruster_rotator_limit_pi.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>And here is the same thing but with <code>turretLimit=0</code>:</p>
+<pre><code class="language-lua">{ 17000
+    features=PALETTE|THRUSTER|ROTATOR
+	shape=CANNON
+	scale=2
+	rotatorLimit=0
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/thruster_rotator_limit_0.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video><div style="break-before: page; page-break-before: always;"></div><h1 id="torquers"><a class="header" href="#torquers">Torquers</a></h1>
+<p>Torquers exert a turning force on the ship.</p>
+<pre><code class="language-lua">{ 17000
+    features=TORQUER
+    torquerTorque=10000 -- =10K
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="factories"><a class="header" href="#factories">Factories</a></h1>
+<p>There are multiple types of factory blocks, but the default <code>FACTORY</code> factories are the most common.</p>
+<pre><code class="language-lua">{ 17000
+    -- TRACTOR is not strictly necessary for factories. 
+    features=FACTORY|TRACTOR
+    -- Factories tend to also store R and collect R.
+    tractorRange=500
+    capacity=50
+}
+</code></pre>
+<h2 id="other-types-of-factories"><a class="header" href="#other-types-of-factories">Other Types of Factories</a></h2>
+<h3 id="self-factory"><a class="header" href="#self-factory">Self-Factory</a></h3>
+<p>To-do. Documentation states that ships with <code>SELFFACTORY</code> can only spawn their own design.</p>
+<pre><code class="language-lua">{ 17000
+    features=SELFFACTORY
+}
+</code></pre>
+<h3 id="telespawn"><a class="header" href="#telespawn">Telespawn</a></h3>
+<p><code>TELESPAWN</code> is like <code>FACTORY</code>, but ships are 'teleported' in, fully built, and for no R cost.</p>
+<pre><code class="language-lua">{ 17000
+    features=TELESPAWN
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="shields"><a class="header" href="#shields">Shields</a></h1>
+<pre><code class="language-lua">{ 17000
+    features=SHIELD
+    shield={
+        strength=100            -- Maximum shield health.
+        regen=20                -- 20 regeneration and 20 energy used up per second.
+        radius=40
+        delay=3                 -- Delay before shield regenerates health after taking damage.
+        armor=0                 -- *
+		color=0xFFFFFFFF        -- AARRGGBB color value.
+		damagedColor=0xFFFFFFFF -- AARRGGBB color value.
+		lineColor=0xFFFFFF      -- RRGGBB color value.
+    }
+}
+</code></pre>
+<p>* For the armor field, see <a href="./features_and_fields_not_to_use.html#armor">Features and Fields Not To Use</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="void-shields"><a class="header" href="#void-shields">Void Shields</a></h1>
+<p>Void shields are an unintended varient of standard shields that have negative <code>strength</code> and <code>regen</code>, which are both conventionally set to -1.</p>
+<p>Here is a list of what they do:</p>
+<ul>
+<li>Constantly radiates the shield death particle effect.</li>
+<li>When hit by explosive weaponry they take 0 damage but blocks in the explosion radius still take damage.</li>
+<li>When hit by non-explosive weaponry, the void shield block's health itself is used as the shield health.</li>
+<li>Does not work if the block or ship it is mounted on has no block with COMMAND</li>
+<li>The <code>armor</code> field doesn't function.</li>
+<li>May have other yet undiscovered effects.</li>
+</ul>
+<pre><code class="language-lua">{ 17000
+    features=SHIELD
+    shield={
+        -- These fields are necessary:
+        strength=-1
+        regen=-1
+
+        -- These can be anything:
+        radius=100
+        delay=3
+    }
+}
+</code></pre>
+<video width="640" height="360" controls>
+  <source src="diagrams/void_shield_video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video><div style="break-before: page; page-break-before: always;"></div><h1 id="power-armor"><a class="header" href="#power-armor">Power Armor</a></h1>
+<p>A shield block, with a shield radius so small that it the shield cannot be hit, redirects incoming damage that hits the block to the health pool of the shield. As the shield block can only be destroyed when its shield goes down, the survivability of the block will be dependent on the survivability of the shield.</p>
+<p>If a shield's <code>delay</code> is 0 and the ship it is attached to has enough power, then it can spend the ship's power to regenerate any amount of damage without being destroyed, as long as the shield's <code>regen</code> and <code>strength</code> provide enough buffer for any incoming damage.</p>
+<p>Shield blocks like this translate the power store of their ship directly into survivability, and are thus called 'power armor'.</p>
+<pre><code class="language-lua">{ 17000
+	features=SHIELD
+	health=1
+    shield={
+        strength=100
+        regen=10000
+        radius=1
+        delay=0
+		color=0xFFFF0000
+		lineColor=0x0000FF
+		damagedColor=0xFFFF0000
+    }
+}
+</code></pre>
+<p>The following example showcases the difference between power armor on a ship with high power generation (Green) and one without (Red) using the Red's Tempest.</p>
+<pre><code class="language-lua">{ 17001 features=GENERATOR generatorCapacityPerSec=0     powerCapacity=50000
+    fillColor=0xFF0000 fillColor1=0xFF0000 }
+{ 17002 features=GENERATOR generatorCapacityPerSec=10000 powerCapacity=50000
+    fillColor=0x00FF00 fillColor1=0x00FF00 }
+</code></pre>
+<p>Notice how the power armor only takes damage when the ship's power runs out after enough fire:</p>
+<video height=256 controls>
+  <source src="diagrams/power_armor.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>Power armor is effective against damage spread out over time, especially lasers, but is vulnerable to high amounts of instantaneous damage that is greater than the buffer of the shield's <code>strength</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="teleporters"><a class="header" href="#teleporters">Teleporters</a></h1>
+<pre><code class="language-lua">{ 17000
+    features=TELEPORTER
+
+    -- Energy used up per unit of mass to teleport the ship.
+    teleporterPOWER=4
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="melee-blocks"><a class="header" href="#melee-blocks">Melee blocks</a></h1>
+<p>Sentinel armor spikes have <code>meleeDamage</code> set to 5.0, which equates to 500% of base collision damage.</p>
+<pre><code class="language-lua">{ 17000
+    features=MELEE
+    -- This is a multiplier to melee damage.
+    meleeDamage=5.0
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="other-collision-bumper-and-elasticity"><a class="header" href="#other-collision-bumper-and-elasticity">Other Collision: Bumper and Elasticity</a></h1>
+<h2 id="elasticity"><a class="header" href="#elasticity">Elasticity</a></h2>
+<p>Bounciness of a block when it collides.
+More elasticity means more bounciness.
+Should be between 0.0 and 1.0.</p>
+<pre><code class="language-lua">{ 17000
+    elasticity=0.4
+}
+</code></pre>
+<h2 id="bumper"><a class="header" href="#bumper">Bumper</a></h2>
+<p>Does not take melee damage when colliding. Anti-melee armor.</p>
+<pre><code class="language-lua">{ 17000
+    features=BUMPER
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="explosive-blocks"><a class="header" href="#explosive-blocks">Explosive Blocks</a></h1>
+<pre><code class="language-lua">{ 17000
+    features=EXPLODE
+
+    explodeDamage=50
+    explodeRadius=50
+    explodeStdDev=10  -- *
+    explodeFaction=98 -- The specified faction will not take damage from the explosion.
+}
+</code></pre>
+<p>*For the explodeStdDev field, see <a href="./standard_deviation_fields.html">Standard Deviation Fields</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="invulnerable-blocks"><a class="header" href="#invulnerable-blocks">Invulnerable Blocks</a></h1>
+<p>Bullets phase through invulnerable blocks which are not commands.</p>
+<pre><code class="language-lua">{ 17000
+    features=INVULNERABLE
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="blocks-with-lifetimes"><a class="header" href="#blocks-with-lifetimes">Blocks with Lifetimes</a></h1>
+<pre><code class="language-lua">{ 17000
+    lifetime=20 -- Time in seconds after block is created that it destroys itself.
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="noclipping-blocks"><a class="header" href="#noclipping-blocks">Noclipping blocks</a></h1>
+<p>Noclipping blocks have just their own collisions disabled, not the entire ship's blocks.</p>
+<pre><code class="language-lua">{ 17000
+    features=NOCLIP
+}
+{ 17001
+    features=NOCLIP_ALLY -- Only noclips with blocks of the same faction.
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="blocks-that-support-plant-growth"><a class="header" href="#blocks-that-support-plant-growth">Blocks that support plant growth</a></h1>
+<p>Seeds, plants, and buildings can all attach to environmental blocks.</p>
+<pre><code class="language-lua">{ 17000
+    features=ENVIRONMENTAL
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="seeds"><a class="header" href="#seeds">Seeds</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="roots"><a class="header" href="#roots">Roots</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cosmetic-features"><a class="header" href="#cosmetic-features">Cosmetic Features</a></h1>
+<p>All of the following features are purely decorative and do nothing.</p>
+<h2 id="internal-lines"><a class="header" href="#internal-lines">Internal Lines</a></h2>
+<p>Block always renders lines.</p>
+<pre><code class="language-lua">{ 17000
+    features=INTLINES
+}
+</code></pre>
+<h2 id="no-icon"><a class="header" href="#no-icon">No Icon</a></h2>
+<p>Block doesn't renders icons.</p>
+<pre><code class="language-lua">{ 17000
+    features=NOICON
+}
+</code></pre>
+<h2 id="no-recolor"><a class="header" href="#no-recolor">No Recolor</a></h2>
+<p>Block is not recolored by color schemes.</p>
+<pre><code class="language-lua">{ 17000
+    features=NORECOLOR
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="shrouding"><a class="header" href="#shrouding">Shrouding</a></h1>
+<p>A shroud is a purely decorative part of a block defined using the <code>shroud</code> field.</p>
+<p>When a weapon with the <a href="./turreted_weapons.html"><code>TURRET</code></a> or <a href="./rotator_thrusters.html"><code>ROTATOR</code></a> is shrouded, the shroud takes on the rotation of the turret or rotator.</p>
+<pre><code class="language-lua">{ 17000
+    fillColor=0xFF555555
+    fillColor1=0xFFAAAAAA
+    lineColor=0xFFFFFFFF
+    shroud={
+        {
+            shape=SQUARE            -- Note that scales cannot be used.
+
+            size={10.0,5.0}         -- Size values can be negative for mirroring.
+                                    -- (Square shrouds' Y sizes are doubled)
+
+            offset={2.5,0,0.01}     -- X and Y offset is relative to icon center *.
+                                    -- Z is 3D draw order. Increment by 0.02.
+                                    -- Higher Z shrouds are drawn on top.
+                                    -- Equal Z shrouds intersect their lines.
+                                    -- 0 Z sets Z by order of shroud shapes in the list.
+
+            taper=0.5               -- Only for shrouds with shape=SQUARE.
+                                    -- Multiplies width of the square's front.
+
+            angle=90*pi/180         -- Angle in radians. (add '*pi/180' for degrees)
+                                    -- If the shroud's size is a multiple of the
+                                    -- shape's bounding box (for a scale 1 square
+                                    -- this could be size={10.0*2,10.0*2}), the shroud
+                                    -- is scaled and then rotated,
+
+                                    -- but if not, the size is applied after
+                                    -- rotation, so for shrouds that need precisely
+                                    -- angled blocks, it may be worth making custom
+                                    -- shapes that are angled to use for shrouding.
+
+            -- Shroud colors are assigned by the colors of the block.
+            -- 0: fillColor.
+            -- 1: fillColor1.
+            -- 2: lineColor.
+            tri_color_id= 0         -- fillColor of the shroud.
+            tri_color1_id=1         -- fillColor1 of the shroud.
+            line_color_id=2         -- lineColor of the shroud.
+
+            count=1                 -- Usually undefined.
+                                    -- Works in the same way as barrelCount.
+        }
+        -- The other shrouds are defined using the compact format:
+        { shape=OCTAGON size={10.0,10.0} offset={ 2.5, 0.0,0.02}               tri_color_id=2 tri_color1_id=2 line_color_id=0 }
+        { shape=OCTAGON size={15.0,10.0} offset={-2.5, 0.0,0.02}               tri_color_id=0 tri_color1_id=0 line_color_id=1 }
+        { shape=1239879 size={ 5.0, 5.0} offset={ 0.0,-5.0,0.03} angle=pi*-0.5 tri_color_id=2 tri_color1_id=2 line_color_id=0 }
+    }
+}
+</code></pre>
+<p>* <a href="./centering_shrouds_on_non-turreted_blocks.html#icon-center">Icon Center</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="transparency-in-shrouds"><a class="header" href="#transparency-in-shrouds">Transparency in Shrouds</a></h1>
+<p>Because <code>fillColor</code>, <code>fillColor1</code>, and <code>lineColor</code> can have transparency with an alpha value less than <code>FF</code> (for example: <code>fillColor1=7FFFFFFF</code>, a 50% transparent white), shrouds can contain transparency. This chapter contains facts about transparency in shrouds.</p>
+<p>Below is a basic example of a shroud with transparency:</p>
+<pre><code class="language-lua">{ 17142
+	group=98 features=PALETTE
+	fillColor =0xAA5555AA
+	fillColor1=0xAAFF33AA
+	lineColor =0xFFFFFFFF
+	shroud={
+		{ tri_color_id=0 tri_color1_id=0 line_color_id=2 shape=SQUARE size={15.0,2.0} offset={-5.0, 5.0,0.01} }
+		{ tri_color_id=1 tri_color1_id=1 line_color_id=2 shape=SQUARE size={15.0,2.0} offset={-5.0, -5.0,0.01} }
+} }
+</code></pre>
+<video width="auto" height="200" controls>
+  <source src="diagrams/shroud_transparency_in_shrouds.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="when-linecolor-is-transparent"><a class="header" href="#when-linecolor-is-transparent">When <code>lineColor</code> is Transparent</a></h2>
+<p>When <code>lineColor</code> is transparent, lines will still be rendered with full opacity, but if a shroud's fill color (<code>tri_color_id</code> or <code>tri_color1_id</code>) uses the transparent line color, it will take on the transparency. Likewise, if a shroud's <code>line_color_id</code> uses a transparent fill color, it will be rendered opaque.</p>
+<p>An example of the same color ID being rendered opaque as a line color and transparent as a fill color:</p>
+<pre><code class="language-lua">-- Shape 271390000 is a circle.
+{ 17000
+	features=INVISIBLE
+	fillColor =0x20FF0000
+	fillColor1=0x2000FF00
+	lineColor =0x200000FF
+	shroud={
+		{ tri_color_id=0 tri_color1_id=0 line_color_id=0 shape=271390000 size={10.0,10.0} offset={2.5, 15.0,0.01} }
+		{ tri_color_id=1 tri_color1_id=1 line_color_id=1 shape=271390000 size={10.0,10.0} offset={2.5,  0.0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=2 shape=271390000 size={10.0,10.0} offset={2.5,-15.0,0.01} }
+} }
+</code></pre>
+<video width="auto" height="200" controls>
+  <source src="diagrams/shrouds_line_transparency.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="overlaying-transparent-shrouds"><a class="header" href="#overlaying-transparent-shrouds">Overlaying Transparent Shrouds</a></h2>
+<p>Overlaying transparent shrouds is best explained in the context of <a href="./getting_more_than_three_colors.html#overlaying-transparent-shrouds">getting more that three colors</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="getting-more-than-three-colors"><a class="header" href="#getting-more-than-three-colors">Getting More Than Three Colors</a></h1>
+<p>As shrouds are limited to using the three colors of their block (<code>fillColor</code>, <code>fillColor1</code>, and <code>lineColor</code>), they can usually only have three colors, but there are ways to get around the limitations.</p>
+<h2 id="overlaying-transparent-shrouds-1"><a class="header" href="#overlaying-transparent-shrouds-1">Overlaying Transparent Shrouds</a></h2>
+<p>When shrouds with &gt;100% alpha are overlayed, only the lines of the topmost shroud are rendered (unless the shrouds have the same Z level). However, the fill colors of all the shrouds are merged, which can be used to create more than three colors.</p>
+<p>Below is an example of a shroud with 3 circles layered bottom up in the orders red, blue, and green, all with 50% alpha:</p>
+<pre><code class="language-lua">-- Shape 271390000 is a circle.
+{ 17000
+	features=INVISIBLE
+	fillColor =0x7FFF0000
+	fillColor1=0x7F00FF00
+	lineColor =0x7F0000FF
+	shroud={
+		{ tri_color_id=0 tri_color1_id=0 line_color_id=0 shape=271390000 size={10.0,10.0} offset={2.500, 2.500,0.01} }
+		{ tri_color_id=1 tri_color1_id=1 line_color_id=1 shape=271390000 size={10.0,10.0} offset={4.665,-1.250,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=2 shape=271390000 size={10.0,10.0} offset={0.335,-1.250,0.01} }
+} }
+</code></pre>
+<p><img src="./diagrams/shroud_transparency_50.png" alt="Transparency With All 50%" /></p>
+<p>Even though all the circles in the above example have the same Z level of <code>0.01</code>, and the same alpha value of 50%, the intersection of all three colors is mostly blue because of the digital compositing process.</p>
+<p>The digital compositing process decides the color of the pixels of the intersection with this process:</p>
+<ol>
+<li>The opaque black background defaults pixels to black: 0% red, blue, and green.</li>
+<li>The black color is mixed with the red circle of 50% alpha. This leads to a color that is 50% black, and 50% red. In terms of RGB, this is 50% red, 0% blue, and 0% green.</li>
+<li>Then, this dark red color is mixed with the green circle of 50% alpha. This creates a color that is 25% black, 25% red, and 50% green. In terms of RGB, this is 25% red, 50% green, and 0% blue (<code>0x3F7F00</code>).</li>
+<li>Finally, this slightly dark impure green color is mixed with a 50% blue. This leads to a color that is 12.5% black, 12.5% red, 25% green, and 50% blue. In terms of RGB, this is 14.29% red, 28.57% green, and 57.14% blue, (<code>0x244992</code>) which is a dark blue color.</li>
+</ol>
+<p>However, if you want a grey center from three circles colored red, green, and blue, you would need to make the final ratios after the digital compositing process of the three colors all equal.</p>
+<p>To get a color of 1:1:1 R:G:B:</p>
+<ol>
+<li>Start with a full red at 100% alpha.</li>
+<li>Then split it equally with green using an alpha value of 50% for 50% red and 50% green.</li>
+<li>And then split those two colors with the third color, blue, at 33% alpha to get equal ratio for all colors.</li>
+</ol>
+<p>The alpha values in order are:</p>
+<ol>
+<li>Red:     100%</li>
+<li>Green:    50%</li>
+<li>Blue:     33%</li>
+</ol>
+<pre><code class="language-lua">{ 17000
+	features=INVISIBLE
+	fillColor =0xFFFF0000
+	fillColor1=0x7F00FF00
+	lineColor =0x550000FF
+	shroud={
+		{ tri_color_id=0 tri_color1_id=0 line_color_id=0 shape=271390000 size={10.0,10.0} offset={2.500, 2.500,0.01} }
+		{ tri_color_id=1 tri_color1_id=1 line_color_id=1 shape=271390000 size={10.0,10.0} offset={4.665,-1.250,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=2 shape=271390000 size={10.0,10.0} offset={0.335,-1.250,0.01} }
+} }
+</code></pre>
+<p><img src="./diagrams/shroud_transparency_gr,y.png" alt="Transparency With Central Gr*y" /></p>
+<p>Merging their colors is of course limited, but it is useful for creating gradients with a non-opaque shroud on top to get rid of the lines:</p>
+<pre><code class="language-lua">{ 17000
+	scale=4
+	fillColor =0xFFFFFFFF
+	fillColor1=0xFFFFFFFF
+	lineColor =0x11000000
+	shroud={
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2* 1,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2* 2,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2* 3,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2* 4,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2* 5,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2* 6,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2* 7,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2* 8,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2* 9,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*10,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*11,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*12,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*13,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*14,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*15,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*16,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*17,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*18,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*19,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*20,20} offset={-10,0,0.01} }
+		
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*20,20} offset={-10,0,0.03} }
+} }
+</code></pre>
+<p><img src="./diagrams/shroud_gradient_opaque.png" alt="Shroud Gradient Opaque" /></p>
+<p>They can also fade into the background:</p>
+<pre><code class="language-lua">{ 17000
+	features=INVISIBLE
+	scale=4
+	fillColor =0xFFFFFFFF
+	fillColor1=0xFFFFFFFF
+	lineColor =0x050000FF
+	shroud={
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2* 1,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2* 2,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2* 3,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2* 4,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2* 5,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2* 6,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2* 7,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2* 8,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2* 9,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*10,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*11,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*12,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*13,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*14,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*15,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*16,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*17,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*18,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*19,20} offset={-10,0,0.01} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*20,20} offset={-10,0,0.01} }
+		
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=1 shape=SQUARE size={2*20,20} offset={-10,0,0.03} }
+} }
+</code></pre>
+<p><img src="./diagrams/shroud_gradient_transparent.png" alt="Shroud Gradient Transparent" /></p>
+<p>Sadly, there is no way to truly avoid rendering lines, as, when hiding lines, there must always be some higher-layered near-transparent shroud with its own rendered lines.</p>
+<h2 id="never-firing-non-turreted-launcher"><a class="header" href="#never-firing-non-turreted-launcher">Never Firing Non-Turreted Launcher</a></h2>
+<p>A non-turreted <a href="./always_and_never_firing_weapons.html?highlight=LAUNCHER%7CNEVERFIRE">never firing launcher</a>, can hold a launchable that can have its own three colors and its own shroud.</p>
+<p>The following example has 6 different colors (blending together to make two grays) using a small custom launcher and launchable shape:</p>
+<pre><code class="language-lua">{ 17000
+	features=COMMAND|GENERATOR|INVISIBLE|LAUNCHER|NEVERFIRE|NOICON
+	shape=271390004
+	fillColor =0xFFFF0000
+	fillColor1=0x7F00FF00
+	lineColor =0x550000FF
+	aihint_range=0
+    launcherPower=inf
+	shroud={
+		{ tri_color_id=0 tri_color1_id=0 line_color_id=0 shape=271390002 size={10.0,10.0} offset={2.500, 2.500,0.02} }
+		{ tri_color_id=1 tri_color1_id=1 line_color_id=1 shape=271390002 size={10.0,10.0} offset={4.665,-1.250,0.02} }
+		{ tri_color_id=2 tri_color1_id=2 line_color_id=2 shape=271390002 size={10.0,10.0} offset={0.335,-1.250,0.02} }
+	}
+	replicateBlock={
+		shape=271390005
+		fillColor =0xFF00FFFF
+		fillColor1=0x7FFF00FF
+		lineColor =0x55FFFF00
+		shroud={
+			{ tri_color_id=0 tri_color1_id=0 line_color_id=0 shape=271390002 size={10.0,10.0} offset={22.500, 2.500,0.02} }
+			{ tri_color_id=1 tri_color1_id=1 line_color_id=1 shape=271390002 size={10.0,10.0} offset={24.665,-1.250,0.02} }
+			{ tri_color_id=2 tri_color1_id=2 line_color_id=2 shape=271390002 size={10.0,10.0} offset={20.335,-1.250,0.02} }
+		}
+	}
+}
+</code></pre>
+<p><img src="./diagrams/shroud_non-turreted_never_firing_launcher.png" alt="Non-Turreted Never Firing Launcher Shroud" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="centering-shrouds-on-non-turreted-blocks"><a class="header" href="#centering-shrouds-on-non-turreted-blocks">Centering Shrouds on Non-Turreted Blocks</a></h1>
+<p>This chapter discusses how one can center their shrouds' offsets with an understanding of how shroud centers are defined for non-turreted blocks.</p>
+<h2 id="icon-center"><a class="header" href="#icon-center">Icon Center</a></h2>
+<p>A shape's icon center is where the center of its icon is. It is defined by the average position of the shape's vertices.</p>
+<h2 id="icon-radius"><a class="header" href="#icon-radius">Icon Radius</a></h2>
+<p>A shape's icon radius is the size of its icon. It is defined by the mininum distance between the maximum distance from the icon center to any vertex and the mininum distance from the icon center to any of the sides' midpoints.</p>
+<h2 id="shroud-center"><a class="header" href="#shroud-center">Shroud Center</a></h2>
+<p>A shape's shroud center is the position of a shroud at <code>offset={0.0,0.0,_}</code>. It is defined by icon center minus half the icon radius.</p>
+<p>Subtract the block's shape's shroud center from the offset of a shroud to center it.</p>
+<p>For example, if you want to center the shroud in the middle of a scale 1 square, you would probably use the Python program below to figure out that the shroud center is <code>{-2.5,0}</code>. Next, you would subtract <code>{-2.5,0}</code> from your shroud's offset, <code>{0.0,0.0,0.01}</code> to get <code>{2.5,0.0,0.01}</code>.</p>
+<h2 id="example-python-code-for-calculating-shroud-centers"><a class="header" href="#example-python-code-for-calculating-shroud-centers">Example Python Code for Calculating Shroud Centers</a></h2>
+<p><em>Abstract things, as simple as they are, must be calculated using comedically complex looking Python programs.</em></p>
+<pre><code class="language-py">import math
+
+def get_icon_center(vertices: list[(float, float)]) -&gt; (float, float):
+    avg_x = sum(vertex[0] for vertex in vertices) / len(vertices)
+    avg_y = sum(vertex[1] for vertex in vertices) / len(vertices)
+    icon_center = (avg_x, avg_y)
+    return icon_center
+
+def get_max_dist_icon_center_to_vertex(icon_center: (float, float), vertices: list[(float, float)]) -&gt; float:
+    max_dist_icon_center_to_vertex = 0
+    for vertex in vertices:
+        dist_icon_center_to_vertex = math.dist(icon_center, vertex)
+        max_dist_icon_center_to_vertex = max(
+            max_dist_icon_center_to_vertex,
+            dist_icon_center_to_vertex
+        )
+    return max_dist_icon_center_to_vertex
+
+def get_min_dist_icon_center_to_side_midpoint(icon_center: (float, float), vertices: list[(float, float)]) -&gt; float:
+    min_dist_icon_center_to_side_midpoint = float('inf')
+    for vertex_index in range(len(vertices)):
+        vertex = vertices[vertex_index]
+        next_vertex = vertices[(vertex_index + 1) % len(vertices)]
+        side_mid_point = (
+            (vertex[0] + next_vertex[0]) / 2,
+            (vertex[1] + next_vertex[1]) / 2
+        )
+        dist_icon_center_to_side_midpoint = math.dist(icon_center, side_mid_point)
+        min_dist_icon_center_to_side_midpoint = min(
+            min_dist_icon_center_to_side_midpoint,
+            dist_icon_center_to_side_midpoint
+        )
+    return min_dist_icon_center_to_side_midpoint
+
+def get_icon_radius(vertices: list[(float, float)]) -&gt; (float, float):
+    icon_center = get_icon_center(vertices)
+    max_dist_icon_center_to_vertex = get_max_dist_icon_center_to_vertex(icon_center, vertices)
+    min_dist_icon_center_to_side_midpoint = get_min_dist_icon_center_to_side_midpoint(icon_center, vertices)
+    icon_radius = min(
+        max_dist_icon_center_to_vertex,
+        min_dist_icon_center_to_side_midpoint
+    )
+    return icon_radius
+
+def get_shroud_center(vertices: list[(float, float)]) -&gt; (float, float):
+    icon_center = get_icon_center(vertices)
+    icon_radius = get_icon_radius(vertices)
+    shroud_center = (icon_center[0] - 0.5 * icon_radius, icon_center[1])
+    return shroud_center
+
+# Add you own shapes using the following as examples:
+shapes = [
+    [(-5, -5), (-5, 5), (5, 5), (5, -5)],   # Square
+    [(0, 0), (0, 5), (5, 0)],               # Triangle
+    [(-10, -10), (50, 100), (0, 0)]         # ???
+]
+
+for shape in shapes:
+    print(f"{shape}\n\t{get_shroud_center(shape)}\n")
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cannons"><a class="header" href="#cannons">Cannons</a></h1>
+<p>Below is an example cannon which has the most basic features.</p>
+<pre><code class="language-lua">{ 17000
+    features=CANNON
+    cannon={
+        damage=100        -- ...per shot fired.
+        roundsPerSec=5
+        muzzleVel=1000    -- Velocity of bullet.
+        range=1000        -- Distance travelled by bullet before it is destroyed.
+        power=10          -- ...per shot fired.
+        spread=0.1        -- Maximum random spread of bullets in radians.
+        color=0xFFFFFFFF  -- AARRGGBB color value.
+        recoil=1          -- ...per shot fired.
+    }
+}
+</code></pre>
+<p>To be precise, that definition of bullet range is not correct, as bullets are destroyed based a duration calculated from just their <code>muzzleVel</code> and the <code>range</code>.</p>
+<p>If the bullet was fired from a stationary ship, then it would travel 1000 units at 1000 units per second over 1 second. However, if the bullet was fired from a moving ship, then the bullet would inherit its velocity.</p>
+<p>For the above example, if the ship firing the bullet was travelling in the same direction as the bullet being fired, the bullet would travel a greater distance with a greater speed over the same amount of time.</p>
+<h2 id="firing-in-bursts"><a class="header" href="#firing-in-bursts">Firing in Bursts</a></h2>
+<p>If you want a cannon to fire in bursts, you need to define its <code>burstyness</code> and <code>roundsPerBurst</code>.</p>
+<p>The way that a cannon using <code>burstyness</code> fires is defined by its <code>burstyness</code>, <code>roundsPerBurst</code>, and <code>roundsPerSec</code>. Keep in mind that <code>roundsPerSec</code> is always constant.</p>
+<p>The value of <code>burstyness</code> must be between 0.0 and 1.0.</p>
+<p>A burstyness of 0 means that a cannon will not fire in bursts and a burstyness of 1 means that a cannon will fire the value of <code>roundsPerBurst</code> all at once.</p>
+<p>Burstyness values in between 0 and 1 will fire however many <code>roundsPerBurst</code> they have, wait, and then fire another burst again.</p>
+<pre><code class="language-lua">{ 17000
+    features=CANNON
+    cannon={
+        -- This cannon will fire 5 bullets at once every 1 second.
+        burstyness=1
+        roundsPerSec=5
+        roundsPerBurst=5
+
+        -- Other cannon fields here.
+    }
+}
+</code></pre>
+<h2 id="bullet-damage-output"><a class="header" href="#bullet-damage-output">Bullet Damage Output</a></h2>
+<p>Think of a bullet's damage output as its health which it 'spends' on damaging blocks. When the bullet runs out of damage output, it is destroyed.</p>
+<p>More specifically, when a bullet (that's non-<code>explosive=ENABLED</code>) hits a block, it deal as much of its damage to the block as it can. If the bullet had more remaining damage output than the block's remaining health before the collision, then the bullet will continue existing with the block's prior remaining health subtracted from its damage output.</p>
+<h2 id="explosive-cannons"><a class="header" href="#explosive-cannons">Explosive Cannons</a></h2>
+<p>If you want a cannon to fire explosives, you need to define its <code>explosive</code> and <code>explodeRadius</code>.</p>
+<p>The <code>explosive</code> field has three flags for non-fragment bullets:</p>
+<ul>
+<li><code>ENABLED</code>: bullet explodes when hitting a target.</li>
+<li><code>FINAL</code>: bullet explodes at either the end of its range or when the bullet's damage output is exhausted.</li>
+<li><code>PROXIMITY</code>: bullet snaps its explosion to the closest enemy block relative to its explode radius.</li>
+</ul>
+<p>(<a href="./fragments.html#explosive-flags-for-fragments">Explosive flags for fragments</a>)</p>
+<pre><code class="language-lua">{ 17000
+    features=CANNON
+    cannon={
+        -- This bullet will explode on hitting a block.
+        -- It will deal its damage to all blocks in a radius of 50.
+        explosive=ENABLED
+        explosiveRadius=50
+        -- Other cannon fields here.
+    }
+}
+</code></pre>
+<p>The <code>explosive</code> field is a flag type, so the way it works is similar to the <code>features</code> field for blocks. This means you can combine <code>explosive</code> flags for a desired effect, but this is unnecessary to know about with the three explosive flags stated prior unless you want to use <a href="./fragments.html">Fragments</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fragments"><a class="header" href="#fragments">Fragments</a></h1>
+<p>When a bullet is destroyed, it can produce fragments. These fragments can also produce fragments when they are destroyed, creating one of the most versatile systems in Reassembly modding.</p>
+<p>Fragments are nested within projectile code and have the same field types as base cannons except for those which wouldn't make sense.</p>
+<p>Look at the code below and look at the similarities between the base cannon bullet and the fragment which is nested within it:</p>
+<pre><code class="language-lua">{ 17000
+    features=CANNON
+    cannon={
+        damage=100
+        roundsPerSec=5
+        muzzleVel=1000
+        range=1000
+        power=10
+        spread=0.1
+        color=0xFFFFFFFF
+        recoil=1
+
+        burstyness=1
+        roundsPerBurst=5
+
+        explosive=ENABLED
+        explodeRadius=50
+
+        fragment={
+            damage=50
+            -- Fragments don't have `roundsPerSec`.
+            muzzleVel=500
+            range=500
+            -- Fragments don't need `power`.
+            spread=0.1
+            color=0xFFFFFFFF
+            -- Fragments have no need to exert `recoil`.
+
+            -- Fragments also don't have `burstyness`.
+            roundsPerBurst=5
+
+            explosive=ENABLED
+            explodeRadius=25
+        }
+    }
+}
+</code></pre>
+<p>In fragments, <code>roundsPerBurst</code> is repurposed as the amount of fragments released when a bullet is destroyed.</p>
+<p>In the code extract above, the base cannon bullet will split into 5 fragments, which are all identical. The fragments will also be created at a spread of 0.1 radians, or ~5.72°, as defined by the fragment's <code>spread</code> field.</p>
+<video  controls>
+  <source src="diagrams/fragment_first_example.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="fragment-chaining"><a class="header" href="#fragment-chaining">Fragment Chaining</a></h2>
+<p>As fragments can be nested within each other, we can create fragment chains. Below is an example of one using conventional one-line fragments for easy reading:</p>
+<pre><code class="language-lua">{ 17000
+    features=CANNON
+    cannon={
+        damage=100
+        roundsPerSec=1
+        muzzleVel=50
+        range=50
+        power=10
+        -- Some fields have been left out for ease of explaining.
+
+        fragment={ damage=100 muzzleVel=50 range=50 roundsPerBurst=1
+        fragment={ damage=100 muzzleVel=50 range=50 roundsPerBurst=1
+        fragment={ damage=100 muzzleVel=50 range=50 roundsPerBurst=1
+        fragment={ damage=100 muzzleVel=50 range=50 roundsPerBurst=1
+        }}}} -- Closing brackets are lined up at the end of the chain.
+    }
+}
+</code></pre>
+<p>In this code extract, there will be 5 fragment projectiles that spawn after one another in a chain.</p>
+<h2 id="the-relationship-of-range-and-muzzlevel"><a class="header" href="#the-relationship-of-range-and-muzzlevel">The Relationship of <code>range</code> and <code>muzzleVel</code></a></h2>
+<p>If you fire the cannon from the code extract above, you might notice something unexpected if you are unfamilier with fragment modding. Each new fragment is faster than the last by 50 units per second:</p>
+<video  controls>
+  <source src="diagrams/fragment_chain_speeding_up.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>This is caused by each successive fragment inheriting the sum of the velocities of all the bullets that came before it.
+To have uniform velocities on the bullets, one might expect the solution to be to make the <code>muzzleVel</code> equal 0, but this does not work:
+<video  controls>
+<source src="diagrams/fragment_chain_going_on.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video></p>
+<pre><code class="language-lua">    cannon={
+        damage=100
+        roundsPerSec=1
+        muzzleVel=50
+        range=50
+        power=10
+
+        fragment={ damage=100 muzzleVel=0 range=50 roundsPerBurst=1
+        -- None of the other fragments are reached.
+        fragment={ damage=100 muzzleVel=0 range=50 roundsPerBurst=1
+        fragment={ damage=100 muzzleVel=0 range=50 roundsPerBurst=1
+        fragment={ damage=100 muzzleVel=0 range=50 roundsPerBurst=1
+        }}}}
+    }
+</code></pre>
+<p>Although the second bullet has velocity, it is inherited from the first stage. Think back to how bullet duration is calculated based on only a bullet's <code>muzzleVel</code> and <code>range</code>, not its current velocity.</p>
+<p>Now, understand that the second bullet will never transition to the third stage as the second bullet is "attempting" to travel a <code>range</code> of 50 at a <code>muzzleVel</code> of 0. The journey to travel 50 units at 0 units per second is uncompletable, the bullet will never enter the third stage.</p>
+<p>To achieve uniform velocities, we must make the <code>muzzleVel</code> unnoticably small as well setting its <code>range</code> small enough that the fragments' duration is calculated to not be infinite.</p>
+<p>If we want the fragments to last for one second, similar to the base bullet, then we can set <code>range</code> to 1 and the <code>muzzleVel</code> to 1. The bullet will travel 1 unit at 1 unit per second over a time of 1 second.</p>
+<video  controls>
+  <source src="diagrams/fragment_chain_uniform_velocity.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<pre><code class="language-lua">    cannon={
+        damage=100
+        roundsPerSec=1
+        muzzleVel=50
+        range=50
+        power=10
+
+        fragment={ damage=100 muzzleVel=1 range=1 roundsPerBurst=1
+        fragment={ damage=100 muzzleVel=1 range=1 roundsPerBurst=1
+        fragment={ damage=100 muzzleVel=1 range=1 roundsPerBurst=1
+        fragment={ damage=100 muzzleVel=1 range=1 roundsPerBurst=1
+		-- All fragments occur. success!
+        }}}}
+    }
+</code></pre>
+<p>Strangely, a bullet trying to travel a <code>range</code> of 0 at a <code>muzzleVel</code> of 0 completes its journey.</p>
+<h2 id="patterns"><a class="header" href="#patterns">Patterns</a></h2>
+<p>For more control over how bullets are spawned, you can select various pattern flags for the <code>pattern</code> field of a bullet. They can be used in both base bullets and fragments.</p>
+<p>Below is an example of a cannon using the <code>RANDOM</code> pattern, which would be the same as having <code>pattern</code> not defined.</p>
+<pre><code class="language-lua">    cannon={
+        damage=100
+        roundsPerSec=1
+        muzzleVel=50
+        range=50
+        power=10
+        recoil=0
+
+        spread=pi*2
+        pattern=RANDOM
+    }
+</code></pre>
+<p>Below are all the bullet patterns, they can all be used on both base cannon bullets and fragments except for <code>WAVE</code>, which can only be used on base cannon bullets.</p>
+<h3 id="random"><a class="header" href="#random">Random</a></h3>
+<p><code>pattern=RANDOM</code>: default spread behaviour, choosing a random angle in the specified spread.</p>
+<pre><code class="language-lua">	cannon={ spread=pi*2 pattern=RANDOM
+
+        damage=100 roundsPerSec=5 muzzleVel=50 range=50 recoil=0 }
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/fragment_pattern_random.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h3 id="constant"><a class="header" href="#constant">Constant</a></h3>
+<p><code>pattern=CONSTANT</code>: bullet will angle exactly at the spread angle. Positive <code>spread</code> angles bullet counterclockwise while negative <code>spread</code> angles bullets clockwise.</p>
+<p>Firing counterclockwise:</p>
+<pre><code class="language-lua">   cannon={ spread=pi*0.5 pattern=CONSTANT
+
+       damage=100 roundsPerSec=5 muzzleVel=50 range=50 recoil=0 }
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/fragment_pattern_constant_positive.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>Firing clockwise:</p>
+<pre><code class="language-lua">   cannon={ spread=pi*-0.5 pattern=CONSTANT
+
+       damage=100 roundsPerSec=5 muzzleVel=50 range=50 recoil=0 }
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/fragment_pattern_constant_negative.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h3 id="spiral"><a class="header" href="#spiral">Spiral</a></h3>
+<p><code>pattern=SPIRAL</code>: bullets are evenly distributed within the spread angle. Needs <code>roundsPerBurst</code> and <code>burstyness</code> defined on base cannon bullets but only needs <code>roundsPerBurst</code> defined on fragments.</p>
+<pre><code class="language-lua">   cannon={ spread=pi*0.5 pattern=SPIRAL roundsPerBurst=5 burstyness=0.5
+
+       damage=100 roundsPerSec=5 muzzleVel=50 range=50 recoil=0 }
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/fragment_pattern_spiral.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h3 id="wave"><a class="header" href="#wave">Wave</a></h3>
+<p><code>pattern=WAVE</code>: bullets are distributed according to a sine wave within the spread angle. Do not use on fragments.</p>
+<pre><code class="language-lua">   cannon={ spread=pi*0.5 pattern=WAVE roundsPerBurst=20 burstyness=0.5
+
+       damage=100 roundsPerSec=5 muzzleVel=50 range=50 recoil=0 }
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/fragment_pattern_wave.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h3 id="absolute"><a class="header" href="#absolute">Absolute</a></h3>
+<p><code>pattern=ABSOLUTE</code>: bullets do not inherit velocity of ship or previous bullets. It can be mixed with any of the other pattern flags.</p>
+<p>This is without <code>ABSOLUTE</code>:</p>
+<pre><code class="language-lua">   cannon={ spread=0
+
+       damage=100 roundsPerSec=5 muzzleVel=50 range=50 recoil=0 }
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/fragment_pattern_absolute_no.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>This is with <code>ABSOLUTE</code>:</p>
+<pre><code class="language-lua">   cannon={ spread=0 pattern=ABSOLUTE
+
+       damage=100 roundsPerSec=5 muzzleVel=50 range=50 recoil=0 }
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/fragment_pattern_absolute_with.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="explosive-flags-for-fragments"><a class="header" href="#explosive-flags-for-fragments">Explosive Flags for Fragments</a></h2>
+<p>There are fragment specific alternatives for <code>ENABLED</code>, <code>FINAL</code>, and <code>PROXIMITY</code> for the <code>explosive field</code>. Respectively, they are:</p>
+<ul>
+<li><code>FRAG_IMPACT</code>: bullet fragments when hitting a target but not when the bullet reaches the end of its range.</li>
+<li><code>FRAG_FINAL</code>: bullet fragments at either the end of its range or when the bullet's damage output is exhausted.</li>
+<li><code>FRAG_PROXIMITY</code>: bullet fragments when within proximity of an attackable block.</li>
+</ul>
+<p>There is also <code>FRAG_NOFLASH</code>, which makes bullets with this flag spawn without producing a frag spawn particle.</p>
+<p>(<a href="./cannons.html#explosive-cannons">Explosive flags for non-fragments</a>)</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="bullet-poofs"><a class="header" href="#bullet-poofs">Bullet Poofs</a></h1>
+<p>There are four types of bullet poofs:</p>
+<ul>
+<li>Spawn poofs (SPs): when a bullet is spawned, the bullet spawns an SP.</li>
+<li>Despawn poofs (DPs): when a bullet reaches the end of its lifetime, the bullet spawns a DP.</li>
+<li>Primary spawn poofs (PSPs): the SP of the primary bullet stage. If fired from a turreted weapon, the PSP pins to where it was spawned on the turret.</li>
+<li>Hit despawn poofs (HDPs): the DP of a non-explosive bullet that hits a block and is despawned from running out of damage to deal. These travel in a random direction.</li>
+</ul>
+<p>Notice how PSPs are twice the radius and are brighter than DPs:</p>
+<pre><code class="language-lua">{ 17000 
+    features=CANNON
+    cannon={
+        damage=100
+        roundsPerSec=0.5
+        muzzleVel=200
+        range=100
+        power=10
+        color=0xFFFFFFFF
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/frag_flashes.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>In the above example, the SPs are stationary but the DPs are not. This is because bullet poofs inherit the velocity of whatever spawned them, which in the case above includes a stationary ship and a moving projectile.</p>
+<p>Below is a slow motion example to show how bullet poofs inherit velocity from a two-stage cannon:</p>
+<pre><code class="language-lua">{ 17000
+    features=CANNON
+    cannon={
+        damage=50
+        roundsPerSec=0.5
+        muzzleVel=200
+        range=100
+        power=10
+		color=0xFFFFFFFF
+		fragment={
+			damage=50
+			roundsPerBurst=1
+			muzzleVel=200
+			range=100
+			color=0xFFFFFFFF
+		}
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/frag_flashes_2.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>When aesthetics demand it, bullet poofs can be removed using <a href="./anti-bullet_poof_stages.html">anti-bullet poof stages</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="anti-bullet-poof-stages"><a class="header" href="#anti-bullet-poof-stages">Anti-Bullet Poof Stages</a></h1>
+<p>This chapter covers how to create fragments that do not produce (or minimize) <a href="./anti-bullet_poof_stages.html#anti-primary-spawn-poof-anti-psp-stages">PSPs</a>, <a href="./anti-bullet_poof_stages.html#anti-spawn-poof-anti-sp-stages">SPs</a>, and <a href="./anti-bullet_poof_stages.html#anti-despawn-poof-anti-dp-stages">DPs</a>.</p>
+<p>There is included an [example of a clean fragment transition]</p>
+<h2 id="anti-primary-spawn-poof-anti-psp-stages"><a class="header" href="#anti-primary-spawn-poof-anti-psp-stages">Anti-Primary Spawn Poof (Anti-PSP Stages)</a></h2>
+<p>There is no known way to fully get rid of a PSP, only to make them as invisible as possible and to prevent them from overlapping to reduce the accumulation of noticable opaqueness.</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON
+    cannon={
+    -- Anti-PSP stage:
+        roundsPerSec=0.3
+        power=10
+		
+        damage=50
+        muzzleVel=200
+        range=    200*1.2
+		color=0xFFFF0000
+		fragment={
+    -- Genuine projectile stage:
+			damage=50
+			muzzleVel=1
+			range=    1*1.2
+			color=0xFF0000FF
+			explosive=FRAG_NOFLASH
+		}
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/frag_anti-psp.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="anti-spawn-poof-anti-sp-stages"><a class="header" href="#anti-spawn-poof-anti-sp-stages">Anti-Spawn Poof (Anti-SP Stages)</a></h2>
+<p>Spawn poofs of non-primary stages are simple to remove using <code>explosive=FRAG_NOFLASH</code> on the stage which spawns the SP.</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON
+    cannon={
+    -- Red, other primary stage.
+        roundsPerSec=0.3
+        power=10
+        damage=50
+        muzzleVel=200
+        range=    200*1.2
+		color=0xFFFF0000
+		fragment={
+    -- Blue, non-primary anti-SP stage:
+			damage=50
+			muzzleVel=1
+			range=    1*1.2
+			color=0xFF0000FF
+			explosive=FRAG_NOFLASH -- Makes this stage anti-SP.
+		}
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/frag_anti-sp.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="anti-despawn-poof-anti-dp-stages"><a class="header" href="#anti-despawn-poof-anti-dp-stages">Anti-Despawn Poof (Anti-DP Stages)</a></h2>
+<p>Getting rid of despawn poofs is less simple than for spawn poofs. DPs can either be removed by:</p>
+<ol>
+<li>Declaring <code>explosive=FINAL</code> on the stage which spawns the DP with the side effect that the bullet cannot to deal damage.</li>
+<li>Declaring <code>explosive=FINAL</code> and <code>explodeRadius=1</code> on the stage with the side effect that the bullet always plays the explosion sound effect on despawn.</li>
+</ol>
+<h3 id="case-1-explosivefinal"><a class="header" href="#case-1-explosivefinal">Case 1: <code>explosive=FINAL</code></a></h3>
+<p>Only having <code>explosive=FINAL</code> with no definition of <code>explosiveRadius</code> makes the bullet use the default <code>explosiveRadius</code> of zero, making it never hit anything and play no sound.</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON
+    cannon={
+        damage=50
+        roundsPerSec=1
+        power=10
+        muzzleVel=300
+        range=200
+		color=0xFFFFFFFF
+		explosive=FINAL -- Makes this stage anti-DP.
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/frag_anti-dp_1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h3 id="case-2-explosviefinal-and-exploderadius1"><a class="header" href="#case-2-explosviefinal-and-exploderadius1">Case 2: <code>explosvie=FINAL</code> and <code>explodeRadius=1</code></a></h3>
+<p>Having <code>explosive=FINAL</code> and defining <code>explosiveRadius=1</code> makes the bullet able to deal damage and makes it play the explosion sound effect on despawn.</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON
+    cannon={
+        damage=50
+        roundsPerSec=1
+        power=10
+        muzzleVel=300
+        range=200
+		color=0xFFFFFFFF
+        -- Makes this stage anti-DP:
+		explosive=FINAL
+		explodeRadius=1
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/frag_anti_dp_2.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="example-of-a-clean-fragment-transition"><a class="header" href="#example-of-a-clean-fragment-transition">Example of a Clean Fragment Transition</a></h2>
+<p>The following fragment transition from the red bullet to the blue bullet contains no poofs, whereby the red anti-DP stage leads into the blue anti-SP stage:</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON
+    cannon={
+    -- Red anti-DP stage:
+        damage=25
+        muzzleVel=200
+        range=    200
+        roundsPerSec=0.8
+        power=10
+		color=0xFFFF0000
+		explosive=FINAL
+		projectileSize=1
+		fragment={
+    -- Blue anti-SP stage:
+			damage=25
+			muzzleVel=1
+			range=    1
+			color=0xFF0000FF
+			explosive=FRAG_NOFLASH
+		}
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/frag_clean_transition.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>Note that despite this stage contains 50 units worth of damage, it can only ever deal 25 units of damage as the first stage's explosion will never overlap with anything as it's undefined <code>explodeRadius</code> is by default set to zero:</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="muzzle-flash"><a class="header" href="#muzzle-flash">Muzzle Flash</a></h1>
+<p>Muzzle flash is a desirable effect for making cannons look like they fire rounds with more force.</p>
+<h2 id="poof-muzzle-flash"><a class="header" href="#poof-muzzle-flash">Poof Muzzle Flash</a></h2>
+<p>This cannon uses a coloured <a href="./bullet_poofs.html?highlight=PSP#bullet-poofs">PSP</a> to make a circular muzzle flash.</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON
+    cannon={
+    -- Muzzle flash stage:
+        roundsPerSec=1
+        power=10
+		
+		projectileSize=2
+		color=0xFFFFAA00
+		
+        damage=1
+        muzzleVel=0
+        range=0
+		
+		fragment={
+    -- Actual bullet:
+			damage=50
+			muzzleVel=200
+			range=200
+			color=0xFFFFFFFF
+		}
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="./diagrams/frag_poof_muzzle_flash.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="bullet-muzzle-flash"><a class="header" href="#bullet-muzzle-flash">Bullet Muzzle Flash</a></h2>
+<p>This cannon uses a coloured bullet to make a bullet-shaped muzzle flash.</p>
+<p>Below are what the stages do in order:</p>
+<ol>
+<li>An invisible <a href="./anti-bullet_poof_stages.html#anti-primary-spawn-poof-anti-psp-stages">anti-PSP stage</a>.</li>
+<li>The visible bullet that makes the shape of a muzzle flash. Exists for 1000/40, or 0.04 seconds.</li>
+<li>This stage takes the fragment back in front of the gun. This means that the cannon does not look like it is shooting from behind itself.</li>
+<li>The actual bullet's stage.</li>
+</ol>
+<pre><code class="language-lua">{ 17000
+	features=CANNON
+    -- Muzzle flash stages:
+        -- Stage 1:
+    cannon={   damage=1 muzzleVel=    1   range=  0   color=1          roundsPerSec=10 power=10 
+        -- Stage 2:
+	fragment={ damage=1 muzzleVel=-1000   range=-40   color=0xFFFFAA00 explosive=FINAL              projectileSize=5 spread=0.2
+        -- Stage 3:
+	fragment={ damage=1 muzzleVel=-1000*4 range=-40*4 color=1          explosive=FINAL|FRAG_NOFLASH
+	fragment={
+    -- Actual bullet (stage 4):
+		damage=50
+		muzzleVel=1
+		range=    1
+		color=0xFFFFFFFF
+		explosive=FRAG_NOFLASH
+	}}}}
+}
+</code></pre>
+<video height=256 controls>
+  <source src="./diagrams/frag_bullet_muzzle_flash.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video><div style="break-before: page; page-break-before: always;"></div><h1 id="bullet-shaping"><a class="header" href="#bullet-shaping">Bullet Shaping</a></h1>
+<p>Using the fragment system to create specific looks for a cannon projectile is called bullet shaping.</p>
+<p>This chapter covers various types of common bullet shapes:</p>
+<ul>
+<li><a href="./bullet_shaping.html#fragball">Fragball</a></li>
+<li><a href="./bullet_shaping.html#spikey-fragball">Spikey Fragball</a></li>
+<li><a href="./bullet_shaping.html#reverse-bullet">Reverse Bullet</a></li>
+<li><a href="./bullet_shaping.html#2-tail-bullet">2-Tail Bullet</a></li>
+<li><a href="./bullet_shaping.html#3-tail-bullet">3-Tail Bullet</a></li>
+<li><a href="./bullet_shaping.html#n-point-star">n-Point Star</a></li>
+<li><a href="./bullet_shaping.html#x-shape-lens-flare-bullet">X Shape Lense Flare Bullet</a></li>
+<li><a href="./bullet_shaping.html#n-point-saw">n-Point Saw</a>.</li>
+</ul>
+<h2 id="fragball"><a class="header" href="#fragball">Fragball</a></h2>
+<p>A simple ball of 5 fragments that keeps its formation by inheriting velocity from the primary stage.</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON
+    cannon={
+        damage=1
+        roundsPerSec=1
+        power=10
+        muzzleVel=200
+        range=0
+		color=0xAAFFFFFF
+		explosive=FINAL
+		fragment={
+			roundsPerBurst=5
+			damage=25
+			spread=360*pi/180
+			muzzleVel=1
+			range=    1
+			color=0xAAFFFFFF
+			explosive=FRAG_NOFLASH
+		}
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="./diagrams/frag_fragball.mp4" type="video/mp4">
+  your browser does not support the video tag.
+</video>
+<h2 id="spikey-fragball"><a class="header" href="#spikey-fragball">Spikey Fragball</a></h2>
+<p>Same as the other fragball but with more bullets with a higher velocity so that they are rendered with longer tails.</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON
+    cannon={
+        damage=1
+        roundsPerSec=5
+        power=10
+        muzzleVel=1500
+        range=0
+		color=0xAAFFFFFF
+		explosive=FINAL
+		fragment={
+			roundsPerBurst=12
+			damage=25
+			spread=360*pi/180
+			muzzleVel=1
+			range=    1
+			color=0xAAFFFFFF
+			explosive=FRAG_NOFLASH
+		}
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="./diagrams/frag_spikey_fragball.mp4" type="video/mp4">
+  your browser does not support the video tag.
+</video>
+<h2 id="reverse-bullet"><a class="header" href="#reverse-bullet">Reverse Bullet</a></h2>
+<p>Simple bullet that appears backwards.</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON
+    cannon={
+        damage=1
+        roundsPerSec=1
+        power=10
+        muzzleVel=500
+        range=0
+		color=0xAAFFFFFF
+		explosive=FINAL
+		fragment={
+			spread=180*pi/180
+			pattern=CONSTANT
+			explosive=FRAG_NOFLASH
+
+			damage=50
+			muzzleVel=1
+			range=    0.5
+			color=0xAAFFFFFF
+		}
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="./diagrams/frag_reverse_bullet.mp4" type="video/mp4">
+  your browser does not support the video tag.
+</video>
+<h2 id="2-tail-bullet"><a class="header" href="#2-tail-bullet">2-Tail Bullet</a></h2>
+<p>Two angled bullets inherit velocity from the primary stage to create an arrow shape.</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON
+    cannon={
+        damage=1
+        roundsPerSec=1
+        power=10
+        muzzleVel=500
+        range=0
+		color=0xAAFFFFFF
+		explosive=FINAL
+		fragment={
+			roundsPerBurst=2
+			damage=25
+			spread=30*pi/180
+			muzzleVel=1
+			range=    0.5
+			color=0xAAFFFFFF
+			explosive=FRAG_NOFLASH
+			pattern=SPIRAL
+		}
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="./diagrams/frag_2-tail_bullet.mp4" type="video/mp4">
+  your browser does not support the video tag.
+</video>
+<h2 id="3-tail-bullet"><a class="header" href="#3-tail-bullet">3-Tail Bullet</a></h2>
+<p>Three angled bullets inherit velocity from the primary stage to create a bullet with three tails.</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON
+    cannon={
+        damage=1
+        roundsPerSec=1
+        power=10
+        muzzleVel=1000
+        range=0
+		color=0xAAFFFFFF
+		explosive=FINAL
+		fragment={
+			roundsPerBurst=3
+			damage=25
+			spread=30*pi/180
+			muzzleVel=1
+			range=    0.5
+			color=0xAAFFFFFF
+			explosive=FRAG_NOFLASH
+			pattern=SPIRAL
+		}
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="./diagrams/frag_3-tail_bullet.mp4" type="video/mp4">
+  your browser does not support the video tag.
+</video>
+<h2 id="n-point-star"><a class="header" href="#n-point-star">n-Point Star</a></h2>
+<p>The <code>SPIRAL</code> pattern can be used to create an star bullet with any amount of points.</p>
+<p>For an n-pointed star, you can calculate the value for the secondary stage's <code>spread</code> by using the formula <code>pi*((n-1)/n))</code>.</p>
+<p>For example, an 8-pointed star's spread would be calculated with <code>pi*((8-1)/8)</code>, which would be put into the fragment as <code>spread=pi*7/8</code>.</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON
+    cannon={
+        damage=1
+        roundsPerSec=1
+        power=10
+        muzzleVel=1000
+        range=0
+		color=0xAAFFFFFF
+		explosive=FINAL
+		fragment={
+			roundsPerBurst=8  -- Number of points of the star.
+			damage=25
+			spread=pi*7/8     -- Spread value here calculated from pi*((n-1)/n)).
+			muzzleVel=1
+			range=    0.5
+			color=0xAAFFFFFF
+			explosive=FRAG_NOFLASH
+			pattern=SPIRAL
+		}
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="./diagrams/frag_8-point_star.mp4" type="video/mp4">
+  your browser does not support the video tag.
+</video>
+<h2 id="x-shape-lens-flare-bullet"><a class="header" href="#x-shape-lens-flare-bullet">X Shape Lens Flare Bullet</a></h2>
+<p>Similar to the <a href="./always_fire_weapons_as_decorations.html#x-shape-lens-flare">X shape lens flare always fire decoration</a>.</p>
+<p>A more complex bullet that creates an X-shaped bullet that always faces in the same direction using <code>muzzleVel=0</code> and still travels in the fired direction by inheriting velocity from the primary stage.</p>
+<p>The function of the stages are as follows:</p>
+<ol>
+<li>Creates a <a href="./bullet_poofs.html?highlight=PSP#bullet-poofs">PSP</a> and supplies the velocity inherited by the rest of the fragment.</li>
+<li>Stage with <code>muzzleVel=0</code> to force the fragment to face either right or left.</li>
+<li>Rotates the fragment by 45° degrees.</li>
+<li>Splits the fragment into four bullets spread over a 270° spread.</li>
+<li>The actual bullet stage that can deal damage and is visible.</li>
+</ol>
+<pre><code class="language-lua">{ 17000
+	features=CANNON
+    -- 1st stage:
+    cannon={   damage=1 muzzleVel=1000 range=0 color=0xAAFFFFFF explosive=FINAL              roundsPerSec=1 power=10 
+    -- 2nd stage:
+	fragment={ damage=1 muzzleVel=   0 range=0 color=1          explosive=FINAL|FRAG_NOFLASH
+    -- 3rd stage:
+	fragment={ damage=1 muzzleVel=   1 range=0 color=1          explosive=FINAL|FRAG_NOFLASH spread= 45*pi/180 pattern=CONSTANT
+    -- 4th stage:
+	fragment={ damage=1 muzzleVel=   1 range=0 color=1          explosive=FINAL|FRAG_NOFLASH spread=135*pi/180 pattern=SPIRAL roundsPerBurst=4
+    -- 5th stage (actual bullet):
+	fragment={
+		damage=100
+		muzzleVel=1
+		range=    0.5
+		color=0xAAFFFFFF
+	}}}}}
+}
+</code></pre>
+<video height=256 controls>
+  <source src="./diagrams/frag_x_shape_lens_flare_bullet.mp4" type="video/mp4">
+  your browser does not support the video tag.
+</video>
+<h2 id="n-point-saw"><a class="header" href="#n-point-saw">n-Point Saw</a></h2>
+<p>A complex saw blade ring of bullets made out of n bullets defined by the <code>roundsPerBurst</code> value of the 3rd stage.</p>
+<p>The <code>spread</code> of the 3rd stage can be calculated in a similar way to that of the <a href="./bullet_shaping.html#n-point-star">n-Point Star</a>, where the <code>spread</code> can be calculated using the formula <code>pi*((n-1)/n))</code>.</p>
+<p>For example, a the spread of the 3rd stage of a 9-pointed star would be calculated with <code>pi*((9-1)/9)</code>, which would be put into the 3rd stage as <code>spread=pi*8/9</code>.</p>
+<p>The function of each stage is as follows:</p>
+<ol>
+<li>Creates a <a href="./bullet_poofs.html?highlight=PSP#bullet-poofs">PSP</a> and moves the fragment backwards a small distance. This accounts for the distance which the fragment moves forwards while assembling the saw formation so that it looks like the saw blade spawns from the right place.</li>
+<li>Reverses the fragment again so that it faces forwards without changing its position.</li>
+<li>Splits the fragment into n bullets (in this case, 9) which then travel outwards almost instantly.</li>
+<li>Cancels out the fragment's velocities so that it no longer changes position.</li>
+<li>This stage rotates by 60° anticlockwise using <code>pattern=CONSTANT</code>. This stage is also the actual bullet stage that can deal damage and is visible.</li>
+</ol>
+<pre><code class="language-lua">{ 17000
+	features=CANNON
+    -- 1st stage:
+    cannon={   damage=1 muzzleVel=-1000 range= -10 color=0xAAFFFFFF explosive=FINAL              roundsPerSec=1 power=10
+    -- 2nd stage:
+    fragment={ damage=1 muzzleVel=-2000 range=   0 color=1          explosive=FINAL|FRAG_NOFLASH
+    -- 3rd stage (defines how many bullets there are in the saw):
+    fragment={ damage=1 muzzleVel=  400 range=  12 color=1          explosive=FINAL|FRAG_NOFLASH pattern=SPIRAL roundsPerBurst=9 spread=pi*8/9
+    -- 4th stage:
+    fragment={ damage=1 muzzleVel= -400 range=   0 color=1          explosive=FINAL|FRAG_NOFLASH
+    -- 5th stage (actual bullet):
+    fragment={
+        damage=25
+        spread=60*pi/180
+        muzzleVel=1
+        range=    0.5
+        color=0xFFFFFFFF
+        explosive=FRAG_NOFLASH
+        pattern=CONSTANT
+    }}}}}
+}
+</code></pre>
+<video height=256 controls>
+  <source src="./diagrams/frag_9-point_saw.mp4" type="video/mp4">
+  your browser does not support the video tag.
+</video>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fragbeams"><a class="header" href="#fragbeams">Fragbeams</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="frag-cascade"><a class="header" href="#frag-cascade">Frag Cascade</a></h1>
+<p>test</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="flamethrowers"><a class="header" href="#flamethrowers">Flamethrowers</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="phase-frags"><a class="header" href="#phase-frags">Phase Frags</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="lasers"><a class="header" href="#lasers">Lasers</a></h1>
+<p>Below is an example laser which has the most basic features.</p>
+<pre><code class="language-lua">{ 17000
+    features=LASER
+    laser={
+        damage=100      -- ...per second of contact.
+        range=1000
+        power=10        -- ...per second firing.
+        width=2         -- ...of laser.
+        color=0xFFFFFFFF  -- AARRGGBB color value.
+        decay=0.1       -- Seconds after firing ceases for laser to fade away.
+    }
+}
+</code></pre>
+<h2 id="firing-in-bursts-1"><a class="header" href="#firing-in-bursts-1">Firing in Bursts</a></h2>
+<p>If you want a laser to fire in bursts, you need to define its <code>burstyness</code>, <code>pulsesPerBurst</code>, and <code>pulsesPerSec</code>.</p>
+<p>Burst firing lasers work similarly to burst firing cannons (see <a href="./cannons.html#firing-in-bursts">Cannons: Firing in Bursts</a>), but <code>roundsPerSec</code> and <code>roundsPerBurst</code> are replaced by <code>pulsesPerSec</code> and <code>pulsesPerBurst</code> respectively.</p>
+<pre><code class="language-lua">{ 17000
+    features=LASER
+    laser={
+        burstyness=0.5
+        pulsesPerBurst=5
+        pulsesPerSec=5
+        -- Other laser fields here.
+    }
+}
+</code></pre>
+<h2 id="lasers-that-exert-force"><a class="header" href="#lasers-that-exert-force">Lasers that Exert Force</a></h2>
+<p>There are two types of force a laser can exert: an immobilization force and a linear force.</p>
+<h3 id="imobilization-force"><a class="header" href="#imobilization-force">Imobilization Force</a></h3>
+<p>When a target is continuously hit by an imobilization laser, the <code>immobilizeForce</code> is exerted on the target to keep them in the same location as when they were initially hit.</p>
+<pre><code class="language-lua">{ 17000
+    features=LASER
+    laser={
+        immobilizeForce=100000
+        -- Other laser fields here.
+    }
+}
+</code></pre>
+<h3 id="linear-force"><a class="header" href="#linear-force">Linear Force</a></h3>
+<p>Force exerted in the direction of the laser. Positive <code>linearForce</code> drives targets away, negative <code>linearForce</code> draws them in.</p>
+<pre><code class="language-lua">{ 17000
+    features=LASER
+    laser={
+        linearForce=100000
+        -- Other laser fields here.
+    }
+}
+</code></pre>
+<h2 id="explosive-lasers"><a class="header" href="#explosive-lasers">Explosive Lasers</a></h2>
+<p>If you want a laser to be explosive, you need to define its <code>explosive</code> and <code>explodeRadius</code>.</p>
+<p>The <code>explosive</code> field has three flags for lasers:</p>
+<ul>
+<li><code>ENABLED</code>: todo.</li>
+<li><code>FINAL</code>: todo.</li>
+<li><code>PROXIMITY</code>: todo.</li>
+</ul>
+<pre><code class="language-lua">{ 17000
+    features=LASER
+    cannon={
+        -- This laser will explode on hitting a block.
+        -- It will deal its damage to all blocks in a radius of 50.
+        explosive=ENABLED
+        explosiveRadius=50
+        -- Other laser fields here.
+    }
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="launchers"><a class="header" href="#launchers">Launchers</a></h1>
+<p>Below is an example launcher that fires a missile that does nothing and dies after 2 seconds.</p>
+<pre><code class="language-lua">{ 17000
+	features=PALETTE|LAUNCHER
+	shape=RECT_LAUNCHER
+	replicateBlock={
+		shape=MISSILE
+		lifetime=2
+	}
+	replicateTime=1
+	launcherPower=100
+	launcherOutSpeed=100
+	launcherAngVel=0
+}
+</code></pre>
+<p>Launchables (what launchers fire) should not have IDs or a <code>group</code> value.</p>
+<p>Because launchers generate a fully customisable block, they can be very diverse.</p>
+<p>The rest of this chapter will contain the most common launcher variants.</p>
+<h2 id="mine-layer"><a class="header" href="#mine-layer">Mine Layer</a></h2>
+<p>Mines have the <a href="./explosive_blocks.html"><code>EXPLODE</code></a> feature.</p>
+<pre><code class="language-lua">	replicateBlock={
+        features=EXPLODE
+		shape=HEPTAGON
+		lifetime=20
+
+        explodeDamage=100
+        explodeRadius=100
+	}
+</code></pre>
+<h2 id="torpedo-launcher"><a class="header" href="#torpedo-launcher">Torpedo Launcher</a></h2>
+<p>Torpedoes have the <a href="./explosive_blocks.html"><code>EXPLODE</code></a> and <a href="./thrusters.html"><code>THRUSTER</code></a> features.</p>
+<pre><code class="language-lua">	replicateBlock={
+        features=EXPLODE|THRUSTER
+		shape=MISSILE
+		lifetime=8
+
+        explodeDamage=100
+        explodeRadius=100
+
+        thrusterForce=3000
+        thrusterColor=0xFFFFFFFF
+        thrusterColor1=0xFFFFFFFF
+	}
+</code></pre>
+<h2 id="missile-launcher"><a class="header" href="#missile-launcher">Missile Launcher</a></h2>
+<p>Missiles have the <a href="./commands.html"><code>COMMAND</code></a>, <a href="./explosive_blocks.html"><code>EXPLODE</code></a>, <a href="./thrusters.html"><code>THRUSTER</code></a>, and <a href="./torquers.html"><code>TORQUER</code></a> features.</p>
+<pre><code class="language-lua">	replicateBlock={
+        features=COMMAND|EXPLODE|THRUSTER|TORQUER
+		shape=MISSILE
+		lifetime=8
+
+        explodeDamage=100
+        explodeRadius=100
+
+        thrusterForce=3000
+        thrusterColor=0xFFFFFFFF
+        thrusterColor1=0xFFFFFFFF
+
+        torquerTorque=10000
+	}
+</code></pre>
+<h2 id="drone-launcher"><a class="header" href="#drone-launcher">Drone Launcher</a></h2>
+<p>Drones have the <a href="./commands.html"><code>COMMAND</code></a>, <a href="./noclipping_blocks.html"><code>NOCLIP_ALLY</code></a>, <a href="./other_features_and_fields.html#commands-that-do-not-give-resources-on-death"><code>FREERES</code></a>, <a href="./thrusters.html"><code>THRUSTER</code></a>, <a href="./torquers.html"><code>TORQUER</code></a>, <a href="./generators.html"><code>GENERATOR</code></a>, either <a href="./cannons.html"><code>CANNON</code></a> or <a href="./lasers.html"><code>LASER</code></a>, and usually <a href="./turreted_weapons.html"><code>TURRET</code></a> features.</p>
+<h3 id="cannon-drone"><a class="header" href="#cannon-drone">Cannon Drone</a></h3>
+<pre><code class="language-lua">	replicateBlock={
+        features=COMMAND|NOCLIP_ALLY|FREERES|THRUSTER|TORQUER|GENERATOR|CANNON|TURRET
+		shape=DISH_MISSILE
+        scale=3
+		lifetime=30
+
+        thrusterForce=3000
+        thrusterColor=0xFFFFFFFF
+        thrusterColor1=0xFFFFFFFF
+
+        torquerTorque=10000
+
+        turretSpeed=4
+
+        cannon={
+            damage=20
+            roundsPerSec=5
+            muzzleVel=500
+            range=500
+            power=1
+            spread=0.1
+            color=0xFFFFFFFF
+        }
+
+        powerCapacity=100
+        generatorCapacityPerSec=100
+	}
+</code></pre>
+<h3 id="laser-drone"><a class="header" href="#laser-drone">Laser Drone</a></h3>
+<pre><code class="language-lua">	replicateBlock={
+        features=COMMAND|NOCLIP_ALLY|FREERES|THRUSTER|TORQUER|GENERATOR|LASER|TURRET
+		shape=DISH_MISSILE
+        scale=3
+		lifetime=30
+
+        thrusterForce=3000
+        thrusterColor=0xFFFFFFFF
+        thrusterColor1=0xFFFFFFFF
+
+        torquerTorque=10000
+
+        turretSpeed=4
+
+        laser={
+            damage=20
+            range=500
+            power=2
+            width=2
+            color=0xFFFFFFFF
+            decay=0.05
+        }
+
+        powerCapacity=100
+        generatorCapacityPerSec=100
+	}
+</code></pre>
+<h2 id="launcher-drone-launcher"><a class="header" href="#launcher-drone-launcher">Launcher Drone Launcher</a></h2>
+<p>It is very possible to create drones that fire launchables. Below is an example for a drone that fires drones; a mothership drone?</p>
+<pre><code class="language-lua">{ 17000
+	group=98
+	features=PALETTE|LAUNCHER
+	shape=RECT_LAUNCHER1
+	replicateBlock={
+        features=COMMAND|NOCLIP_ALLY|FREERES|THRUSTER|TORQUER|GENERATOR|LAUNCHER
+		shape=MISSILE_LAUNCHER
+        scale=3
+		lifetime=20
+		density=1
+
+        thrusterForce=3000
+        thrusterColor=0xFFFF0000
+        thrusterColor1=0x00000001
+
+        torquerTorque=10000
+
+		replicateBlock={
+			features=COMMAND|NOCLIP_ALLY|FREERES|THRUSTER|TORQUER|GENERATOR|LASER|TURRET
+			shape=MISSILE_SHORT
+			scale=1
+			lifetime=20
+			density=1
+
+			thrusterForce=3000
+			thrusterColor=0xFF0000FF
+			thrusterColor1=0x00000001
+
+			torquerTorque=10000
+
+			turretSpeed=4
+			
+			laser={
+				damage=20
+				range=500
+				width=0.5
+				power=1
+				decay=0.1
+				color=0xFFFFFFFF
+			}
+			
+			powerCapacity=100
+			generatorCapacityPerSec=100
+		}
+		replicateTime=1
+		launcherPower=1
+		launcherOutSpeed=100
+		launcherAngVel=0
+		
+        powerCapacity=100
+        generatorCapacityPerSec=100
+	}
+	replicateTime=1
+	launcherPower=100
+	launcherOutSpeed=100
+	launcherAngVel=0
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/drone_collectoriszation_of_the_masses.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video><div style="break-before: page; page-break-before: always;"></div><h1 id="launcher-chaining"><a class="header" href="#launcher-chaining">Launcher Chaining</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="turreted-weapons"><a class="header" href="#turreted-weapons">Turreted Weapons</a></h1>
+<p>Cannons, lasers, and launchers can all be turreted.</p>
+<pre><code class="language-lua">{ 17000
+    features=CANNON|TURRET
+    cannon={
+        -- Cannon fields here.
+    }
+    turretSpeed=6
+    turretLimit=pi
+}
+{ 17001
+    features=LASER|TURRET
+    laser={
+        -- Laser fields here.
+    }
+    turretSpeed=6
+    turretLimit=pi
+}
+{ 17002
+    features=LAUNCHER|TURRET
+    replicateBlock={
+        launcherSpeed=100
+        -- Other replicated block fields here.
+    }
+    -- launcherOutSpeed is not used for turreted launchers.
+    turretSpeed=6
+    turretLimit=pi
+}
+</code></pre>
+<p>Note that turreted launchers use <code>launcherSpeed</code> defined on the replicated block to control the speed that the launchable is fired at.</p>
+<h2 id="barrel-appearance"><a class="header" href="#barrel-appearance">Barrel Appearance</a></h2>
+<p>Turreted cannons and lasers both display barrels which have fields that control how the look and where their bullets are fired from.</p>
+<pre><code class="language-lua">{ 17000
+    features=CANNON|TURRET  -- Same fields for `LASER|TURRET`
+    barrelSize={5,2.5}      -- Length and width dimensions of the barrel.
+                            -- (Height value is doubled.)
+    barrelOffset={10,0}     -- Offset of (first if there are multiple) barrel.
+    barrelSpacing={0,10}    -- Spacing between each barrel if there are multiple.
+    barrelCount=2
+    barrelTaper=0.75        -- Multiplier on barrel width at the end of the barrel.
+                            -- Lasers have it default to 0. 
+}
+</code></pre>
+<h2 id="invisible-barrels"><a class="header" href="#invisible-barrels">Invisible Barrels</a></h2>
+<p>If you want a barrel to be near-invisible then use two near-zero values for its <code>barrelSize</code>;</p>
+<pre><code class="language-lua">{ 17000
+    features=CANNON|TURRET
+    barrelSize={0.001,0.001}
+}
+</code></pre>
+<p>If you want the remove the dot that is created by this method, then cover it up using a shroud seemlessly-colored shroud on a higher Z level.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="x-spaced-barrel-beams"><a class="header" href="#x-spaced-barrel-beams">X-Spaced Barrel Beams</a></h1>
+<p>Also called just 'barrel beams' or alternatively 'hellbores'.</p>
+<p>X-spaced barrel beams fire an evenly spaced "beam" of burst bullets across multiple X-spaced invisible barrels. They can penetrate enemy ships.</p>
+<p>Key fields:</p>
+<ul>
+<li><code>barrelCount</code> = <code>roundsPerBurst</code>.</li>
+<li>Near 1 <code>burstyness</code>.</li>
+<li>High <code>roundsPerSec</code> compared to normal cannons to counteract high <code>roundsPerBurst</code>.</li>
+<li>(Low <code>muzzleVel</code> and <code>range</code> if you want it to be a stationary beam.)</li>
+<li>(Low <code>recoil</code> if you do not want to be flung around because of high <code>roundsPerBurst</code>.)</li>
+</ul>
+<pre><code class="language-lua">{ 17000
+	features=CANNON|TURRET
+	barrelSize={0.000001,0.000001}
+	barrelCount=32
+	barrelSpacing={20,0}
+	barrelOffset={32*20*0.5,0}
+    cannon={
+        damage=100
+        roundsPerSec=32*2
+		roundsPerBurst=32
+		burstyness=1
+        muzzleVel=2
+        range=1
+        color=0xFFFFFFFF
+        recoil=0
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/x-spaced_barrel_beam.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>When a ship has no commands, it is difficult for the beam to penetrate it as the bullets are required to hit the side of a ship, unlike when attacking ships that have a command.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cosmetic-launchable-laser-printer"><a class="header" href="#cosmetic-launchable-laser-printer">Cosmetic Launchable Laser Printer</a></h1>
+<p>A launchable-generating cosmetic laser printer effect can be created with a barrel-spaced laser block with a high barrel count to mimic a moving laser.</p>
+<p>The laser printer blocks use a visible laser and an high fire rate invisible cannon to cycle through the barrels.</p>
+<p>The direction of the laser is decided by the sign of <code>barrelSpacing</code>'s Y change, allowing for a mirrored version of the laser printer.</p>
+<p>Both the laser printer's cycle time (1 second, because <code>barrelCount</code> / <code>roundsPerSec</code> = 1) and the launcher's <code>replicateTime</code> are the same, allowing for the two blocks to synchronize their functionality if activated at the right time.</p>
+<pre><code class="language-lua">{ 17000 features=LASER|CANNON|ALWAYSFIRE|TURRET
+    name="Laser Printer Left -&gt; Right"
+	shape=271390000
+	scale=4
+	barrelCount=30
+	barrelSize={0.0001,0.0001}
+	barrelSpacing={0,-1}
+	turretLimit=0
+	sound=NONE
+    laser={
+        damage=0.0001
+        range=40
+        width=0.5
+        color=0xFFFFFFFF
+    }
+	cannon={
+		muzzleVel=0
+		range=0
+        color=0x01000000
+        damage=0.0001
+		roundsPerSec=30
+		recoil=0
+		explosive=FINAL
+	}
+}
+{ 17001 extends=17000 name="Laser Printer Right -&gt; Left" shape=271390001 barrelSpacing={0,1}}
+{ 17002 features=LAUNCHER|TURRET|NOICON
+    name="Launcher"
+	scale=4
+	turretLimit=0
+	replicateBlock={
+		features=NOCLIP_ALLY
+		shape=MISSILE_SHORT
+		scale=3
+		lifetime=2
+	}
+	replicateTime=1
+}
+</code></pre>
+<p>This shape is a direct copy of the base game's <code>RECT_LONG</code> with a mirrored counterpart for both directions of the laser printer.</p>
+<pre><code class="language-lua">{271390000, {{verts={{5, -5}, {-5, -5}, {-5, 5}, {5, 5}}, ports={{3, 0.5}, {0, 0.5},
+           {1, 0.5}, {2, 0.5}}},
+      {verts={{5, -10}, {-5, -10}, {-5, 10}, {5, 10}}, ports={{3, 0.25}, {3, 0.75}, {0, 0.5}, {1, 0.25},
+           {1, 0.75}, {2, 0.5}}},
+      {verts={{5, -15}, {-5, -15}, {-5, 15}, {5, 15}}, ports={{3, 0.167}, {3, 0.5}, {3, 0.833}, {0, 0.5},
+           {1, 0.167}, {1, 0.5}, {1, 0.833}, {2, 0.5}}},
+      {verts={{5, -20}, {-5, -20}, {-5, 20}, {5, 20}}, ports={{3, 0.125}, {3, 0.375}, {3, 0.625}, {3,
+            0.875}, {0, 0.5}, {1, 0.125}, {1, 0.375}, {1, 0.625}, {1, 0.875}, {2, 0.5}}},
+      {verts={{5, -25}, {-5, -25}, {-5, 25}, {5, 25}}, ports={{3, 0.1}, {3, 0.5}, {3, 0.9}, {0, 0.5},
+          {1, 0.1}, {1, 0.5}, {1, 0.9}, {2, 0.5}}},
+      {verts={{5, -30}, {-5, -30}, {-5, 30}, {5, 30}}, ports={{3, 0.083}, {3, 0.25}, {3, 0.417}, {3, 0.583},
+           {3, 0.75}, {3, 0.917}, {0, 0.5}, {1, 0.083}, {1, 0.25}, {1, 0.417}, {1, 0.583}, {1, 0.75},
+          {1, 0.917}, {2, 0.5}}},
+      {verts={{5, -35}, {-5, -35}, {-5, 35}, {5, 35}}, ports={{3, 0.071}, {3, 0.357}, {3, 0.643}, {3,
+            0.929}, {0, 0.5}, {1, 0.071}, {1, 0.357}, {1, 0.643}, {1, 0.929}, {2, 0.5}}},
+      {verts={{5, -40}, {-5, -40}, {-5, 40}, {5, 40}}, ports={{3, 0.062}, {3, 0.188}, {3, 0.312}, {3,
+            0.438}, {3, 0.562}, {3, 0.688}, {3, 0.812}, {3, 0.938}, {0, 0.5}, {1, 0.062}, {1, 0.188},
+          {1, 0.312}, {1, 0.438}, {1, 0.562}, {1, 0.688}, {1, 0.812}, {1, 0.938}, {2, 0.5}}},
+      {verts={{5, -45}, {-5, -45}, {-5, 45}, {5, 45}}, ports={{3, 0.056}, {3, 0.278}, {3, 0.5}, {3, 0.722},
+           {3, 0.944}, {0, 0.5}, {1, 0.056}, {1, 0.278}, {1, 0.5}, {1, 0.722}, {1, 0.944}, {2, 0.5}}},
+      {verts={{5, -50}, {-5, -50}, {-5, 50}, {5, 50}}, ports={{3, 0.05}, {3, 0.15}, {3, 0.25}, {3, 0.35},
+           {3, 0.45}, {3, 0.55}, {3, 0.65}, {3, 0.75}, {3, 0.85}, {3, 0.95}, {0, 0.5}, {1, 0.05}, {1,
+            0.15}, {1, 0.25}, {1, 0.35}, {1, 0.45}, {1, 0.55}, {1, 0.65}, {1, 0.75}, {1, 0.85}, {1, 0.95},
+           {2, 0.5}}}}},
+{271390001 {} mirror_of=271390000}
+</code></pre>
+<p>The laser printer is placed next to the turreted launcher it seem like they are one mechanism.
+<video height=256 controls>
+<source src="diagrams/cosmetic_laser_printer.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="always-and-never-firing-weapons"><a class="header" href="#always-and-never-firing-weapons">Always and Never Firing Weapons</a></h1>
+<h2 id="always-fire-weapons"><a class="header" href="#always-fire-weapons">Always Fire Weapons</a></h2>
+<p>Cannons, lasers, and launchers can be given the <code>ALWAYSFIRE</code> feature to continuously fire with enough energy. Weapons with <code>ALWAYSFIRE</code> are unselectable in the bindings menu and are ignored by the AI.</p>
+<pre><code class="language-lua">{ 17000
+    features=CANNON|ALWAYSFIRE
+}
+{ 17001
+    features=LASER|ALWAYSFIRE
+}
+{ 17002
+    features=LAUNCHER|ALWAYSFIRE
+}
+</code></pre>
+<h2 id="never-fire-weapons"><a class="header" href="#never-fire-weapons">Never Fire Weapons</a></h2>
+<p>The inverse of <code>ALWAYSFIRE</code> is <code>NEVERFIRE</code>.</p>
+<p><code>launcherPower=inf</code> is necessary for non-turreted launchers, as otherwise, AI-controlled ships can fire the launchable.</p>
+<pre><code class="language-lua">{ 17000
+    features=CANNON|NEVERFIRE
+}
+{ 17001
+    features=LASER|NEVERFIRE
+}
+{ 17002
+    features=LAUNCHER|NEVERFIRE
+    launcherPower=inf
+}
+{ 17003
+    features=LAUNCHER|TURRET|NEVERFIRE
+}
+</code></pre>
+<p><code>ALWAYSFIRE</code> takes priority over <code>NEVERFIRE</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="always-fire-weapons-as-decorations"><a class="header" href="#always-fire-weapons-as-decorations">Always Fire Weapons as Decorations</a></h1>
+<p>As weapons are so flashy, they can be used purely as cosmetics using the always fire features.</p>
+<p>This chapter will contain a few common always fire weapon decorations.</p>
+<p>When using always fire cannons cosmetically, it is important to check how <a href="./ups.html">UPS</a> will affect the visuals as having too low a <code>roundsPerSec</code> on a high UPS will cause the cannon to flicker. It is thus recommeneded to have <code>roundsPerSec=120</code> by default unless lag due to the sheer amount of bullets becomes an issue.</p>
+<h2 id="frag-spike"><a class="header" href="#frag-spike">Frag Spike</a></h2>
+<pre><code class="language-lua">{ 17000
+	features=CANNON|ALWAYSFIRE
+	sound=None                  -- Having a sound is annoying.
+    cannon={
+        -- Cosmetic fields:
+		projectileSize=2        -- Override projectile size calculation based on damage.
+        muzzleVel=10000         -- Affects length of the bullet.
+        color=0xFFFFFFFF
+
+        -- Functional fields:
+        damage=0.0001           -- Prevents it from dealing damage.
+        roundsPerSec=120        -- Minimal flicker on 60 UPS and above.
+        range=0                 -- So that the bullet does not travel.
+        power=0.0001            -- Cosmetics should not use power.
+		recoil=0                -- Cosmetics should not have recoil.
+		explosive=FINAL         -- Removes bullet end particle.
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/always_fire_frag_spike.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="laser-spike"><a class="header" href="#laser-spike">Laser Spike</a></h2>
+<pre><code class="language-lua">{ 17000
+	features=LASER|ALWAYSFIRE
+	sound=None                  -- Having a sound is annoying.
+    laser={
+        -- Cosmetic fields:
+        range=50
+        width=3
+        color=0xFFFFFFFF
+
+        -- Functional fields:
+        damage=0                -- Prevents it from dealing damage.
+        power=0.0001            -- Cosmetics should not use power.
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/always_fire_laser_spike.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>You could also use a negative <code>width</code>, such as <code>width=-3</code> in the below example:</p>
+<video height=256 controls>
+  <source src="diagrams/always_fire_laser_spike_negative_width.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="laser-light"><a class="header" href="#laser-light">Laser Light</a></h2>
+<pre><code class="language-lua">{ 17000
+	features=LASER|ALWAYSFIRE|TURRET
+	sound=None
+	barrelSize={0.001,0.001}    -- Centers the laser.
+    laser={
+        -- Cosmetic fields:
+        width=3                 -- Affects the size of the light.
+        color=0xFFFFFFFF
+
+        -- Functional fields:
+        damage=0
+        range=0
+        power=0.0001
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/always_fire_laser_light.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>You can also make them flash:</p>
+<pre><code class="language-lua">    laser={
+		burstyness=0.5
+		pulsesPerBurst=1
+		pulsesPerSec=1
+        -- Other laser features here.
+    }
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/always_fire_laser_light_flashing.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="frag-tentacle"><a class="header" href="#frag-tentacle">Frag Tentacle</a></h2>
+<pre><code class="language-lua">{ 17000
+    features=ALWAYSFIRE|CANNON
+	sound=None
+	cannon={
+        -- Cosmetic fields:
+		projectileSize=1        -- Override bullet size calculation based on damage.
+		muzzleVel=100           -- "Speed" of tentacle wave.
+		range=50                -- Length of tentacle.
+        color=0xAAFFFFFF
+		spread=pi*0.25          -- Width of tentacle.
+		burstyness=0.0203       -- Try to making this value as small as possible to
+                                -- make the wave pattern cycle seemless.
+		roundsPerBurst=60       -- Amount of bullets in a wave cycle.
+		roundsPerSec=30         -- Fidelity of tentacle.
+		
+        -- Functional fields:
+		pattern=WAVE
+        damage=0.0001           -- Prevents it from dealing damage.
+        power=0.0001            -- Cosmetics should not use power.
+		recoil=0                -- Cosmetics should not have recoil.
+		explosive=FINAL         -- Removes bullet end particle.
+	}
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/always_fire_frag_tentacle.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="lens-flare"><a class="header" href="#lens-flare">Lens Flare</a></h2>
+<p>A lens flare effect that does change direction when the ship it is on rotates.</p>
+<p>1st stage: invisible anti-FSP stage with spread just above 180° to be centered and <code>muzzleVel=0</code> to make the frag always face in the same direction.</p>
+<p>2nd stage: invisible 90° rotation stage by using <code>pattern=CONSTANT</code>.</p>
+<p>3rd stage: visible lens flare using 2 frags that always face in the same direction using <code>pattern=SPIRAL</code>.</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON|ALWAYSFIRE
+	sound=None
+	cannon={
+	-- 1st stage:
+		muzzleVel=0
+		range=0
+        color=0x01000000
+		spread=pi*0.5*1.0001
+		pattern=ABSOLUTE
+        damage=0.0001
+		roundsPerSec=120
+		recoil=0
+		explosive=FINAL
+		fragment={
+	-- 2nd stage:
+			muzzleVel=1
+			range=0
+			color=0x01000000
+			pattern=CONSTANT
+			damage=0.0001
+			explosive=FINAL|FRAG_NOFLASH
+			spread=pi*1/2
+			fragment={
+	-- 3rd stage:
+				projectileSize=2
+				muzzleVel=3000
+				range=0
+				color=0xFFFFFFFF
+				pattern=SPIRAL
+				damage=0.0001
+				explosive=FINAL|FRAG_NOFLASH
+				spread=pi*1/2
+				roundsPerBurst=2
+			}
+		}
+	}
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/always_fire_lens_flare.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h1 id="x-shape-lens-flare"><a class="header" href="#x-shape-lens-flare">X Shape Lens Flare</a></h1>
+<p>You can also make lens flares with an 'X' shape.</p>
+<p>This X-shaped lens flare does not contain the 90° rotating 2nd stage of the standard lens flare frag as the X shape does not require it.</p>
+<p>The visible (2nd) stage's <code>roundsPerBurst</code> is changed from <code>2</code> to <code>4</code> and its <code>spread</code> is changed from <code>pi*1/2</code> (180°) to <code>pi*3/4</code> (270°).</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON|ALWAYSFIRE
+	sound=None
+	cannon={
+	-- 1st stage:
+		muzzleVel=0
+		range=0
+        color=0x01000000
+		spread=pi*0.5*1.0001
+		pattern=ABSOLUTE
+        damage=0.0001
+		roundsPerSec=120
+		recoil=0
+		explosive=FINAL
+		fragment={
+	-- 2nd stage:
+			projectileSize=2
+			muzzleVel=3000
+			range=0
+			color=0xFFFFFFFF
+			pattern=SPIRAL
+			damage=0.0001
+			explosive=FINAL|FRAG_NOFLASH
+			spread=pi*3/4
+			roundsPerBurst=4
+		}
+	}
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/always_fire_lens_flare_x.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="frag-rings"><a class="header" href="#frag-rings">Frag Rings</a></h2>
+<p>Here is an example of a basic frag ring you could make for a generator:</p>
+<p>1st stage: invisible anti-FSP stage with spread just above 180° is used to center the frag.</p>
+<p>2nd stage: invisible stage of a 20-round burst in a uniform spiral which are sent outwards.</p>
+<p>3rd stage: this is the stage visible to the player. <code>pattern=ABSOLUTE</code> is used to reset the bullet velocities, and <code>projectileSize</code>, <code>muzzleVel</code>, and <code>color</code> affect how the frag looks.</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON|ALWAYSFIRE|GENERATOR
+	sound=None
+	shape=OCTAGON
+	scale=3
+    cannon={
+	-- 1st stage:
+        damage=0.0001
+		projectileSize=0.001
+        muzzleVel=1
+        range=0
+        power=0.01
+		recoil=0
+        roundsPerSec=120
+		pattern=CONSTANT
+		spread=pi*0.5*1.0000001
+        color=0x01000001
+		fragment={
+	-- 2nd stage:
+			damage=0.0001
+			projectileSize=0.1
+			muzzleVel=10*60
+			range=10
+			pattern=ABSOLUTE|SPIRAL
+			roundsPerBurst=20
+			spread=pi*340/360
+			explosive=FINAL|FRAG_NOFLASH
+			color=0x01000000
+			fragment={
+	-- 3rd stage:
+				damage=0.0001
+				projectileSize=0.1
+				muzzleVel=-1
+				range=0
+				pattern=ABSOLUTE
+				explosive=FINAL|FRAG_NOFLASH
+				color=0xFFFFFFFF
+			}
+		}
+    }
+	-- Generator fields here.
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/always_fire_frag_ring_1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="poof-particle-emitter"><a class="header" href="#poof-particle-emitter">Poof Particle Emitter</a></h2>
+<p>A simple fragless setup that emits 120 frag despawn poofs every second. A neat effect for a generator.</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON|ALWAYSFIRE|GENERATOR
+	sound=None
+	shape=OCTAGON
+	scale=3
+	cannon={
+		projectileSize=1
+		muzzleVel=100
+		range=0
+        color=0xFFFFFFFF
+		spread=pi
+		pattern=ABSOLUTE
+        damage=0.0001
+		roundsPerSec=120
+		recoil=0
+	}
+	-- Generator fields here.
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/always_fire_poof_particle_emitter.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="launchable-laser-printer"><a class="header" href="#launchable-laser-printer">Launchable Laser Printer</a></h2>
+<p>See the main page for the <a href="./cosmetic_launchable_laser_printer.html">Launchable Laser Printer</a>.</p>
+<video height=256 controls>
+  <source src="diagrams/cosmetic_laser_printer.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video><div style="break-before: page; page-break-before: always;"></div><h1 id="one-use-weapons"><a class="header" href="#one-use-weapons">One-Use Weapons</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="combining-weapon-types"><a class="header" href="#combining-weapon-types">Combining Weapon Types</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="other-features-and-fields"><a class="header" href="#other-features-and-fields">Other Features and Fields</a></h1>
+<p>Here are some other features and fields that are certainly useful, but undeserving of having their own sections.</p>
+<h2 id="health-and-mass"><a class="header" href="#health-and-mass">Health and Mass</a></h2>
+<p>Directly define exact values for health and mass.</p>
+<p>Unnecessary for most cases when <code>durability</code> and <code>density</code> exist.</p>
+<pre><code class="language-lua">{ 17000
+    health=50
+    mass=50
+}
+</code></pre>
+<h2 id="no-regen"><a class="header" href="#no-regen">No Regen</a></h2>
+<p>Blocks with <code>NOREGEN</code> do not regenerate after taking damage or being destroyed.</p>
+<pre><code class="language-lua">{ 17000
+    features=NOREGEN
+}
+</code></pre>
+<h2 id="commands-that-do-not-give-resources-on-death"><a class="header" href="#commands-that-do-not-give-resources-on-death">Commands that do not give resources on death</a></h2>
+<p><code>FREERES</code> is strongly recommended for launchables with commands.</p>
+<pre><code class="language-lua">{ 17000
+    features=COMMAND|FREERES
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="features-and-fields-not-to-use"><a class="header" href="#features-and-fields-not-to-use">Features and Fields Not To Use</a></h1>
+<p>There are various features and fields that shouldn't be used because they are either used by the game internally, are unnecessary for their purpose, or are disliked by the community.</p>
+<p>Ignore these guidelines if the cons do not affect you.</p>
+<h2 id="armor"><a class="header" href="#armor">Armor</a></h2>
+<p>The value of armor is subtracted from all the damage output of all non-explosive cannon bullets.</p>
+<pre><code class="language-lua">{ 17000
+    armor=10
+}
+</code></pre>
+<p>The armor value on shields causes bullets to 'slide' around shield's radius if the subtracted damage from the bullet causes its damage to be below the armor value.</p>
+<pre><code class="language-lua">{ 17000
+    features=SHIELD
+    shield={
+        armor=100.
+        -- Other shield features here.
+    }
+}
+</code></pre>
+<h2 id="perishable"><a class="header" href="#perishable">Perishable</a></h2>
+<p>Used to allow the <code>lifetime</code> field to be used but is now unnecessary.</p>
+<pre><code class="language-lua">{ 17000
+    features=PERISHABLE
+    lifetime=5
+}
+</code></pre>
+<h2 id="persistent"><a class="header" href="#persistent">Persistent</a></h2>
+<p>Used internally for keeping map objectives, stations, and agents functional.</p>
+<pre><code class="language-lua">{ 17000
+    features=PERSISTENT
+}
+</code></pre>
+<h2 id="deactivating-commands"><a class="header" href="#deactivating-commands">Deactivating Commands</a></h2>
+<p>Used during early development by Terran stations making them unable to be truly destroyed, only deactivated.</p>
+<pre><code class="language-lua">{ 17000
+    features=COMMAND|DEACTIVATES
+}
+</code></pre>
+<h2 id="launch"><a class="header" href="#launch">Launch</a></h2>
+<p>Used internally for launchables like missiles and seeds grown from launchers. Do not use.</p>
+<pre><code class="language-lua">{ 17000
+    features=LAUNCH
+}
+{ 17001
+    features=LAUNCHER
+    replicateBlock={
+        features=LAUNCH
+    }
+}
+</code></pre>
+<h2 id="auto-launch"><a class="header" href="#auto-launch">Auto-Launch</a></h2>
+<p>Identical to <a href="./always_and_never_firing_weapons.html#always-fire-weapons"><code>ALWAYSFIRE</code></a>, but only works for not-turreted launchers and is used put on the launchable in the same way as <a href="./features_and_fields_not_to_use.html#launch"><code>LAUNCH</code></a>.</p>
+<p>It is unique in that it overrides <a href="./always_and_never_firing_weapons.html#never-fire-weapons"><code>NEVERFIRE</code></a> and is selectable in the bindings menu, but as neither of these traits are useful, <a href="./always_and_never_firing_weapons.html#always-fire-weapons"><code>ALWAYSFIRE</code></a> should be used instead.</p>
+<pre><code class="language-lua">{ 17000
+    features=LAUNCHER
+    replicateBlock={
+        features=AUTOLAUNCH
+    }
+}
+{ 17001
+    features=LAUNCHER|NEVERFIRE
+    replicateBlock={
+        features=AUTOLAUNCH
+    }
+}
+</code></pre>
+<h2 id="growing-and-ungrowing"><a class="header" href="#growing-and-ungrowing">Growing and Ungrowing</a></h2>
+<p>Used internally for blocks that are either growing or ungrowing.</p>
+<pre><code class="language-lua">{ 17000
+    features=GROW
+}
+{ 17001
+    features=UNGROW
+}
+</code></pre>
+<h2 id="unique"><a class="header" href="#unique">Unique</a></h2>
+<p>Block cannot be scaled, deleted, or copied in the editor. Used internally for the ship the player is editing in the constructor and ships exported from the constructor.</p>
+<pre><code class="language-lua">{ 17000
+    features=UNIQUE
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="shapeslua"><a class="header" href="#shapeslua">shapes.lua</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="niche-port-flag-combinations"><a class="header" href="#niche-port-flag-combinations">Niche Port Flag Combinations</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="audiolua"><a class="header" href="#audiolua">audio.lua</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="factionslua"><a class="header" href="#factionslua">factions.lua</a></h1>
+<p><code>factions.lua</code> controls general faction identity.</p>
+<pre><code class="language-lua">{
+	98={                            -- Faction ID should be same as group.
+                                    -- (Technically does not have to be,
+                                    -- but it is strongly recommended.)
+		name="My Faction"
+
+		playable=2                  -- 0: Unplayable.
+                                    -- 1: Unlockable by killing a &gt;1000P ship.
+                                    -- 2: Always playable.
+
+		start="98_Starter_Ship"     -- Requires this format to work.
+
+		primaries=3                 -- Amount of primary colors.
+		color0=0x5555AA
+		color1=0x3333AA
+		color2=0xFFFFFF
+
+        -- Explosion color does not have to be defined.
+        -- If defined, either color is randomly picked for each explosion.
+		explosionColor0=0xFF0000
+        explosionColor1=0xFFAA00
+
+		thrustSFX=0                 -- 0: Normal thrust SFX.
+                                    -- 1: 'Magic' thrust SFX.
+
+		aiflags=BAD_AIM|CAUTIOUS    -- How ships of this faction will act.
+                                    -- Some ships deviate on an individual basis.
+									-- *
+	}
+	-- More factions:
+	256={
+		-- Fleet fields here.
+	}
+	888={
+		-- Fleet fields here.
+	}
+}
+</code></pre>
+<p><code>aiflags</code> uses <a href="./commands.html#command-flags">command flags</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="regionslua"><a class="header" href="#regionslua">regions.lua</a></h1>
+<p><code>regions.lua</code> controls how sectors procedurally generate in the galaxy by defining regions.</p>
+<p>Below is an example of a <code>regions.lua</code> that defines the region for one faction. Note that <code>regions.lua</code>s that define multiple regions have a <a href="./multiple_regions_in_one_mod.html">different syntax</a>.</p>
+<pre><code class="language-lua">{
+	-- General region identity:
+	ident=98                    -- Region ID should be same as group.
+                                -- (Technically does not have to be,
+                                -- but it is strongly recommended.)
+
+	color=0x5555AA              -- Color on galaxy map.
+    
+	faction=98                  -- Faction of the region.
+                                -- Region name is taken from the faction.
+	
+    -- Region Spawning:
+	count=3                     -- Number of this region on the map.
+
+	position={0.90,0.95}        -- Range of this region's position 0.0-1.0.
+                                -- 0.0 is the center of the galaxy,
+                                -- 1.0 is at the edge.
+
+	radius=  {0.05,0.10}        -- Range of this region's size 0.0-1.0.
+                                -- 0.0 could just not spawn the region,
+                                -- 1.0 could make the region galaxy-sized.
+
+	type=2                      -- Defines the region's shape.
+                                -- 0: Voronoi - evenly spaced, recommended (bias:).
+                                -- 1: Splats  - what the Reds use.
+                                -- 2: Circles - what most factions use.
+	
+	-- *:
+	fleets={
+		{ 98 {
+			{0,1000}
+			{1,3000}
+		} }
+		{ 8 {
+			{0,3000}
+		} }
+	}
+	fleetCount={1,4}            -- Range of number of ships per fleet in each sector.
+	fleetFraction=1.0           -- Probability that a fleet spawns
+								-- in each sector 0.0-1.0.
+	
+	-- Fortresses (entities that surrounded damaged stations):
+	fortress={
+		"98_Fortress_1"
+		"98_Fortress_2"
+		"98_Fortress_3"
+	}
+	fortressCount={3, 6}         -- Range of fortresses per damaged station.
+	fortressRadius={500, 500}    -- Range of distances of fortresses from station.
+	
+	-- **:
+	unique={
+		{
+			"98_Special_Station"
+		}
+		{
+			"98_Other_Thing_1"
+			"98_Other_Thing_2"
+		}
+		{
+			"8_interceptor"
+		}
+	}
+	uniqueFraction=0.5          -- Probability that a unique fleet spawns
+								-- in each sector 0.0-1.0.
+	
+	-- Asteroids:
+	ambient={1,2}               -- List that decides what spawns on asteroids.
+	                            -- 0: Nothing.
+                                -- 1: Green plants.
+                                -- 2: Blue plants.
+                                -- 3: Pink plants.
+                                -- Only -1: only faction structures.
+
+	asteroidDensity={0.1,0.2}   -- Range of density of asteroids in region 0.0-1.0.
+	asteroidSize={12,24}        -- Range of block count per asteroid.
+	asteroidFlags=EXPLOSIVE     -- See all flags below.
+}
+</code></pre>
+<p>* <a href="./fleet_spawning.html">Fleet Spawning</a></p>
+<p>** <a href="./unique_fleet_spawning.html">Unique Fleet Spawning</a></p>
+<h2 id="asteroid-flags"><a class="header" href="#asteroid-flags">Asteroid Flags</a></h2>
+<p>Many asteroid flags sadly do not work (they can be found in ), but the ones that do are listed below:</p>
+<ul>
+<li><code>EXPLOSIVE</code>: asteroid blocks are replaced with their explosive variants.</li>
+<li><code>UNIFORM_SIZE</code>: all asteroids in a sector have the same number of blocks.</li>
+</ul>
+<h2 id="regions-visualizer"><a class="header" href="#regions-visualizer">Regions Visualizer</a></h2>
+<p>The <a href="https://ttftcuts.github.io/RWDK/">RWDK</a>'s region editor is a useful tool for visualising how much of the galaxy a region will take up.</p>
+<p><img src="./diagrams/regions_rwdk.PNG" alt="RWDK Region Starchart" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fleet-spawning"><a class="header" href="#fleet-spawning">Fleet Spawning</a></h1>
+<p>(Fleet spawning is surprisingly complex, but there has been so much misinformation and mods that have gone on to use fleet code "incorrectly", that even if you do not understand fleets at all, you probably won't even notice.)</p>
+<!-- `fleetFraction` is the probability of a sector in the region containing a fleet.
+
+`fleets` controls how much P is allocated to a fleet of a faction in a sector at different distances from the center of a region.
+
+`fleetCount` controls the ranges of ship counts for each faction of a fleet. -->
+<p>When a sector is generated in this region, it has <code>fleetFraction</code> (0.0-1.0) probability to spawn one type of fleet in from <code>fleets</code>.</p>
+<p><code>fleets</code> is a list of fleet types. Each fleet type in <code>fleets</code> has a faction ID and also has a list of number pairs that represent the total P of fleets at different locations in the region. The 2nd number of the number pair is a P allocation distributed in a  fleet, and the 1st number being which distance from the center of the region that P allocation is for.</p>
+<p>In other words, <code>fleets</code> controls how much P is allocated to a fleet of a faction in a sector at different distances from the center of a region.</p>
+<p>Also, each fleet type's list of P allocations should have a value at 0.0 distance and at 1.0 distance.</p>
+<p><code>fleetCount</code> is a list of ranges of ship numbers for the fleet type at the same index.</p>
+<p>So, every time a fleet is spawned in a sector, a random number in the range of the relevant <code>fleetCount</code> element is chosen to decide how many ships will be in the fleet. Then, the relevant P allocation for the fleet (dependent on the sector's distance from the center of the region) is spread out between the number of ships in the fleet.</p>
+<pre><code class="language-lua">    fleets={
+		{ 98    -- Faction ID of the faction that can spawn
+				-- in a sector in this region.
+			{
+				-- Each faction 98 fleet in the center of the region has 10000P total.
+				{0.0,10000}
+
+				-- Each faction 98 fleet 1/4 from the center of the region
+				-- has (10000+3000)/2=6500P total.
+
+				-- Each faction 98 fleet halfway into the region has 3000P total.
+				{0.5, 3000}
+
+				-- Each faction 98 fleet 1/4 from the edge of the region
+				-- has (3000+1000)/2=2000P total.
+
+				-- Each faction 98 fleet at the edge of the region has 1000P total.
+				{1.0, 1000}
+			}
+		}
+		{ 8     -- The Terrans (faction 8) could also spawn in this region.
+			{ 
+				{0.0,    0}
+				-- No Terrans can spawn anywhere from the center
+				-- to 80% of the region. It will all be faction 98.
+				{0.8,    0}
+
+				-- Increasing from 80% to 100% of the region,
+				-- Terran fleets can begin to spawn in sectors.
+				{1.0, 1000}
+				-- At the edge of the region, each fleet has a maximum of 1000P total.
+			}
+		}
+    }
+
+	fleetCount={
+		{4,8}	-- Each faction 98 fleet has 4 to 8 ships.
+		{10,16} -- Each Terran fleet has 10 to 16 ships.
+	}
+
+				-- Every sector in this region has a 75% chance of spawning a
+				-- faction 98 fleet and a 75% of spawning a Terran fleet.
+	fleetFraction=0.75
+</code></pre>
+<h2 id="fleet-p-allocation-example"><a class="header" href="#fleet-p-allocation-example">Fleet P Allocation Example</a></h2>
+<p>Below is an example of a unique region that exploits the P allocation curve of 2 factions, where bigger ships have more P.</p>
+<pre><code class="language-lua">{
+	fleets={
+		{ 200 -- Red Colored Faction
+			{
+				{0.00,10000}
+				{0.10, 5000}
+				{0.25,    0}
+				{0.75,    0}
+				{0.90, 3000}
+				{0.10, 5000}
+			}
+		}
+		{ 300 -- Blue Colored Faction
+			{
+				{0.00,    0}
+				{0.25,    0}
+				{0.26,10000}
+				{0.75, 8000}
+				{0.76,    0}
+				{0.10,    0}
+			}
+		}
+	}
+	fleetCount={
+		{3,3}
+		{3,3}
+	}
+	fleetFraction=1
+	-- Other fields here.
+}
+</code></pre>
+<p><img src="./diagrams/p_allocation_curve.jpg" alt="P Allocation Curve" />
+<img src="./diagrams/regions_example_1.png" alt="Regions Example Galaxy" /></p>
+<p>This shows how versatile regions are, but a better way of doing this that would have the same effect would be to use <a href="./subregions.html">subregions</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="unique-fleet-spawning"><a class="header" href="#unique-fleet-spawning">Unique Fleet Spawning</a></h2>
+<p>Regions can contain special structures or ships that are unrelated to their fleets, fortresses or buildings: they are unique spawns.</p>
+<pre><code class="language-lua">	unique={           -- The unique field contains a list of unique fleets.
+		{
+			"200_2250" -- Red Faction
+		}
+		{
+			"300_2250" -- Green Faction
+		}
+		{
+			"400_2250" -- Blue Faction
+			"500_2250" -- White Faction
+		}
+	}
+	uniqueFraction=1.0
+</code></pre>
+<p>For each sector in a region, <code>uniqueFraction</code> is the probability that a unique fleet will spawn in it.</p>
+<p>Each item in the <code>unique</code> field is a unique fleet, and each unique fleet is a list of ship names (ship names must be repeated to appear multiple times). Each unique fleet spawns all the ships in its ship list unless there is not enough space in the sector, which can be because of other ships, asteroids, or space debris/plants.</p>
+<p>When a sector is chosen to contain a unique fleet, it will contain the unique fleet whose position in the <code>unique</code> list matches the sector's distance from the center of the region.</p>
+<p>The galaxy image below uses the <code>unique</code> defined above to show how uniques are spawned based on their definition's position in the list.</p>
+<p><img src="./diagrams/regions_unique_example.png" alt="Unique Example" /></p>
+<p>The central sector contains the last defined unique fleet for some reason, even if it is not where the player spawns.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="subregions"><a class="header" href="#subregions">Subregions</a></h1>
+<p>Each region can optionally have the <code>subregions</code> field, which is a list of other regions, each with its own unique <code>ident</code> as well as other fields.</p>
+<p>Note that the <code>radius</code> and <code>position</code> fields of each subregion is relative to the parent region.</p>
+<pre><code class="language-lua">{
+    ident=98
+
+    color=0x5555AA
+    faction=98
+
+    count=3
+    position={0.70,0.80}
+    radius=  {0.05,0.10}
+
+    subregions={ -- Ensure that each subregion has a unique ident.
+        {
+            ident=980
+
+            color=0x8888AA
+            faction=98
+
+            count=1
+            position=0.70
+            radius=  0.30
+            -- Other fields here.
+        }
+        {
+            ident=981
+
+            color=0xAAAA55
+            faction=98
+
+            count=3
+            position=0.2
+            radius=  0.1
+            -- Other fields here.
+        }
+        {
+            ident=982
+
+            color=0x333388
+            faction=98
+
+            count=3
+            position={0.00,1.00}
+            radius=  {0.20,0.30}
+            -- Other fields here.
+        }
+    }
+}
+</code></pre>
+<p>Subregions can even contain other subregions, creating a region tree.</p>
+<pre><code class="language-lua">-- Many fields excluded.
+{
+    ident=980
+    faction=98
+
+    subregions={
+        {
+            ident=981
+            faction=98
+        }
+        {
+            ident=982
+            faction=98
+
+            subregions={
+                {
+                    ident=983
+                    faction=98
+                }
+                {
+                    ident=984
+                    faction=98
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="example-of-a-unique-region"><a class="header" href="#example-of-a-unique-region">Example of a Unique Region</a></h2>
+<p>The <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3373133163">Makai &amp; Monolith Orbital Runeworks</a> mod uses nested subregions well by imitating the shape of its rune blocks with regions of different shapes.</p>
+<p>(Fields that do not affect region map appearance have been removed.)</p>
+<pre><code class="language-lua">{
+-- Deep Blue Background:
+	ident=2671
+	color=0x1E142B
+	faction=267
+	count=4
+	type=2
+	position={0.9,1.0}
+	radius=  {0.2,0.2}
+	subregions = {
+-- Inner Light Orange Splats:
+        {
+            ident=2672
+            color=0xEE915B
+            faction=267
+            count=2
+            type=1
+            position={0.2,0.6}
+            radius=  {0.2,0.3}
+        }
+        {
+-- White Outer Rim:
+            ident=2673
+            color=0xFFFFFF
+            faction=267
+            count=40
+            type=2
+            position={1.0,1.0}
+            radius=  {0.1,0.1}
+        }
+    }
+}
+</code></pre>
+<p><img src="./diagrams/region_of_mmor.jpg" alt="Region of MMOR" /> <img src="./diagrams/shrouds_of_mmor.jpg" alt="Shrouds of MMOR" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="multiple-regions-in-one-mod"><a class="header" href="#multiple-regions-in-one-mod">Multiple Regions in One Mod</a></h1>
+<p>Below is an example of a mod that contains different regions for factions 200, 300, and 400.</p>
+<pre><code class="language-lua">{
+    -- No fields are defined in the outermost scope.
+    subregions={
+        {
+            ident=200
+            -- Other fields here.
+        }
+        {
+            ident=300
+            -- Other fields here.
+        }
+        {
+            ident=400
+            -- Other fields here.
+        }
+    }
+}
+</code></pre>
+<p>The outermost brackets represent the entire galaxy, which is itself a region, but has unique functionality to allow multiple <code>subregions</code> definitions to coexist and extend each other.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="nonfunctional-asteroid-flags"><a class="header" href="#nonfunctional-asteroid-flags">Nonfunctional Asteroid Flags</a></h1>
+<p>The following asteroid flags do not work:</p>
+<ul>
+<li><code>HEXAGON</code></li>
+<li><code>OCTAGON</code></li>
+<li><code>PENROSE</code></li>
+<li><code>SQUARE</code></li>
+<li><code>TRIANGLE</code></li>
+<li><code>UNIFORM_TYPE</code></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cvarstxt"><a class="header" href="#cvarstxt">cvars.txt</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="standard-deviation-fields"><a class="header" href="#standard-deviation-fields">Standard Deviation Fields</a></h1>
+<p><code>StdDev</code> stands for 'standard deviation', In Reassembly modding, it is used for fields that add randomness to values.</p>
+<p>The value you set as the standard deviation decides the maximum value that can be added and subtracted from the value it modifies.</p>
+<p>Here is a standard deviation curve:
+<img src="./diagrams/Standard_deviation_diagram.png" alt="Standard Deviation Curve" /></p>
+<p>Every time a value is modified by its respective standard deviation value, a random value is taken between the <code>StdDev</code> value and the negative <code>StdDev</code> value. It is based on the standard deviation curve, so values close to 0 are less likely than values closer to the defined <code>StdDev</code> value.</p>
+<p>Standard deviation fields are useful in fragments as they can make effects look less static and more alive.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ups"><a class="header" href="#ups">UPS</a></h1>
+<p>UPS represents 'physics updates per seconds', or in other words, Reassembly's simulation step rate.</p>
+<p>Reassembly mods should be made to function at UPS settings 60 or higher.
+<video height=256 controls>
+<source src="diagrams/ups.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video></p>
+<p>UPS should beg kept in mind when creating cannons or launchers that do a lot in a short amount of time, such as having a high <code>roundsPerSec</code>, a high <code>muzzleVel</code> with a short <code>range</code>, or constantly producing blocks with an instant <code>replicateTime</code>.</p>
+<p>It is recommened to make UPS-affected blocks function identically across UPS settings above 60 to ensure that all players have the same experience and to avoid requiring players to switch UPS settings.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>

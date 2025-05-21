@@ -1,0 +1,285 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Cosmetic Launchable Laser Printer - Reassembly Modding by Example</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Reassembly Modding by Example</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="cosmetic-launchable-laser-printer"><a class="header" href="#cosmetic-launchable-laser-printer">Cosmetic Launchable Laser Printer</a></h1>
+<p>A launchable-generating cosmetic laser printer effect can be created with a barrel-spaced laser block with a high barrel count to mimic a moving laser.</p>
+<p>The laser printer blocks use a visible laser and an high fire rate invisible cannon to cycle through the barrels.</p>
+<p>The direction of the laser is decided by the sign of <code>barrelSpacing</code>'s Y change, allowing for a mirrored version of the laser printer.</p>
+<p>Both the laser printer's cycle time (1 second, because <code>barrelCount</code> / <code>roundsPerSec</code> = 1) and the launcher's <code>replicateTime</code> are the same, allowing for the two blocks to synchronize their functionality if activated at the right time.</p>
+<pre><code class="language-lua">{ 17000 features=LASER|CANNON|ALWAYSFIRE|TURRET
+    name="Laser Printer Left -&gt; Right"
+	shape=271390000
+	scale=4
+	barrelCount=30
+	barrelSize={0.0001,0.0001}
+	barrelSpacing={0,-1}
+	turretLimit=0
+	sound=NONE
+    laser={
+        damage=0.0001
+        range=40
+        width=0.5
+        color=0xFFFFFFFF
+    }
+	cannon={
+		muzzleVel=0
+		range=0
+        color=0x01000000
+        damage=0.0001
+		roundsPerSec=30
+		recoil=0
+		explosive=FINAL
+	}
+}
+{ 17001 extends=17000 name="Laser Printer Right -&gt; Left" shape=271390001 barrelSpacing={0,1}}
+{ 17002 features=LAUNCHER|TURRET|NOICON
+    name="Launcher"
+	scale=4
+	turretLimit=0
+	replicateBlock={
+		features=NOCLIP_ALLY
+		shape=MISSILE_SHORT
+		scale=3
+		lifetime=2
+	}
+	replicateTime=1
+}
+</code></pre>
+<p>This shape is a direct copy of the base game's <code>RECT_LONG</code> with a mirrored counterpart for both directions of the laser printer.</p>
+<pre><code class="language-lua">{271390000, {{verts={{5, -5}, {-5, -5}, {-5, 5}, {5, 5}}, ports={{3, 0.5}, {0, 0.5},
+           {1, 0.5}, {2, 0.5}}},
+      {verts={{5, -10}, {-5, -10}, {-5, 10}, {5, 10}}, ports={{3, 0.25}, {3, 0.75}, {0, 0.5}, {1, 0.25},
+           {1, 0.75}, {2, 0.5}}},
+      {verts={{5, -15}, {-5, -15}, {-5, 15}, {5, 15}}, ports={{3, 0.167}, {3, 0.5}, {3, 0.833}, {0, 0.5},
+           {1, 0.167}, {1, 0.5}, {1, 0.833}, {2, 0.5}}},
+      {verts={{5, -20}, {-5, -20}, {-5, 20}, {5, 20}}, ports={{3, 0.125}, {3, 0.375}, {3, 0.625}, {3,
+            0.875}, {0, 0.5}, {1, 0.125}, {1, 0.375}, {1, 0.625}, {1, 0.875}, {2, 0.5}}},
+      {verts={{5, -25}, {-5, -25}, {-5, 25}, {5, 25}}, ports={{3, 0.1}, {3, 0.5}, {3, 0.9}, {0, 0.5},
+          {1, 0.1}, {1, 0.5}, {1, 0.9}, {2, 0.5}}},
+      {verts={{5, -30}, {-5, -30}, {-5, 30}, {5, 30}}, ports={{3, 0.083}, {3, 0.25}, {3, 0.417}, {3, 0.583},
+           {3, 0.75}, {3, 0.917}, {0, 0.5}, {1, 0.083}, {1, 0.25}, {1, 0.417}, {1, 0.583}, {1, 0.75},
+          {1, 0.917}, {2, 0.5}}},
+      {verts={{5, -35}, {-5, -35}, {-5, 35}, {5, 35}}, ports={{3, 0.071}, {3, 0.357}, {3, 0.643}, {3,
+            0.929}, {0, 0.5}, {1, 0.071}, {1, 0.357}, {1, 0.643}, {1, 0.929}, {2, 0.5}}},
+      {verts={{5, -40}, {-5, -40}, {-5, 40}, {5, 40}}, ports={{3, 0.062}, {3, 0.188}, {3, 0.312}, {3,
+            0.438}, {3, 0.562}, {3, 0.688}, {3, 0.812}, {3, 0.938}, {0, 0.5}, {1, 0.062}, {1, 0.188},
+          {1, 0.312}, {1, 0.438}, {1, 0.562}, {1, 0.688}, {1, 0.812}, {1, 0.938}, {2, 0.5}}},
+      {verts={{5, -45}, {-5, -45}, {-5, 45}, {5, 45}}, ports={{3, 0.056}, {3, 0.278}, {3, 0.5}, {3, 0.722},
+           {3, 0.944}, {0, 0.5}, {1, 0.056}, {1, 0.278}, {1, 0.5}, {1, 0.722}, {1, 0.944}, {2, 0.5}}},
+      {verts={{5, -50}, {-5, -50}, {-5, 50}, {5, 50}}, ports={{3, 0.05}, {3, 0.15}, {3, 0.25}, {3, 0.35},
+           {3, 0.45}, {3, 0.55}, {3, 0.65}, {3, 0.75}, {3, 0.85}, {3, 0.95}, {0, 0.5}, {1, 0.05}, {1,
+            0.15}, {1, 0.25}, {1, 0.35}, {1, 0.45}, {1, 0.55}, {1, 0.65}, {1, 0.75}, {1, 0.85}, {1, 0.95},
+           {2, 0.5}}}}},
+{271390001 {} mirror_of=271390000}
+</code></pre>
+<p>The laser printer is placed next to the turreted launcher it seem like they are one mechanism.
+<video height=256 controls>
+<source src="diagrams/cosmetic_laser_printer.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="x-spaced_barrel_beams.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="always_and_never_firing_weapons.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="x-spaced_barrel_beams.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="always_and_never_firing_weapons.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

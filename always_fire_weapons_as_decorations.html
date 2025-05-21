@@ -1,0 +1,491 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Always Fire Weapons as Decorations - Reassembly Modding by Example</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Reassembly Modding by Example</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="always-fire-weapons-as-decorations"><a class="header" href="#always-fire-weapons-as-decorations">Always Fire Weapons as Decorations</a></h1>
+<p>As weapons are so flashy, they can be used purely as cosmetics using the always fire features.</p>
+<p>This chapter will contain a few common always fire weapon decorations.</p>
+<p>When using always fire cannons cosmetically, it is important to check how <a href="./ups.html">UPS</a> will affect the visuals as having too low a <code>roundsPerSec</code> on a high UPS will cause the cannon to flicker. It is thus recommeneded to have <code>roundsPerSec=120</code> by default unless lag due to the sheer amount of bullets becomes an issue.</p>
+<h2 id="frag-spike"><a class="header" href="#frag-spike">Frag Spike</a></h2>
+<pre><code class="language-lua">{ 17000
+	features=CANNON|ALWAYSFIRE
+	sound=None                  -- Having a sound is annoying.
+    cannon={
+        -- Cosmetic fields:
+		projectileSize=2        -- Override projectile size calculation based on damage.
+        muzzleVel=10000         -- Affects length of the bullet.
+        color=0xFFFFFFFF
+
+        -- Functional fields:
+        damage=0.0001           -- Prevents it from dealing damage.
+        roundsPerSec=120        -- Minimal flicker on 60 UPS and above.
+        range=0                 -- So that the bullet does not travel.
+        power=0.0001            -- Cosmetics should not use power.
+		recoil=0                -- Cosmetics should not have recoil.
+		explosive=FINAL         -- Removes bullet end particle.
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/always_fire_frag_spike.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="laser-spike"><a class="header" href="#laser-spike">Laser Spike</a></h2>
+<pre><code class="language-lua">{ 17000
+	features=LASER|ALWAYSFIRE
+	sound=None                  -- Having a sound is annoying.
+    laser={
+        -- Cosmetic fields:
+        range=50
+        width=3
+        color=0xFFFFFFFF
+
+        -- Functional fields:
+        damage=0                -- Prevents it from dealing damage.
+        power=0.0001            -- Cosmetics should not use power.
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/always_fire_laser_spike.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>You could also use a negative <code>width</code>, such as <code>width=-3</code> in the below example:</p>
+<video height=256 controls>
+  <source src="diagrams/always_fire_laser_spike_negative_width.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="laser-light"><a class="header" href="#laser-light">Laser Light</a></h2>
+<pre><code class="language-lua">{ 17000
+	features=LASER|ALWAYSFIRE|TURRET
+	sound=None
+	barrelSize={0.001,0.001}    -- Centers the laser.
+    laser={
+        -- Cosmetic fields:
+        width=3                 -- Affects the size of the light.
+        color=0xFFFFFFFF
+
+        -- Functional fields:
+        damage=0
+        range=0
+        power=0.0001
+    }
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/always_fire_laser_light.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>You can also make them flash:</p>
+<pre><code class="language-lua">    laser={
+		burstyness=0.5
+		pulsesPerBurst=1
+		pulsesPerSec=1
+        -- Other laser features here.
+    }
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/always_fire_laser_light_flashing.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="frag-tentacle"><a class="header" href="#frag-tentacle">Frag Tentacle</a></h2>
+<pre><code class="language-lua">{ 17000
+    features=ALWAYSFIRE|CANNON
+	sound=None
+	cannon={
+        -- Cosmetic fields:
+		projectileSize=1        -- Override bullet size calculation based on damage.
+		muzzleVel=100           -- "Speed" of tentacle wave.
+		range=50                -- Length of tentacle.
+        color=0xAAFFFFFF
+		spread=pi*0.25          -- Width of tentacle.
+		burstyness=0.0203       -- Try to making this value as small as possible to
+                                -- make the wave pattern cycle seemless.
+		roundsPerBurst=60       -- Amount of bullets in a wave cycle.
+		roundsPerSec=30         -- Fidelity of tentacle.
+		
+        -- Functional fields:
+		pattern=WAVE
+        damage=0.0001           -- Prevents it from dealing damage.
+        power=0.0001            -- Cosmetics should not use power.
+		recoil=0                -- Cosmetics should not have recoil.
+		explosive=FINAL         -- Removes bullet end particle.
+	}
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/always_fire_frag_tentacle.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="lens-flare"><a class="header" href="#lens-flare">Lens Flare</a></h2>
+<p>A lens flare effect that does change direction when the ship it is on rotates.</p>
+<p>1st stage: invisible anti-FSP stage with spread just above 180° to be centered and <code>muzzleVel=0</code> to make the frag always face in the same direction.</p>
+<p>2nd stage: invisible 90° rotation stage by using <code>pattern=CONSTANT</code>.</p>
+<p>3rd stage: visible lens flare using 2 frags that always face in the same direction using <code>pattern=SPIRAL</code>.</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON|ALWAYSFIRE
+	sound=None
+	cannon={
+	-- 1st stage:
+		muzzleVel=0
+		range=0
+        color=0x01000000
+		spread=pi*0.5*1.0001
+		pattern=ABSOLUTE
+        damage=0.0001
+		roundsPerSec=120
+		recoil=0
+		explosive=FINAL
+		fragment={
+	-- 2nd stage:
+			muzzleVel=1
+			range=0
+			color=0x01000000
+			pattern=CONSTANT
+			damage=0.0001
+			explosive=FINAL|FRAG_NOFLASH
+			spread=pi*1/2
+			fragment={
+	-- 3rd stage:
+				projectileSize=2
+				muzzleVel=3000
+				range=0
+				color=0xFFFFFFFF
+				pattern=SPIRAL
+				damage=0.0001
+				explosive=FINAL|FRAG_NOFLASH
+				spread=pi*1/2
+				roundsPerBurst=2
+			}
+		}
+	}
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/always_fire_lens_flare.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h1 id="x-shape-lens-flare"><a class="header" href="#x-shape-lens-flare">X Shape Lens Flare</a></h1>
+<p>You can also make lens flares with an 'X' shape.</p>
+<p>This X-shaped lens flare does not contain the 90° rotating 2nd stage of the standard lens flare frag as the X shape does not require it.</p>
+<p>The visible (2nd) stage's <code>roundsPerBurst</code> is changed from <code>2</code> to <code>4</code> and its <code>spread</code> is changed from <code>pi*1/2</code> (180°) to <code>pi*3/4</code> (270°).</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON|ALWAYSFIRE
+	sound=None
+	cannon={
+	-- 1st stage:
+		muzzleVel=0
+		range=0
+        color=0x01000000
+		spread=pi*0.5*1.0001
+		pattern=ABSOLUTE
+        damage=0.0001
+		roundsPerSec=120
+		recoil=0
+		explosive=FINAL
+		fragment={
+	-- 2nd stage:
+			projectileSize=2
+			muzzleVel=3000
+			range=0
+			color=0xFFFFFFFF
+			pattern=SPIRAL
+			damage=0.0001
+			explosive=FINAL|FRAG_NOFLASH
+			spread=pi*3/4
+			roundsPerBurst=4
+		}
+	}
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/always_fire_lens_flare_x.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="frag-rings"><a class="header" href="#frag-rings">Frag Rings</a></h2>
+<p>Here is an example of a basic frag ring you could make for a generator:</p>
+<p>1st stage: invisible anti-FSP stage with spread just above 180° is used to center the frag.</p>
+<p>2nd stage: invisible stage of a 20-round burst in a uniform spiral which are sent outwards.</p>
+<p>3rd stage: this is the stage visible to the player. <code>pattern=ABSOLUTE</code> is used to reset the bullet velocities, and <code>projectileSize</code>, <code>muzzleVel</code>, and <code>color</code> affect how the frag looks.</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON|ALWAYSFIRE|GENERATOR
+	sound=None
+	shape=OCTAGON
+	scale=3
+    cannon={
+	-- 1st stage:
+        damage=0.0001
+		projectileSize=0.001
+        muzzleVel=1
+        range=0
+        power=0.01
+		recoil=0
+        roundsPerSec=120
+		pattern=CONSTANT
+		spread=pi*0.5*1.0000001
+        color=0x01000001
+		fragment={
+	-- 2nd stage:
+			damage=0.0001
+			projectileSize=0.1
+			muzzleVel=10*60
+			range=10
+			pattern=ABSOLUTE|SPIRAL
+			roundsPerBurst=20
+			spread=pi*340/360
+			explosive=FINAL|FRAG_NOFLASH
+			color=0x01000000
+			fragment={
+	-- 3rd stage:
+				damage=0.0001
+				projectileSize=0.1
+				muzzleVel=-1
+				range=0
+				pattern=ABSOLUTE
+				explosive=FINAL|FRAG_NOFLASH
+				color=0xFFFFFFFF
+			}
+		}
+    }
+	-- Generator fields here.
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/always_fire_frag_ring_1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="poof-particle-emitter"><a class="header" href="#poof-particle-emitter">Poof Particle Emitter</a></h2>
+<p>A simple fragless setup that emits 120 frag despawn poofs every second. A neat effect for a generator.</p>
+<pre><code class="language-lua">{ 17000
+	features=CANNON|ALWAYSFIRE|GENERATOR
+	sound=None
+	shape=OCTAGON
+	scale=3
+	cannon={
+		projectileSize=1
+		muzzleVel=100
+		range=0
+        color=0xFFFFFFFF
+		spread=pi
+		pattern=ABSOLUTE
+        damage=0.0001
+		roundsPerSec=120
+		recoil=0
+	}
+	-- Generator fields here.
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/always_fire_poof_particle_emitter.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="launchable-laser-printer"><a class="header" href="#launchable-laser-printer">Launchable Laser Printer</a></h2>
+<p>See the main page for the <a href="./cosmetic_launchable_laser_printer.html">Launchable Laser Printer</a>.</p>
+<video height=256 controls>
+  <source src="diagrams/cosmetic_laser_printer.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="always_and_never_firing_weapons.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="one-use_weapons.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="always_and_never_firing_weapons.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="one-use_weapons.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

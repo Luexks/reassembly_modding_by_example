@@ -1,0 +1,5 @@
+`TURRET`,`NEVERFIRE`,`replicatePower=inf`,Shows up in bindings menu,Can be fired by player,Can be fired by AI
+❌,✔️,❌,❌,❌,✔️
+❌,❌,✔️,✔️,❌,❌
+❌,️✔️,✔️,❌,❌,❌
+✔️,✔️,❌,❌,❌,❌
