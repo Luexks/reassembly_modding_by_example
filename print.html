@@ -1989,7 +1989,87 @@ Your browser does not support the video tag.
   your browser does not support the video tag.
 </video>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="fragbeams"><a class="header" href="#fragbeams">Fragbeams</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="frag-cascade"><a class="header" href="#frag-cascade">Frag Cascade</a></h1>
+<p>Fragbeams are cannons that use fragments in such a way that they they look like a laser beam when fired.</p>
+<p>This chapter will describe multiple distinct types of fragbeams, each example video includes the fragbeam firing at a <a href="./further_ship_testing.html?highlight=target#spawning-targets-and-asteroids">target</a> without commands and with commands.</p>
+<h2 id="synchronous-evenly-spaced-fragbeam"><a class="header" href="#synchronous-evenly-spaced-fragbeam">Synchronous, Evenly Spaced Fragbeam</a></h2>
+<p>This fragbeam uses <code>pattern=SPIRAL</code>to make each bullet split into two travelling in opposite directions. After each split, the distance travelled by each stage decreases until the final stage is reached in synchrony. Because there are no uses of <code>rangeStdDev</code>, this fragbeam is evenly spaced.</p>
+<pre><code class="language-lua">{ 17000
+    features=CANNON
+	cannon={   damage= 1 muzzleVel=121*64 range=32 color=0xFFFFFFFF                                                                    explosive=FINAL|FRAG_NOFLASH roundsPerSec=0.5 recoil=0
+	fragment={ damage= 1 muzzleVel=  1    range= 0 color=1                           pattern=ABSOLUTE|       CONSTANT spread=90*pi/180 explosive=FINAL|FRAG_NOFLASH
+	fragment={ damage= 1 muzzleVel=121*32 range=32 color=1          roundsPerBurst=2 pattern=ABSOLUTE|SPIRAL          spread=90*pi/180 explosive=FINAL|FRAG_NOFLASH
+	fragment={ damage= 1 muzzleVel=  1    range= 0 color=1                           pattern=ABSOLUTE|       CONSTANT spread=90*pi/180 explosive=FINAL|FRAG_NOFLASH
+	fragment={ damage= 1 muzzleVel=121*16 range=16 color=1          roundsPerBurst=2 pattern=ABSOLUTE|SPIRAL          spread=90*pi/180 explosive=FINAL|FRAG_NOFLASH
+	fragment={ damage= 1 muzzleVel=  1    range= 0 color=1                           pattern=ABSOLUTE|       CONSTANT spread=90*pi/180 explosive=FINAL|FRAG_NOFLASH
+	fragment={ damage= 1 muzzleVel=121* 8 range= 8 color=1          roundsPerBurst=2 pattern=ABSOLUTE|SPIRAL          spread=90*pi/180 explosive=FINAL|FRAG_NOFLASH
+	fragment={ damage= 1 muzzleVel=  1    range= 0 color=1                           pattern=ABSOLUTE|       CONSTANT spread=90*pi/180 explosive=FINAL|FRAG_NOFLASH
+	fragment={ damage= 1 muzzleVel=121* 4 range= 4 color=1          roundsPerBurst=2 pattern=ABSOLUTE|SPIRAL          spread=90*pi/180 explosive=FINAL|FRAG_NOFLASH
+	fragment={ damage= 1 muzzleVel=  1    range= 0 color=1                           pattern=ABSOLUTE|       CONSTANT spread=90*pi/180 explosive=FINAL|FRAG_NOFLASH
+	fragment={ damage= 1 muzzleVel=121* 2 range= 2 color=1          roundsPerBurst=2 pattern=ABSOLUTE|SPIRAL          spread=90*pi/180 explosive=FINAL|FRAG_NOFLASH
+	fragment={ damage=25 muzzleVel=  1    range= 1 color=0xFFFFFFFF                  pattern=ABSOLUTE                                  explosive=      FRAG_NOFLASH
+	}}}}}}}}}}}}
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/fragbeam_1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="synchronous-unevenly-spaced-fragbeam"><a class="header" href="#synchronous-unevenly-spaced-fragbeam">Synchronous, Unevenly Spaced Fragbeam</a></h2>
+<p>This fragbeam uses multiple stages with <code>rangeStdDev</code> and decreasing range after each stage to cover a long distance with many bullets.</p>
+<pre><code class="language-lua">{ 17000
+ 	features=CANNON
+	cannon={   damage= 1 muzzleVel=  1   range= 0                    color=1                           explosive=FINAL|FRAG_NOFLASH roundsPerSec=4    recoil=0
+	fragment={ damage= 1 muzzleVel=500*4 range=10*4 rangeStdDev=10*4 color=1          pattern=ABSOLUTE explosive=FINAL|FRAG_NOFLASH roundsPerBurst=64
+	fragment={ damage= 1 muzzleVel=500*3 range=10*3 rangeStdDev=10*3 color=1          pattern=ABSOLUTE explosive=FINAL|FRAG_NOFLASH
+	fragment={ damage= 1 muzzleVel=500*2 range=10*2 rangeStdDev=10*2 color=1          pattern=ABSOLUTE explosive=FINAL|FRAG_NOFLASH
+	fragment={ damage= 1 muzzleVel=500*1 range=10*1 rangeStdDev=10*1 color=1          pattern=ABSOLUTE explosive=FINAL|FRAG_NOFLASH
+	fragment={ damage=10 muzzleVel=  5   range= 1                    color=0x7FFFFFFF pattern=ABSOLUTE explosive=      FRAG_NOFLASH
+	}}}}}}
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/fragbeam_2.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="small-sequential-unevenly-spaced-fragbeam"><a class="header" href="#small-sequential-unevenly-spaced-fragbeam">Small Sequential, Unevenly Spaced Fragbeam</a></h2>
+<p>Even though the "beam" is not stationary and it looks more like a long bullet, this can still be useful when aesthetics demand it.</p>
+<p>This fragment works by spawning one large cluster of fragments, each slight differences in range from a low <code>rangeStdDev</code> value. After each finishes its range, they become the final stage and begin travelling. Because of the high velocity of the final stage, the small difference in delay before each fragment starts travelling is expressed as a line of bullets, which looks like a travelling fragbeam.</p>
+<pre><code class="language-lua">{ 17000
+ 	features=CANNON
+	cannon={   damage= 1 muzzleVel=   1 range=  0               color=1          explosive=FINAL|FRAG_NOFLASH                   roundsPerSec=2 recoil=0
+	fragment={ damage= 1 muzzleVel=  40 range=  1 rangeStdDev=1 color=1          explosive=FINAL|FRAG_NOFLASH roundsPerBurst=16
+	fragment={ damage=20 muzzleVel=1000 range=500               color=0xFFFFFFFF explosive=      FRAG_NOFLASH
+	}}}
+}
+</code></pre>
+<video height=256 controls>
+  <source src="diagrams/fragbeam_3.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="long-sequential-unevenly-spaced-fragbeam"><a class="header" href="#long-sequential-unevenly-spaced-fragbeam">Long Sequential, Unevenly Spaced Fragbeam</a></h2>
+<p>This is less like a fragbeam, and more like a bullet that leaves a long trail.</p>
+<p>The fragment works by spawning one large cluster of fragments, each with a different range from the high <code>rangeStdDev</code> value. After each finishes its range, they become the final stage, which is stationary and is what looks like a fragbeam.</p>
+<pre><code class="language-lua">{ 17000
+ 	features=CANNON
+	cannon={   damage= 1 muzzleVel=   1 range=  0                 color=1                                              roundsPerSec=2 recoil=0
+	fragment={ damage= 1 muzzleVel=   1 range=  0                 color=1          roundsPerBurst=255
+	fragment={ damage=50 muzzleVel=1000 range=750 rangeStdDev=250 color=0xFFFFFFFF
+	fragment={ damage=50 muzzleVel=   1 range=  5                 color=0xFFFFFFFF                    pattern=ABSOLUTE
+	}}}}
+}
+</code></pre>
+<p>The example video below includes the Terran Interceptor flying into the fragbeam.</p>
+<video height=256 controls>
+  <source src="diagrams/fragbeam_4.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="x-spaced-barrel-beam"><a class="header" href="#x-spaced-barrel-beam">X-Spaced Barrel Beam</a></h2>
+<p>See the chapter for the X-spaced barrel beam <a href="./x-spaced_barrel_beams.html">here</a>.</p>
+<p>Even though this is technically not a fragbeam (it requires no fragments to achieve a beam like effect, instead using the <code>barrelSpacing</code> field), it is still just as viable as all the other fragbeam variants in creating a laser out of cannon projectiles.</p>
+<video height=256 controls>
+  <source src="diagrams/x-spaced_barrel_beam.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video><div style="break-before: page; page-break-before: always;"></div><h1 id="frag-cascade"><a class="header" href="#frag-cascade">Frag Cascade</a></h1>
 <p>test</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="flamethrowers"><a class="header" href="#flamethrowers">Flamethrowers</a></h1>
 <p>Flamethrowers are a common weapon type that can be made in multiple different ways. However, this chapter contains one flamethrower (as well as a <a href="./flamethrowers.html#version-without-patternabsolute">version without <code>pattern=ABSOLUTE</code></a>) that can be modified to act differently.</p>
