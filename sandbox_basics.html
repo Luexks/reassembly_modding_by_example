@@ -200,9 +200,11 @@
 <p>For example, pressing tab on an empty console will give you every command in a list:</p>
 <p><img src="./diagrams/sandbox_tab_on_empty_console.png" alt="Tab on an empty console." /></p>
 <p>Many commands do an action at the deploy location, the blue circle with an X. Change its location by double clicking.</p>
+<p>Also, if you use the shortest distinct way of typing the command, the console will understand it. These abbreviations will be shown in brackets next to the full versions of commands.</p>
 <img src="./diagrams/sandbox_deploy_location.png" alt="Deploy Location" width="100" height="auto">
 <h2 id="spawning-in-palettes"><a class="header" href="#spawning-in-palettes">Spawning in Palettes</a></h2>
-<p>Each faction has a palette that can be spawned in using the <code>mi</code> command followed by either its <a href="./blocks.lua.html?highlight=group"><code>group</code></a> in the <code>blocks.lua</code> or its <a href="./factions.lua.html?highlight=name"><code>name</code></a> in the <code>factions.lua</code>.</p>
+<p>Each faction has a palette that can be spawned in using the <code>palette</code> (<code>pa</code>) command followed by either its <a href="./blocks.lua.html?highlight=group"><code>group</code></a> in the <code>blocks.lua</code> or its <a href="./factions.lua.html?highlight=name"><code>name</code></a> in the <code>factions.lua</code>.</p>
+<p>You can also use the <code>minpalette</code> (<code>mi</code>) command to only spawn in one of each scale of block to keep your workspace small.</p>
 <p>Work with the palette using normal editor controls by switching to command mode by pressing <code>3</code>.</p>
 <video height=256 controls>
   <source src="diagrams/sandbox_mi.mp4" type="video/mp4">
@@ -223,19 +225,21 @@
 </video>
 <p>(Always duplicate your ships before flying them so that they can always be saved in their latest state and so that they do not reassemble to a previous state if activated.)</p>
 <h2 id="saving-modded-ships"><a class="header" href="#saving-modded-ships">Saving Modded Ships</a></h2>
-<p>Once you have spawned in a palette and made a ship with a command, save it to your mod's <code>ships/</code> folder with the <code>ss &lt;Ship Name Here&gt;</code> command. Note that you must use underscores instead of spaces.</p>
+<p>Once you have spawned in a palette and made a ship with a command, save it to your mod's <code>ships/</code> folder with the <code>ssave &lt;Ship Name Here&gt;</code> (<code>ss</code>) command. Note that you must use underscores instead of spaces.</p>
 <video height=256 controls>
   <source src="diagrams/sandbox_ss.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 <p>Note that if neither your ship has a corresponding faction defined in the <code>faction.lua</code> nor there is a preexisting <code>ships/</code> folder, your ship will instead be saved to <code>C:/Users/&lt;your username here&gt;/Saved Games/Reassembly/Data/ships/</code>.</p>
+<h2 id="exporting-ships"><a class="header" href="#exporting-ships">Exporting Ships</a></h2>
+<p>Another way of turning ships into files is by using the <code>export &lt;Ship Name Here&gt;</code> (<code>expo</code>) command. This sends the ship to your desktop, which is useful when exporting ships made with vanilla factions so that you do not have to search in the game files.</p>
 <h2 id="spawning-fleet-palettes"><a class="header" href="#spawning-fleet-palettes">Spawning Fleet Palettes</a></h2>
-<p>Spawn in a faction's fleets by using the <code>fleetp</code> command followed by either its <a href="./factions.lua.html?highlight=98">faction ID</a> or its <a href="./factions.lua.html?highlight=name"><code>name</code></a> in the <code>factions.lua</code>.</p>
+<p>Spawn in a faction's fleets by using the <code>fleetpalette</code> (<code>fleetp</code>) command followed by either its <a href="./factions.lua.html?highlight=98">faction ID</a> or its <a href="./factions.lua.html?highlight=name"><code>name</code></a> in the <code>factions.lua</code>.</p>
 <video height=256 controls>
   <source src="diagrams/sandbox_fleetp.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
-<p>(<code>fleetp 0</code> spawns in plants, <code>fleetp -10</code> spawns in every faction except for the Contestants, and specifying any other negative faction ID spawns in every faction plus the Contestants.)</p>
+<p>(<code>fleetpalette 0</code> spawns in plants, <code>fleetpalette -10</code> spawns in every faction except for the Contestants, and specifying any other negative faction ID spawns in every faction plus the Contestants.)</p>
 <h2 id="saving-the-sandbox"><a class="header" href="#saving-the-sandbox">Saving the Sandbox</a></h2>
 <p>Use <code>Ctrl</code> + <code>S</code> to save the state of the sandbox.</p>
 <p>If you want a clean state for your sandbox a big block of text saying 'IN THE BEGINNING WAS THE COMMAND LINE', use the <code>cl</code> command to clear everything and the do <code>Ctrl</code> + <code>S</code>.</p>
@@ -245,7 +249,7 @@
 <h2 id="time-settings"><a class="header" href="#time-settings">Time Settings</a></h2>
 <p>Use <code>P</code> without the mouse cursor over the console to freeze and unfreeze time.</p>
 <p>Use <code>O</code> in the same way to progress Reassembly's simulation by 1 update (can be held down).</p>
-<p>Use <code>{</code> to speed down update rate (not <a href="./ups.html">updates per second</a>) by 50% and <code>}</code> to slow it down by 50%.</p>
+<p>Use <code>{</code> to speed up time by 50% and <code>}</code> to slow it down by 50% (<a href="./ups.html">updates per second</a> remains constant).</p>
 <p>Use the <code>deb fps</code> command to open the FPS debugger in the bottem left to check update rate and UPS.`</p>
 
                     </main>
