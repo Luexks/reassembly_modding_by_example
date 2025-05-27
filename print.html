@@ -1994,7 +1994,7 @@ Your browser does not support the video tag.
 </video>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="fragbeams"><a class="header" href="#fragbeams">Fragbeams</a></h1>
 <p>Fragbeams are cannons that use fragments in such a way that they they look like a laser beam when fired.</p>
-<p>This chapter will describe multiple distinct types of fragbeams, each example video includes the fragbeam firing at a <a href="./further_ship_testing.html?highlight=target#spawning-targets-and-asteroids">target</a> without commands and with commands.</p>
+<p>This chapter will describe multiple distinct types of fragbeams, each example video includes the fragbeam firing at a <a href="./further_ship_testing.html?highlight=target#spawning-targets-and-asteroids">target</a> without commands and with commands, as well as advantages and disadvantages for each.</p>
 <h2 id="synchronous-evenly-spaced-fragbeam"><a class="header" href="#synchronous-evenly-spaced-fragbeam">Synchronous, Evenly Spaced Fragbeam</a></h2>
 <p>This fragbeam uses <code>pattern=SPIRAL</code>to make each bullet split into two travelling in opposite directions. After each split, the distance travelled by each stage decreases until the final stage is reached in synchrony. Because there are no uses of <code>rangeStdDev</code>, this fragbeam is evenly spaced.</p>
 <pre><code class="language-lua">{ 17000
@@ -2018,10 +2018,12 @@ Your browser does not support the video tag.
   <source src="diagrams/fragbeam_1.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+<p>This fragbeam advantage of being evenly spaced and having all of its visible fragments appear at the same time in synchrony.</p>
+<p>However, it has the disadvantage of always having delay before it appears. This cannot be removed by using high speed bullets in a satisfactory way as it will cause differences across different <a href="./ups.html">UPS</a> settings.</p>
 <h2 id="synchronous-unevenly-spaced-fragbeam"><a class="header" href="#synchronous-unevenly-spaced-fragbeam">Synchronous, Unevenly Spaced Fragbeam</a></h2>
-<p>This fragbeam uses multiple stages with <code>rangeStdDev</code> and decreasing range after each stage to cover a long distance with many bullets.</p>
+<p>This fragbeam uses multiple stages with <code>rangeStdDev</code> to create variation in the distance travelled by each split of the fragment, causing a beam shape to form. This is done at both a high speed and without the loss of bullet travel distance fidelity due to each next stage having decreasing <code>range</code> and <code>muzzleVel</code> values. This approaches a high fidelity of unevenly spaced fragments by the last stage.</p>
 <pre><code class="language-lua">{ 17000
- 	features=CANNON
+    features=CANNON
 	cannon={   damage= 1 muzzleVel=  1   range= 0                    color=1                           explosive=FINAL|FRAG_NOFLASH roundsPerSec=4    recoil=0
 	fragment={ damage= 1 muzzleVel=500*4 range=10*4 rangeStdDev=10*4 color=1          pattern=ABSOLUTE explosive=FINAL|FRAG_NOFLASH roundsPerBurst=64
 	fragment={ damage= 1 muzzleVel=500*3 range=10*3 rangeStdDev=10*3 color=1          pattern=ABSOLUTE explosive=FINAL|FRAG_NOFLASH
@@ -2035,11 +2037,13 @@ Your browser does not support the video tag.
   <source src="diagrams/fragbeam_2.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+<p>This fragbeam has the advantage of being visible while the beam is still forming, which can be useful if desired aesthetically.</p>
+<p>However, it has the disadvantage of spreading its final stage fragments along its range inconsistently, which can sometimes spawn bullets inside of an enemy ship when they should have hit its side.</p>
 <h2 id="small-sequential-unevenly-spaced-fragbeam"><a class="header" href="#small-sequential-unevenly-spaced-fragbeam">Small Sequential, Unevenly Spaced Fragbeam</a></h2>
 <p>Even though the "beam" is not stationary and it looks more like a long bullet, this can still be useful when aesthetics demand it.</p>
 <p>This fragment works by spawning one large cluster of fragments, each slight differences in range from a low <code>rangeStdDev</code> value. After each finishes its range, they become the final stage and begin travelling. Because of the high velocity of the final stage, the small difference in delay before each fragment starts travelling is expressed as a line of bullets, which looks like a travelling fragbeam.</p>
 <pre><code class="language-lua">{ 17000
- 	features=CANNON
+    features=CANNON
 	cannon={   damage= 1 muzzleVel=   1 range=  0               color=1          explosive=FINAL|FRAG_NOFLASH                   roundsPerSec=2 recoil=0
 	fragment={ damage= 1 muzzleVel=  40 range=  1 rangeStdDev=1 color=1          explosive=FINAL|FRAG_NOFLASH roundsPerBurst=16
 	fragment={ damage=20 muzzleVel=1000 range=500               color=0xFFFFFFFF explosive=      FRAG_NOFLASH
@@ -2050,11 +2054,12 @@ Your browser does not support the video tag.
   <source src="diagrams/fragbeam_3.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+<p>Because this fragment only has one stage with <code>rangeStdDev</code>, it has the disadvantage of not being able to create consistent fragment shapes. Additionally, this fragbeam's inability to create a stationary beam makes it unsuitable for creating standard beam weapons, although its relative simplicity makes it useful for creating other effects that only requre a long bullet.</p>
 <h2 id="long-sequential-unevenly-spaced-fragbeam"><a class="header" href="#long-sequential-unevenly-spaced-fragbeam">Long Sequential, Unevenly Spaced Fragbeam</a></h2>
 <p>This is less like a fragbeam, and more like a bullet that leaves a long trail.</p>
 <p>The fragment works by spawning one large cluster of fragments, each with a different range from the high <code>rangeStdDev</code> value. After each finishes its range, they become the final stage, which is stationary and is what looks like a fragbeam.</p>
 <pre><code class="language-lua">{ 17000
- 	features=CANNON
+    features=CANNON
 	cannon={   damage= 1 muzzleVel=   1 range=  0                 color=1                                              roundsPerSec=2 recoil=0
 	fragment={ damage= 1 muzzleVel=   1 range=  0                 color=1          roundsPerBurst=255
 	fragment={ damage=50 muzzleVel=1000 range=750 rangeStdDev=250 color=0xFFFFFFFF
@@ -2067,13 +2072,17 @@ Your browser does not support the video tag.
   <source src="diagrams/fragbeam_4.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+<p>Although this fragbeam is slow to fully activate, it can be used to create a weapon that behaves differently when it hits an enemy directly and when it is crossed over by an enemy.</p>
 <h2 id="x-spaced-barrel-beam"><a class="header" href="#x-spaced-barrel-beam">X-Spaced Barrel Beam</a></h2>
 <p>See the chapter for the X-spaced barrel beam <a href="./x-spaced_barrel_beams.html">here</a>.</p>
 <p>Even though this is technically not a fragbeam (it requires no fragments to achieve a beam like effect, instead using the <code>barrelSpacing</code> field), it is still just as viable as all the other fragbeam variants in creating a laser out of cannon projectiles.</p>
 <video height=256 controls>
   <source src="diagrams/x-spaced_barrel_beam.mp4" type="video/mp4">
   Your browser does not support the video tag.
-</video><div style="break-before: page; page-break-before: always;"></div><h1 id="frag-cascade"><a class="header" href="#frag-cascade">Frag Cascade</a></h1>
+</video>
+<p>The XSBB has the advantage of both being a consistent weapon to use and acting the same across different <a href="./ups.html">UPS</a> settings, as there are no high speed fragments that can travel different distances across different UPS settings.</p>
+<p>However, the XSBB has the disadvantage of spawning bullets inside of enemy ships, which may not be desirable from a balancing standpoint. Moreover, it is subject to the XSBB desync glitch, in which bullets randomly do not spawn when fired.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="frag-cascade"><a class="header" href="#frag-cascade">Frag Cascade</a></h1>
 <p>test</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="flamethrowers"><a class="header" href="#flamethrowers">Flamethrowers</a></h1>
 <p>Flamethrowers are a common weapon type that can be made in multiple different ways. However, this chapter contains one flamethrower (as well as a <a href="./flamethrowers.html#version-without-patternabsolute">version without <code>pattern=ABSOLUTE</code></a>) that can be modified to act differently.</p>
@@ -2490,6 +2499,8 @@ Your browser does not support the video tag.
   Your browser does not support the video tag.
 </video>
 <p>When a ship has no commands, it is difficult for the beam to penetrate it as the bullets are required to hit the side of a ship, unlike when attacking ships that have a command.</p>
+<p>The XSBB has the advantage of both being a consistent weapon to use and acting the same across different <a href="./ups.html">UPS</a> settings, as there are no high speed fragments that can travel different distances across different UPS settings.</p>
+<p>However, the XSBB has the disadvantage of spawning bullets inside of enemy ships, which may not be desirable from a balancing standpoint. Moreover, it is subject to the XSBB desync glitch, in which bullets randomly do not spawn when fired.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cosmetic-launchable-laser-printer"><a class="header" href="#cosmetic-launchable-laser-printer">Cosmetic Launchable Laser Printer</a></h1>
 <p>A launchable-generating cosmetic laser printer effect can be created with a barrel-spaced laser block with a high barrel count to mimic a moving laser.</p>
 <p>The laser printer blocks use a visible laser and an high fire rate invisible cannon to cycle through the barrels.</p>
