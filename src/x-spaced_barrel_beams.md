@@ -34,3 +34,7 @@ Key fields:
 </video>
 
 When a ship has no commands, it is difficult for the beam to penetrate it as the bullets are required to hit the side of a ship, unlike when attacking ships that have a command.
+
+The XSBB has the advantage of both being a consistent weapon to use and acting the same across different [UPS](./ups.md) settings, as there are no high speed fragments that can travel different distances across different UPS settings.
+
+However, the XSBB has the disadvantage of spawning bullets inside of enemy ships, which may not be desirable from a balancing standpoint. Moreover, it is subject to the XSBB desync glitch, in which bullets randomly do not spawn when fired.
