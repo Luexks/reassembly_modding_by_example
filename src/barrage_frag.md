@@ -8,7 +8,7 @@ The barrage frag has four core stages. Their purposes are as follows:
 1. Rotate the fragment 90° counterclockwise.
 2. Almost instantly travel some distance left.
 3. Almost instantly travel a random distance in between no distance and double the distance travelled from the point of firing, using `rangeStdDev` to do so. This stage also has a greater-than-one `roundsPerBurst` to make a more bullet dense artillery barrage effect.
-4. The actual, visible bullet, now fired along a line.
+4. The actual, visible bullet, now fired along a line. This stage also has a small `rangeStdDev` value of 10 to make it look more natural.
 
 <img src="./diagrams/frag_barrage_diagram.png" alt="Frag Barrage Diagram" width="400" height="auto">
 
@@ -34,7 +34,7 @@ A similar effect can be created by using the Y part of the `barrelSpacing` field
 
 The primary stage has a high `roundsPerSec` so that the cannon cycles through its barrels rapidly. It also has a high `roundsPerBurst` and `burstyness` to avoid the tapping of the fire button causing only a few of the barrels to be shot out of. This stage also has a small `range` and `rangeStdDev` with a relatively high `muzzleVel` to add variation to when the secondary stage appears, making the barrage look more random.
 
-The secondary stage is the actual bullet. Even though its `muzzleVel` is 460, it will actually travel at the speed of 500 because of what it inherits from the primary stage.
+The secondary stage is the actual bullet. Even though its `muzzleVel` is 460, it will actually travel at the speed of 500 because of what it inherits from the primary stage. The secondary stage also has a small `rangeStdDev` value of 10 to make it look more natural.
 
 ```lua
 { 17000
@@ -55,8 +55,9 @@ The secondary stage is the actual bullet. Even though its `muzzleVel` is 460, it
 		recoil=0
 		fragment={
 			damage=25
-			muzzleVel=460
-			range=    460
+			muzzleVel= 460
+			range=     460*0.4
+            rangeStdDev=10
 			color=0xFFFFFFFF
 		}
 	}
