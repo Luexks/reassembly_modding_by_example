@@ -181,7 +181,7 @@
 <li>Rotate the fragment 90° counterclockwise.</li>
 <li>Almost instantly travel some distance left.</li>
 <li>Almost instantly travel a random distance in between no distance and double the distance travelled from the point of firing, using <code>rangeStdDev</code> to do so. This stage also has a greater-than-one <code>roundsPerBurst</code> to make a more bullet dense artillery barrage effect.</li>
-<li>The actual, visible bullet, now fired along a line.</li>
+<li>The actual, visible bullet, now fired along a line. This stage also has a small <code>rangeStdDev</code> value of 10 to make it look more natural.</li>
 </ol>
 <img src="./diagrams/frag_barrage_diagram.png" alt="Frag Barrage Diagram" width="400" height="auto">
 <pre><code class="language-lua">{ 17000
@@ -200,7 +200,7 @@
 <h2 id="y-spaced-barrel-method-y-spaced-barrel-barrage-ysbb"><a class="header" href="#y-spaced-barrel-method-y-spaced-barrel-barrage-ysbb">Y-Spaced Barrel Method: Y-Spaced Barrel Barrage (YSBB)</a></h2>
 <p>A similar effect can be created by using the Y part of the <code>barrelSpacing</code> field.</p>
 <p>The primary stage has a high <code>roundsPerSec</code> so that the cannon cycles through its barrels rapidly. It also has a high <code>roundsPerBurst</code> and <code>burstyness</code> to avoid the tapping of the fire button causing only a few of the barrels to be shot out of. This stage also has a small <code>range</code> and <code>rangeStdDev</code> with a relatively high <code>muzzleVel</code> to add variation to when the secondary stage appears, making the barrage look more random.</p>
-<p>The secondary stage is the actual bullet. Even though its <code>muzzleVel</code> is 460, it will actually travel at the speed of 500 because of what it inherits from the primary stage.</p>
+<p>The secondary stage is the actual bullet. Even though its <code>muzzleVel</code> is 460, it will actually travel at the speed of 500 because of what it inherits from the primary stage. The secondary stage also has a small <code>rangeStdDev</code> value of 10 to make it look more natural.</p>
 <pre><code class="language-lua">{ 17000
 	features=CANNON|TURRET|
 	barrelSize={0.000001,0.000001}
@@ -219,8 +219,9 @@
 		recoil=0
 		fragment={
 			damage=25
-			muzzleVel=460
-			range=    460
+			muzzleVel= 460
+			range=     460*0.4
+            rangeStdDev=10
 			color=0xFFFFFFFF
 		}
 	}
