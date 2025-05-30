@@ -76,6 +76,9 @@
     - [Features and Fields Not To Use](./features_and_fields_not_to_use.md)
 # Shapes
 - [shapes.lua](./shapes.lua.md)
+    - [Mirrored Shapes](./mirrored_shapes.md)
+    - [Calculating Port Positions](./calculating_port_positions.md)
+    - [Port Flags](./port_flags.md)
     - [Niche Port Flag Combinations](./niche_port_flag_combinations.md)
 # Audio
 - [audio.lua](./audio.lua.md)
