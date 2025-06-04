@@ -63,6 +63,7 @@
             - [Phase Frags](./phase_frags.md)
     - [Lasers](./lasers.md)
     - [Launchers](./launchers.md)
+        - [Blueprint Drones](./blueprint_drones.md)
         - [Launcher Chaining](./launcher_chaining.md)
     - [Turreted Weapons](./turreted_weapons.md)
         - [X-Spaced Barrel Beams](./x-spaced_barrel_beams.md)
