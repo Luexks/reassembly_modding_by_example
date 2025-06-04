@@ -2480,14 +2480,14 @@ Your browser does not support the video tag.
 <p>Blueprint drones are special drones that can grow blocks according to a specified ship blueprint.</p>
 <p>There are a few necessary factors for making blueprint drones:</p>
 <ul>
-<li>Drone command block (must have its own ID). Requires the features: <a href="./commands.html"><code>COMMAND</code></a>, <a href="./commands.html?highlight=regrower"><code>REGROWER</code></a> <a href="./commands.html?highlight=assembler"><code>assembler</code></a> (depending on if you want it to rebuild using debris), <a href="./other_features_and_fields.html#commands-that-do-not-give-resources-on-death"><code>FREERES</code></a>; also needs <a href="./other_features_and_fields.html#commands-that-do-not-give-resources-on-death"><code>lifetime</code></a>.</li>
-<li>Special blocks (hull,) for the blueprint drone that have <a href="./other_features_and_fields.html#commands-that-do-not-give-resources-on-death"><code>features=FREERES</code></a> and <a href="./other_features_and_fields.html#commands-that-do-not-give-resources-on-death"><code>lifetime</code></a>.</li>
+<li>Drone command block (must have its own ID). Requires the features: <a href="./commands.html"><code>COMMAND</code></a>, <a href="./commands.html?highlight=regrower"><code>REGROWER</code></a> or <a href="./commands.html?highlight=assembler"><code>ASSEMBLER</code></a> (depending on if you want it to rebuild using debris), and <a href="./other_features_and_fields.html#commands-that-do-not-give-resources-on-death"><code>FREERES</code></a>; also needs <a href="./blocks_with_lifetimes.html"><code>lifetime</code></a>.</li>
+<li>Bespoke blocks (hull, thrusters, weapons) for the blueprint drone that have <a href="./other_features_and_fields.html#commands-that-do-not-give-resources-on-death"><code>features=FREERES</code></a>, <a href="./blocks_with_lifetimes.html"><code>lifetime</code></a>, and <a href="./getting_blocks_to_show_up_in_the_campaigns_databank.html?highlight=nopalette"><code>NOPALETTE</code></a>.</li>
 <li>(Optionally give the blocks <a href="./noclipping_blocks.html?highlight=noclip_ally"><code>features=NOCLIP_ALLY</code></a> just as with standard launchables.)</li>
-<li>A blueprint in <a href="./mod_structure.html?highlight=ships/"><code>ships/</code></a> (the full path is <code>C:\users\&lt;your username here&gt;\Saved Games\Reassembly\mods\&lt;your mod here&gt;\ships\</code>).</li>
+<li>A blueprint in <a href="./mod_structure.html?highlight=ships/"><code>ships/</code></a> (the full path is <code>C:/users/&lt;your username here&gt;/Saved Games/Reassembly/mods/&lt;your mod here&gt;/ships/</code>).</li>
 <li>In the drone command's <code>command={}</code> field, a declaration of <code>blueprint="&lt;your blueprint drone name here&gt;"</code>.</li>
 <li>In the launcher block, set <code>replicateBlock=&lt;ID of your drone command block here&gt;</code>.</li>
 </ul>
-<p>Build the blueprint drone in the same way as you would with any other ship and remember to use dedicated blueprint drone blocks with <a href="./other_features_and_fields.html#commands-that-do-not-give-resources-on-death"><code>features=FREERES</code></a> and <a href="./other_features_and_fields.html#commands-that-do-not-give-resources-on-death"><code>lifetime</code></a>. Comment out (add <code>--</code> at the start of the line of) <code>lifetime</code> so that the blueprint drone does not despawn while building. Add it back after finishing. Use <a href="./sandbox_basics.html#saving-modded-ships"><code>ssave</code> (<code>ss</code>)</a> and make sure that the blueprint is in <code>ships/</code>.</p>
+<p>Build the blueprint drone in the same way as you would with any other ship and remember to use dedicated blueprint drone blocks with <a href="./other_features_and_fields.html#commands-that-do-not-give-resources-on-death"><code>features=FREERES</code></a> and <a href="./blocks_with_lifetimes.html"><code>lifetime</code></a>. Comment out (add <code>--</code> at the start of the line of) <code>lifetime</code> so that the blueprint drone does not despawn while building. Add it back after finishing. Use <a href="./sandbox_basics.html#saving-modded-ships"><code>ssave</code> (<code>ss</code>)</a> and make sure that the blueprint is in <code>ships/</code>.</p>
 <p>Below is an example of a blueprint drone and its dedicated blocks for faction 98:</p>
 <pre><code>Reassembly/
 └── mods/
@@ -2500,13 +2500,13 @@ Your browser does not support the video tag.
 
 -- Dedicated Blueprint Drone Parts:
 { 17000
-	features=FREERES|PALETTE
+	features=NOPALETTE|FREERES
 	group=98
 	growRate=50
 	lifetime=20
 }
 { 17001
-	features=FREERES|GENERATOR|PALETTE
+	features=NOPALETTE|FREERES|GENERATOR
 	group=98
 	shape=OCTAGON
 	generatorCapacityPerSec=20
@@ -2516,7 +2516,7 @@ Your browser does not support the video tag.
 	lifetime=20
 }
 { 17002
-	features=FREERES|THRUSTER|PALETTE
+	features=NOPALETTE|FREERES|THRUSTER
 	group=98
 	shape=THRUSTER_RECT
 	thrusterForce=1000
@@ -2526,7 +2526,7 @@ Your browser does not support the video tag.
 	lifetime=20
 }
 { 17003
-	features=FREERES|LASER|TURRET|PALETTE
+	features=NOPALETTE|FREERES|LASER|TURRET
 	group=98
 	shape=OCTAGON
 	turretSpeed=12
@@ -2544,8 +2544,8 @@ Your browser does not support the video tag.
 
 -- Blueprint Drone Command:
 { 17004
-	features=COMMAND|REGROWER|FREERES|PALETTE
-	--features=COMMAND|ASSEMBLER|FREERES|PALETTE
+	features=NOPALETTE|FREERES|COMMAND|REGROWER
+	--features=NOPALETTE|ASSEMBLER|COMMAND|REGROWER
 	group=98
 	shape=COMMAND
 	command={ blueprint="98_My_Blueprint_Drone" }
@@ -2554,7 +2554,7 @@ Your browser does not support the video tag.
 
 -- Launcher:
 { 17005
-	features=LAUNCHER|PALETTE
+	features=PALETTE|LAUNCHER
 	group=98
 	shape=RECT_LAUNCHER1
 	
@@ -2572,7 +2572,37 @@ Your browser does not support the video tag.
 <video height=256 controls>
   <source src="diagrams/blueprint_drone_deconstructing.mp4" type="video/mp4">
   Your browser does not support the video tag.
-</video><div style="break-before: page; page-break-before: always;"></div><h1 id="launcher-chaining"><a class="header" href="#launcher-chaining">Launcher Chaining</a></h1>
+</video>
+<h2 id="extending-normal-blocks-for-blueprint-drones"><a class="header" href="#extending-normal-blocks-for-blueprint-drones">Extending Normal Blocks for Blueprint Drones</a></h2>
+<p>If you want a blueprint drone to use the same blocks that your faction normally uses, then you should use <a href="./block_extensions.html"><code>block extensions</code></a>.</p>
+<p>An example of this for a hull block and a laser is below:</p>
+<pre><code class="language-lua">-- Normal Faction Blocks:
+
+{ 17000
+	features=PALETTE
+	group=98
+}
+{ 17001
+	features=PALETTE|LASER|TURRET
+	group=98
+	shape=OCTAGON
+	turretSpeed=12
+	laser={
+		damage=50
+		range=1000
+		power=2
+		color=0xFFFF5500
+		width=2
+		decay=0.1
+	}
+}
+
+-- Dedicated Blueprint Drone Blocks:
+
+{ 17100 extends=17000 features=FREERES|NOPALETTE              growRate=50 lifetime=20 }
+{ 17101 extends=17001 features=FREERES|NOPALETTE|LASER|TURRET growRate=50 lifetime=20 }
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="launcher-chaining"><a class="header" href="#launcher-chaining">Launcher Chaining</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="turreted-weapons"><a class="header" href="#turreted-weapons">Turreted Weapons</a></h1>
 <p>Cannons, lasers, and launchers can all be turreted.</p>
 <pre><code class="language-lua">{ 17000
