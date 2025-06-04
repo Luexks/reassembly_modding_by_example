@@ -82,6 +82,7 @@
     - [Niche Port Flag Combinations](./niche_port_flag_combinations.md)
 # Audio
 - [audio.lua](./audio.lua.md)
+    - [Mixing a Stereo File Down to Mono](./mixing_a_stereo_file_down_to_mono.md)
 # Factions
 - [factions.lua](./factions.lua.md)
 # Regions
