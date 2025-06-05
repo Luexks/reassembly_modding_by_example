@@ -76,6 +76,7 @@
     - [Other Features and Fields](./other_features_and_fields.md)
     - [Features and Fields Not To Use](./features_and_fields_not_to_use.md)
 # Shapes
+- [Vanilla Shapes](./vanilla_shapes.md)
 - [shapes.lua](./shapes.lua.md)
     - [Mirrored Shapes](./mirrored_shapes.md)
     - [Calculating Port Positions](./calculating_port_positions.md)
