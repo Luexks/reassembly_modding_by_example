@@ -81,6 +81,7 @@
     - [Mirrored Shapes](./mirrored_shapes.md)
     - [Calculating Port Positions](./calculating_port_positions.md)
     - [Port Flags](./port_flags.md)
+    - [Root Shapes](./root_shapes.md)
     - [Niche Port Flag Combinations](./niche_port_flag_combinations.md)
 # Audio
 - [audio.lua](./audio.lua.md)
@@ -93,6 +94,7 @@
     - [Unique Fleet Spawning](./unique_fleet_spawning.md)
     - [Subregions](./subregions.md)
     - [Multiple Regions in One Mod](./multiple_regions_in_one_mod.md)
+    - [Structures on Asteroids](./structures_on_asteroids.md)
     - [Nonfunctional Asteroid Flags](./nonfunctional_asteroid_flags.md)
 # Cvars
 - [cvars.txt](./cvars.txt.md)

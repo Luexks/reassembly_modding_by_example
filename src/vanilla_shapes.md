@@ -77,6 +77,13 @@ The rhombuses of the Penrose shape palette can be described by the ratio of thei
  - `OCTAGON_1`
  - `NONAGON`
 
+ ## Thrusters
+
+ - `DISH_THRUSTER`
+ - `THRUSTER`
+ - `THRUSTER_PENT`
+ - `THRUSTER_RECT`
+
 ## Spinal Weapons
 
  - `CANNON`
@@ -110,6 +117,10 @@ The rhombuses of the Penrose shape palette can be described by the ratio of thei
  - `ISOTRI_25_MISSILE`
  - `MISSILE_LAUNCHER`: missile port on back side, two launcher ports between left and right sides.
 
+## Root
+
+ - `RECT_ROOT`
+
 ## Plant
 
  - `GEM_1`
@@ -120,13 +131,6 @@ The rhombuses of the Penrose shape palette can be described by the ratio of thei
  - `SEED_2`
  - `SEED_3`
  - `SEED_4`
-
- ## Thrusters
-
- - `DISH_THRUSTER`
- - `THRUSTER`
- - `THRUSTER_PENT`
- - `THRUSTER_RECT`
 
  ## Other
 
