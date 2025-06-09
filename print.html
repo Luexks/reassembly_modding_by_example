@@ -242,6 +242,94 @@ Below is what mod folders tend to look like:</p>
         └── anything.txt        # Random stuff that won't be picked up by the game
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="publishing-to-the-steam-workshop"><a class="header" href="#publishing-to-the-steam-workshop">Publishing to the Steam Workshop</a></h1>
+<p>Once your mod is in a state where you are happy to release it or when you are finished with it, you can prepare it for publication to the Steam Workshop.</p>
+<p><img src="./diagrams/steam_workshop.png" alt="Steam Workshop" /></p>
+<p>To do this, you should create preview images that explain and show off your mod for people browsing the Steam Workshop.</p>
+<h2 id="adding-previewpng"><a class="header" href="#adding-previewpng">Adding <code>preview.png</code></a></h2>
+<p><code>preview.png</code> is the main picture of your mod and decides the first impressions that people will have when they first see your mod. It is located in the same place as <code>blocks.lua</code>.</p>
+<pre><code>Reassembly/
+└── mods/
+    └── My New Mod/
+        ├── blocks.lua
+        └── preview.png
+        └── &lt;other mod stuff here&gt;
+</code></pre>
+<p>Key requirements:</p>
+<ul>
+<li>Called <code>preview.png</code>, note the <a href="https://fileinfo.com/extension/png"><code>.png</code></a> file format.</li>
+<li>In the right place (see above).</li>
+<li>Less than 1 MB file size.</li>
+</ul>
+<p>Recommended factors:</p>
+<ul>
+<li>Square image so it looks correct.</li>
+<li>Big, easy to read title. Try making it out of your faction's blocks.</li>
+<li>Show off what makes your faction interesting. Put out your biggest, coolest ship for all the world to see.</li>
+</ul>
+<p>I think that the <code>preview.png</code> I made for <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3295296698">Debaton</a> is a good example:</p>
+<img src="./diagrams/debaton_preview.png" alt="Debaton `preview.png`" width="256" height="auto">
+<p>Here is an example of how other <code>preview.png</code> look on the popular section of the Steam Workshop:</p>
+<p><img src="./diagrams/steam_workshop_popular.png" alt="Steam Workshop Popular" /></p>
+<h2 id="secondary-preview-images"><a class="header" href="#secondary-preview-images">Secondary Preview Images</a></h2>
+<p><img src="./diagrams/secondary_preview_images.png" alt="Secondary Preview Images" /></p>
+<p>Secondary preview images do not need to be in a mod's files and are uploaded directly into the Steam Workshop page.</p>
+<p>Key requirements:</p>
+<ul>
+<li>Less than 8 MB file size each.</li>
+</ul>
+<p>Recommended factors:</p>
+<ul>
+<li>Do not store these in your mod's folder so that they are not uploaded to the Steam Workshop and take up the storage space of whoever downloads it.</li>
+<li>Show off your ships, your weapons, anything you could not fit in the <code>preview.png</code>.</li>
+<li>Add text to explain things, such as faction gimmicks.</li>
+</ul>
+<h2 id="mod-description"><a class="header" href="#mod-description">Mod Description</a></h2>
+<p>Before you publish to the Steam Workshop, it is a good idea to prepare a mod description.</p>
+<p>It could answer these questions:</p>
+<ul>
+<li>What is this mod?</li>
+<li>Does it have any gimmicks?</li>
+<li>What makes it special?</li>
+<li>How strong is this faction?</li>
+<li>Does it have any interesting lore?</li>
+<li>Who helped you make it?</li>
+</ul>
+<h2 id="publishing-to-the-steam-workshop-1"><a class="header" href="#publishing-to-the-steam-workshop-1">Publishing to the Steam Workshop</a></h2>
+<p>Navigate to the mod menu and click the 'publish' button.</p>
+<video controls>
+  <source src="diagrams/publish_button.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>Next, you will see a your mod's workshop page open with the following message, which can be ignored:</p>
+<p><img src="./diagrams/automated_content_check.png" alt="Automated Content Check" /></p>
+<p>Now you can add your <a href="./publishing_to_the_steam_workshop.html#secondary-preview-images">secondary preview images</a> and <a href="./publishing_to_the_steam_workshop.html#description">mod description</a></p>
+<h2 id="adding-secondary-preview-images"><a class="header" href="#adding-secondary-preview-images">Adding Secondary Preview Images</a></h2>
+<ol>
+<li>Add/edit images &amp; videos.</li>
+<li>Choose files.</li>
+<li>Upload.</li>
+<li>Manage images.</li>
+<li>Save and Continue.</li>
+</ol>
+<video controls>
+  <source src="./diagrams/adding_secondary_preview_images.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="adding-a-mod-description"><a class="header" href="#adding-a-mod-description">Adding a Mod Description</a></h2>
+<p>If your mod requires any beta features, put it in <code>[CAPITAL]</code> text in the title so that nobody can miss it: <code>[BETA REQUIRED]</code>.</p>
+<ol>
+<li>Edit title &amp; description.</li>
+<li>Description.</li>
+<li>Title.</li>
+<li>Save.</li>
+</ol>
+<video controls>
+  <source src="./diagrams/adding_a_mod_description.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<h2 id="advertise-your-mod"><a class="header" href="#advertise-your-mod">Advertise your Mod</a></h2>
+<p>If you are not a part of it already, go to the Reassembly Discord server and tell everyone about your mod.</p>
+<p>Reassembly Discord: <a href="https://discord.gg/8fCjt3J">https://discord.gg/8fCjt3J</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="sandbox-basics"><a class="header" href="#sandbox-basics">Sandbox Basics</a></h1>
 <p><img src="./diagrams/sandbox_button.png" alt="Sandbox Button" /></p>
 <p>The sandbox is where a faction's blocks can be tested out and where ships can be built without anything annoying getting in the way.</p>
