@@ -2,15 +2,21 @@
 
 Blueprint drones are special drones that can grow blocks according to a specified ship blueprint.
 
-There are a few necessary factors for making blueprint drones:
- - Drone command block (must have its own ID). Requires the features: [`COMMAND`](./commands.md), [`REGROWER`](./commands.html?highlight=regrower) or [`ASSEMBLER`](./commands.html?highlight=assembler) (depending on if you want it to rebuild using debris), and [`FREERES`](./other_features_and_fields.md#commands-that-do-not-give-resources-on-death); also needs [`lifetime`](./blocks_with_lifetimes.md).
- - Bespoke blocks (hull, thrusters, weapons) for the blueprint drone that have [`features=FREERES`](./other_features_and_fields.md#commands-that-do-not-give-resources-on-death), [`lifetime`](./blocks_with_lifetimes.md), and [`NOPALETTE`](./getting_blocks_to_show_up_in_the_campaigns_databank.html?highlight=nopalette).
- - (Optionally give the blocks [`features=NOCLIP_ALLY`](./noclipping_blocks.html?highlight=noclip_ally) just as with standard launchables.)
- - A blueprint in [`ships/`](./mod_structure.html?highlight=ships/) (the full path is `C:/users/<your username here>/Saved Games/Reassembly/mods/<your mod here>/ships/`).
+Key/recommended factors:
+ - Drone command block (must have its own ID). Requires [`COMMAND`](./commands.md), [`REGROWER`](./commands.html?highlight=regrower) or [`ASSEMBLER`](./commands.html?highlight=assembler) (depending on if you want it to rebuild using debris), and [`FREERES`](./other_features_and_fields.md#commands-that-do-not-give-resources-on-death); also needs [`lifetime`](./blocks_with_lifetimes.md).
+ - Bespoke blocks (hull, thrusters, weapons) for the blueprint drone that have [`FREERES`](./other_features_and_fields.md#commands-that-do-not-give-resources-on-death), [`lifetime`](./blocks_with_lifetimes.md), and [`NOPALETTE`](./getting_blocks_to_show_up_in_the_campaigns_databank.html?highlight=nopalette). See [below](./blueprint_drones.md#bespoke-blocks-for-blueprint-drones) to see how to make these using [block extensions](./block_extensions.md).
+ - (Optionally give the blocks [`NOCLIP_ALLY`](./noclipping_blocks.html?highlight=noclip_ally) just as with standard launchables.)
+ - The blueprint drone's ship file in [`ships/`](./mod_structure.html?highlight=ships/).
  - In the drone command's `command={}` field, a declaration of `blueprint="<your blueprint drone name here>"`.
  - In the launcher block, set `replicateBlock=<ID of your drone command block here>`.
 
-Build the blueprint drone in the same way as you would with any other ship and remember to use dedicated blueprint drone blocks with [`features=FREERES`](./other_features_and_fields.md#commands-that-do-not-give-resources-on-death) and [`lifetime`](./blocks_with_lifetimes.md). Comment out (add `--` at the start of the line of) `lifetime` so that the blueprint drone does not despawn while building. Add it back after finishing. Use [`ssave` (`ss`)](./sandbox_basics.md#saving-modded-ships) and make sure that the blueprint is in `ships/`.
+Alternative factors:
+ - Bespoke blocks are not strictly necessary, standard faction blocks used on normal ships can also be used on blueprint drones, especially if standalone blocks with specific features for blueprint drones are not required.
+ - [`lifetime`](./blocks_with_lifetimes.md) is not required if a blueprint drone with an indefinite lifetime is desired, which would make the launcher a pseudo-[factory](./factories.md) block.
+ - [`EXPLODE`](./explosive_blocks.md) and its required fields can be used on a drone command block to make it explode instantly after its lifetime ends.
+ - [`FREERES`](./other_features_and_fields.md#commands-that-do-not-give-resources-on-death) is not strictly required.
+
+Build the blueprint drone in the same way as you would with any other ship with any bespoke blocks if you made them. Comment out (add `--` at the start of the line of) `lifetime` so that the blueprint drone does not despawn while building. Add it back after finishing. Use [`ssave` (`ss`)](./sandbox_basics.md#saving-modded-ships) and make sure that the blueprint is in `ships/`.
 
 Below is an example of a blueprint drone and its dedicated blocks for faction 98:
 
@@ -104,9 +110,9 @@ Reassembly/
   Your browser does not support the video tag.
 </video>
 
-## Extending Normal Blocks for Blueprint Drones
+## Bespoke Blocks for Blueprint Drones
 
-If you want a blueprint drone to use the same blocks that your faction normally uses, then you should use [`block extensions`](./block_extensions.md).
+If you want a blueprint drone to use the same blocks that your faction normally uses but with different features, then you should use [block extensions](./block_extensions.md).
 
 An example of this for a hull block and a laser is below:
 
