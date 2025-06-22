@@ -64,7 +64,7 @@ The `explosive` field has three flags for non-fragment bullets:
         -- This bullet will explode on hitting a block.
         -- It will deal its damage to all blocks in a radius of 50.
         explosive=ENABLED
-        explosiveRadius=50
+        explodeRadius=50
         -- Other cannon fields here.
     }
 }

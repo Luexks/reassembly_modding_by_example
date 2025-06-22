@@ -66,7 +66,7 @@ Getting rid of despawn poofs is less simple than for spawn poofs. DPs can either
 1. Declaring `explosive=FINAL` on the stage which spawns the DP with the side effect that the bullet cannot to deal damage.
 2. Declaring `explosive=FINAL` and `explodeRadius=1` on the stage with the side effect that the bullet always plays the explosion sound effect on despawn.
 ### Case 1: `explosive=FINAL`
-Only having `explosive=FINAL` with no definition of `explosiveRadius` makes the bullet use the default `explosiveRadius` of zero, making it never hit anything and play no sound.
+Only having `explosive=FINAL` with no definition of `explodeRadius` makes the bullet use the default `explodeRadius` of zero, making it never hit anything and play no sound.
 ```lua
 { 17000
 	features=CANNON
@@ -87,7 +87,7 @@ Only having `explosive=FINAL` with no definition of `explosiveRadius` makes the 
 </video>
 
 ### Case 2: `explosvie=FINAL` and `explodeRadius=1`
-Having `explosive=FINAL` and defining `explosiveRadius=1` makes the bullet able to deal damage and makes it play the explosion sound effect on despawn.
+Having `explosive=FINAL` and defining `explodeRadius=1` makes the bullet able to deal damage and makes it play the explosion sound effect on despawn.
 ```lua
 { 17000
 	features=CANNON
