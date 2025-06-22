@@ -240,7 +240,7 @@
 <li>Declaring <code>explosive=FINAL</code> and <code>explodeRadius=1</code> on the stage with the side effect that the bullet always plays the explosion sound effect on despawn.</li>
 </ol>
 <h3 id="case-1-explosivefinal"><a class="header" href="#case-1-explosivefinal">Case 1: <code>explosive=FINAL</code></a></h3>
-<p>Only having <code>explosive=FINAL</code> with no definition of <code>explosiveRadius</code> makes the bullet use the default <code>explosiveRadius</code> of zero, making it never hit anything and play no sound.</p>
+<p>Only having <code>explosive=FINAL</code> with no definition of <code>explodeRadius</code> makes the bullet use the default <code>explodeRadius</code> of zero, making it never hit anything and play no sound.</p>
 <pre><code class="language-lua">{ 17000
 	features=CANNON
     cannon={
@@ -259,7 +259,7 @@
   Your browser does not support the video tag.
 </video>
 <h3 id="case-2-explosviefinal-and-exploderadius1"><a class="header" href="#case-2-explosviefinal-and-exploderadius1">Case 2: <code>explosvie=FINAL</code> and <code>explodeRadius=1</code></a></h3>
-<p>Having <code>explosive=FINAL</code> and defining <code>explosiveRadius=1</code> makes the bullet able to deal damage and makes it play the explosion sound effect on despawn.</p>
+<p>Having <code>explosive=FINAL</code> and defining <code>explodeRadius=1</code> makes the bullet able to deal damage and makes it play the explosion sound effect on despawn.</p>
 <pre><code class="language-lua">{ 17000
 	features=CANNON
     cannon={
