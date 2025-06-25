@@ -117,16 +117,19 @@ The rhombuses of the Penrose shape palette can be described by the ratio of thei
  - `ISOTRI_25_MISSILE`
  - `MISSILE_LAUNCHER`: missile port on back side, two launcher ports between left and right sides.
 
-## Root
+## Roots
 
  - `RECT_ROOT`
 
-## Plant
+## Plants
 
  - `GEM_1`
  - `GEM_2`
  - `GEM_3`
  - `GEM_4`
+
+## Seeds
+
  - `SEED_1`
  - `SEED_2`
  - `SEED_3`

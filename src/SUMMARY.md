@@ -61,6 +61,7 @@
             - [Barrage Frag](./barrage_frag.md)
             - [Flamethrowers](./flamethrowers.md)
             - [Phase Frags](./phase_frags.md)
+        - [Cannon Boosts](./cannon_boosts.md)
     - [Lasers](./lasers.md)
     - [Launchers](./launchers.md)
         - [Blueprint Drones](./blueprint_drones.md)
