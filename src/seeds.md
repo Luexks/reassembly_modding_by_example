@@ -11,7 +11,7 @@ A basic seed has the `SEED` feature and a valid root shape, such as the [vanilla
 }
 ```
 
-When it hits an asteroid, the seed will randomly select a blueprint that uses the seed as its main seed. However, if the seed is launched from a preexisting plant, the child plant will use the same blueprint as the parent plant.
+When it hits an asteroid, the seed will randomly select a blueprint that uses itself as the main seed. However, if the seed is launched from a preexisting plant, the child plant will use the same blueprint as the parent plant.
 
 ## Making plants
 
@@ -30,17 +30,19 @@ Reassembly/
         └── regions.lua
 ```
 
-Note that plants whose seed lacks the `COMMAND` feature may be saved to the `data/ships/` folder instead of in your mod's `ships/` folder with a name that suggests that they are of faction zero. If this occurs, move them to your mod's `ships/` and rename them to have the correct faction in their name (for example: `0_Plant.lua` -> `98_Plant.lua`).
+Note that plants whose seed lacks the `COMMAND` feature will be saved to the `data/ships/` folder instead of in your mod's `ships/` folder with a name that suggests that they are of faction zero.
+
+Move them to your mod's `ships/` and rename them to have the correct faction ID in their name (for example: `0_Plant.lua` -> `98_Plant.lua`).
 
 ```
 Reassembly/
 ├── data/
 ├── └── ships/
-│       └── 0_Plant_In_Wrong_Place.lua
+│       └── 0_Plant_In_Wrong_Place.lua      <- Move this,
 └── mods/
     └── Faction 98/
         └── ships/
-            └── 98_Plant_In_Right_Place.lua
+            └── 98_Plant_In_Right_Place.lua <- to here.
 ```
 
 ## Seed Launchers
@@ -61,6 +63,8 @@ Note that the launcher must be defined after the seed.
     -- Other launcher fields here.
 }
 ```
+
+(You can also fully define the seed block inside the `replicateBlock` with an ID, e.g.: `replicateBlock={ 17001 features=SEED shape=SEED_1 }`, but it is not recommended since any plants that use the seed will corrupt if the launcher corrupts, and having the two block definitions seperate makes for cleaner code.)
 
 ## Plants that Grow Offspring Seeds
 
