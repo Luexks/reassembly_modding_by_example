@@ -183,7 +183,7 @@
     shape=SEED_1
 }
 </code></pre>
-<p>When it hits an asteroid, the seed will randomly select a blueprint that uses the seed as its main seed. However, if the seed is launched from a preexisting plant, the child plant will use the same blueprint as the parent plant.</p>
+<p>When it hits an asteroid, the seed will randomly select a blueprint that uses itself as the main seed. However, if the seed is launched from a preexisting plant, the child plant will use the same blueprint as the parent plant.</p>
 <h2 id="making-plants"><a class="header" href="#making-plants">Making plants</a></h2>
 <p>Create and save plants using the seed as you would any other modded ship. They should be in the <code>ships/</code> folder.</p>
 <pre><code>Reassembly/
@@ -197,15 +197,16 @@
         └── factions.lua
         └── regions.lua
 </code></pre>
-<p>Note that plants whose seed lacks the <code>COMMAND</code> feature may be saved to the <code>data/ships/</code> folder instead of in your mod's <code>ships/</code> folder with a name that suggests that they are of faction zero. If this occurs, move them to your mod's <code>ships/</code> and rename them to have the correct faction in their name (for example: <code>0_Plant.lua</code> -&gt; <code>98_Plant.lua</code>).</p>
+<p>Note that plants whose seed lacks the <code>COMMAND</code> feature will be saved to the <code>data/ships/</code> folder instead of in your mod's <code>ships/</code> folder with a name that suggests that they are of faction zero.</p>
+<p>Move them to your mod's <code>ships/</code> and rename them to have the correct faction ID in their name (for example: <code>0_Plant.lua</code> -&gt; <code>98_Plant.lua</code>).</p>
 <pre><code>Reassembly/
 ├── data/
 ├── └── ships/
-│       └── 0_Plant_In_Wrong_Place.lua
+│       └── 0_Plant_In_Wrong_Place.lua      &lt;- Move this,
 └── mods/
     └── Faction 98/
         └── ships/
-            └── 98_Plant_In_Right_Place.lua
+            └── 98_Plant_In_Right_Place.lua &lt;- to here.
 </code></pre>
 <h2 id="seed-launchers"><a class="header" href="#seed-launchers">Seed Launchers</a></h2>
 <p>Seeds can be launched from <a href="./launchers.html">launchers</a> and grow into plants on <a href="./environmental_blocks.html">environmental</a> blocks. The value of the launcher's <code>replicateBlock</code> field must be set to the ID of the seed.</p>
@@ -221,6 +222,7 @@
     -- Other launcher fields here.
 }
 </code></pre>
+<p>(You can also fully define the seed block inside the <code>replicateBlock</code> with an ID, e.g.: <code>replicateBlock={ 17001 features=SEED shape=SEED_1 }</code>, but it is not recommended since any plants that use the seed will corrupt if the launcher corrupts, and having the two block definitions seperate makes for cleaner code.)</p>
 <h2 id="plants-that-grow-offspring-seeds"><a class="header" href="#plants-that-grow-offspring-seeds">Plants that Grow Offspring Seeds</a></h2>
 <p>When a plant has a blueprint with extra seeds on it, the seeds are launched after being grown. In vanilla, this is how plants reproduce.</p>
 <p>Note that the offspring seeds should be attached by their <code>ROOT</code> (yellow) port, otherwise the plant may spawn weirdly if generated in a sector on asteroids.</p>
