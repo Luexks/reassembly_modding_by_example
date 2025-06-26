@@ -11,7 +11,7 @@ There are multiple types of factory blocks, but the default `FACTORY` factories 
 }
 ```
 ## Other Types of Factories
-### Self-Factory
+### Self-Factories
 To-do. Documentation states that ships with `SELFFACTORY` can only spawn their own design.
 ```lua
 { 17000

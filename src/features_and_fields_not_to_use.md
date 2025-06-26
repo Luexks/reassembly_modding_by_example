@@ -89,3 +89,11 @@ Block cannot be scaled, deleted, or copied in the editor. Used internally for th
     features=UNIQUE
 }
 ```
+## Transient Blocks
+Used internally for blocks that are in the process of being scavenged by non-player ships with the [`TRACTOR_TRANSIENT`](./commands.html?highlight=TRACTOR_TRANSIENT#command-flags) AI flag from debris.
+```lua
+{ 17000
+    features=TRANSIENT
+}
+```
+<img src="./diagrams/transient.png" alt="Transient Block" width="256" height="auto">

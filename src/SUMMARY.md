@@ -43,8 +43,9 @@
     - [Environmental Blocks](./environmental_blocks.md)
     - [Seeds](./seeds.md)
     - [Roots](./roots.md)
+    - [One-Use Blocks](./one-use_blocks.md)
 
-    - [Cosmetic Features](./cosmetic_fields.md)
+    - [Cosmetic Features](./cosmetic_features.md)
 
     - [Shrouding](./shrouding.md)
         - [Transparency in Shrouds](./transparency_in_shrouds.md)
@@ -70,6 +71,8 @@
         - [X-Spaced Barrel Beams](./x-spaced_barrel_beams.md)
         - [Y-Spaced Barrel Barrage](./y-spaced_barrel_barrage.md)
         - [Cosmetic Launchable Laser Printer](./cosmetic_launchable_laser_printer.md)
+    - [Point Defense Weapons](./point_defense_weapons.md)
+    - [Charging Cannons and Lasers](./charging_cannons_and_lasers.md)
     - [Always and Never Firing Weapons](./always_and_never_firing_weapons.md)
         - [Always Fire Weapons as Decorations](./always_fire_weapons_as_decorations.md)
     - [One-Use Weapons](./one-use_weapons.md)
