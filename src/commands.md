@@ -44,7 +44,7 @@ These are the flags which are used for [`command={flags}`](./commands.md#the-com
  - `AGGRESSIVE`: initiate attack more easily.
  - `CAUTIOUS`: initiate attack less easily.
  - `SOCIAL`: call for help when attacked.
- - `PEACEFUL`: never initiate attack.
+ - `PEACEFUL`: never initiate attack. Will still engage in combat if attacked, if nearby station is being captured, or if nearby allied ship with the `SOCIAL` AI flag is under attack.
  - `WANDER`: wander randomly if nothing else to do. Recommended for most factions.
  - `HATES_PLANTS`: kill plants if in range.
  - `FORGIVING`: stop attacking more easily.
