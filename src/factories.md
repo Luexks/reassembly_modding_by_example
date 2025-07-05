@@ -12,7 +12,7 @@ There are multiple types of factory blocks, but the default `FACTORY` factories 
 ```
 ## Other Types of Factories
 ### Self-Factories
-To-do. Documentation states that ships with `SELFFACTORY` can only spawn their own design.
+Ships with a `SELFFACTORY` block on them can spawn ships as if every one of their blocks is a normal factory. Still requires R to spawn sips.
 ```lua
 { 17000
     features=SELFFACTORY
