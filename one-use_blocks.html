@@ -187,13 +187,22 @@
     -- Laser fields here.
 }
 </code></pre>
+<p>The destruction of a one-use block does not inherently cause damage other blocks, but features like <a href="./explosive_blocks.html"><code>EXPLODE</code></a> can make them more destructive.</p>
 <p>Features which <code>ONEUSE</code> works with:</p>
 <ul>
-<li><a href="./cannons.html"><code>CANNON</code></a>: block is destroyed after firing a single bullet. If <code>roundsPerBurst</code> is defined, then the block will be destroyed after <code>roundsPerBurst</code> number of bullets have been fired.</li>
-<li><a href="./lasers.html"><code>LASER</code></a>: block is destroyed after laser decays.</li>
+<li><a href="./cannons.html"><code>CANNON</code></a>: block is destroyed after firing a single bullet. If <a href="./cannons.html#firing-in-bursts">burst fields</a> are defined, then the block will be destroyed after <code>roundsPerBurst</code> number of bullets have been fired.</li>
+<li><a href="./cannons.html"><code>CANNON</code></a> and <a href="./charging_cannons_and_lasers.html"><code>CHARGING</code></a>: block is destroyed after firing a single bullet. If <a href="./cannons.html#firing-in-bursts">burst fields</a> is defined, then <code>ONEUSE</code> does not function.</li>
+<li><a href="./lasers.html"><code>LASER</code></a>: block is destroyed after laser finishes decaying. <a href="./lasers.html#firing-in-bursts">Burst fields</a> do not work with <code>ONEUSE</code>, the laser acts as if there are no burst fields.</li>
+<li><a href="./laser.html"><code>LASER</code></a> and <a href="./charging_cannons_and_lasers.html"><code>CHARGING</code></a>: block is destroyed after laser finishes decaying. <a href="./lasers.html#firing-in-bursts">Burst fields</a> do not work with <code>ONEUSE</code>, the laser acts as if there are no burst fields.</li>
+<li><a href="./launchers.html"><code>LAUNCHER</code></a>: block is destroyed after firing a single launchable.</li>
 <li><a href="./shields.html"><code>SHIELD</code></a>: block is destroyed after shield loses its health.</li>
-<li><a href="./factories.html"><code>FACTORY</code></a>: block is destroyed after the command built by the factory finishes growing and is released.</li>
+<li><a href="./factories.html"><code>FACTORY</code></a>: block is destroyed after the command built by the factory finishes growing and is released. (<a href="./factories.html#self-factories"><code>SELFFACTORY</code></a> and <a href="./factories.html#telespawn"><code>TELESPAWN</code></a> do not have this effect. Combinations of different factory fields have no noteworthy effects.).</li>
 </ul>
+<p>Because the function of <a href="./cannons.html">cannon</a>, <a href="./lasers.html">laser</a>, and <a href="./shields.html">shield</a> blocks are dependent on the energy stored by the ship, their destruction because of <code>ONEUSE</code> can be manipulated by controlling energy.</p>
+<video height=256 controls>
+  <source src="diagrams/one-use.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
                     </main>
 
