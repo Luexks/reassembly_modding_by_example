@@ -83,6 +83,7 @@
 - [Vanilla Shapes](./vanilla_shapes.md)
 - [shapes.lua](./shapes.lua.md)
     - [Mirrored Shapes](./mirrored_shapes.md)
+    - [Shapes: Further Essentials](./shapes_further_essentials.md)
     - [Calculating Port Positions](./calculating_port_positions.md)
     - [Port Flags](./port_flags.md)
     - [Root Shapes](./root_shapes.md)
