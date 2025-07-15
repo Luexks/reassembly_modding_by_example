@@ -87,6 +87,7 @@
     - [Calculating Port Positions](./calculating_port_positions.md)
     - [Port Flags](./port_flags.md)
     - [Root Shapes](./root_shapes.md)
+    - [Cannon Boost Shapes](./cannon_boost_shapes.md)
     - [Niche Port Flag Combinations](./niche_port_flag_combinations.md)
 # Audio
 - [audio.lua](./audio.lua.md)
